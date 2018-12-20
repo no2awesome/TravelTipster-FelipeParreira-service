@@ -1,9 +1,8 @@
-import db from './index';
-
 const Sequelize = require('sequelize');
+const db = require('./index');
 
+// defines models
 const Users = db.define('User', {
-  ID: Sequelize.INTEGER,
   Username: Sequelize.STRING,
   SignUpDate: Sequelize.DATE,
   CitiesVisited: Sequelize.INTEGER,
@@ -14,8 +13,7 @@ const Users = db.define('User', {
   Photos: Sequelize.INTEGER,
 }, { timestamps: false });
 
-const Reviews = db.define('User', {
-  ID: Sequelize.INTEGER,
+const ReviewDistributions = db.define('ReviewDistributions', {
   UserID: Sequelize.INTEGER,
   Excellent: Sequelize.INTEGER,
   VeryGood: Sequelize.INTEGER,
@@ -24,25 +22,32 @@ const Reviews = db.define('User', {
   Terrible: Sequelize.INTEGER,
 }, { timestamps: false });
 
-const Questions = db.define('User', {
-  ID: Sequelize.INTEGER,
+const Questions = db.define('Question', {
   Content: Sequelize.STRING,
   UserID: Sequelize.INTEGER,
   HotelID: Sequelize.INTEGER,
   PostedDate: Sequelize.DATE,
 }, { timestamps: false });
 
-const Answers = db.define('User', {
-  ID: Sequelize.INTEGER,
+const Answers = db.define('Answers', {
   Content: Sequelize.STRING,
   UserID: Sequelize.INTEGER,
   QuestionID: Sequelize.INTEGER,
   Votes: Sequelize.INTEGER,
 }, { timestamps: false });
 
+// defines association among models
+Users.hasMany(Questions, { foreignKey: 'UserID' });
+Questions.belongsTo(Users, { foreignKey: 'UserID' });
+
+Users.hasMany(Answers, { foreignKey: 'UserID' });
+Answers.belongsTo(Users, { foreignKey: 'UserID' });
+
+Users.hasOne(ReviewDistributions, { foreignKey: 'UserID' });
+
 module.exports = {
   Users,
-  Reviews,
+  ReviewDistributions,
   Questions,
   Answers,
 };

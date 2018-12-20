@@ -3,12 +3,11 @@ const faker = require('faker');
 
 // generate 100 users
 const users = [];
-for (let i = 0; i < 100; i += 1) {
+for (let i = 1; i < 101; i += 1) {
   const user = {};
-  user.ID = i;
   user.Username = faker.internet.userName();
-  user.SignUpDate = String(faker.date.past());
-  user.ProfileURL = `https://localhost:3000/users/${user.ID}/profile`;
+  user.SignUpDate = faker.date.past();
+  user.ProfileURL = `https://localhost:3000/users/${i}/profile`;
   user.ThumbnailURL = faker.image.avatar();
   user.CitiesVisited = Math.floor(16 * Math.random());
   user.HelpfulVotes = Math.floor(21 * Math.random());
@@ -20,10 +19,9 @@ for (let i = 0; i < 100; i += 1) {
 
 
 // generate Review Distributions for each user
-const reviews = [];
-for (let i = 0; i < 100; i += 1) {
+const reviewDists = [];
+for (let i = 1; i < 101; i += 1) {
   const review = {};
-  review.ID = i;
   review.UserID = i;
   review.Excellent = Math.floor(16 * Math.random());
   review.VeryGood = Math.floor(16 * Math.random());
@@ -31,30 +29,30 @@ for (let i = 0; i < 100; i += 1) {
   review.Poor = Math.floor(16 * Math.random());
   review.Terrible = Math.floor(16 * Math.random());
 
-  reviews.push(review);
+  reviewDists.push(review);
 }
+
 
 // generate 10 questions for each of the 100 hotels
 const questions = [];
 for (let i = 0; i < 1000; i += 1) {
   const question = {};
-  question.ID = i;
   question.Content = `${faker.lorem.paragraph()}?`;
-  question.HotelID = Math.floor(i / 10);
-  question.UserID = Math.floor(100 * Math.random());
-  question.PostedDate = String(faker.date.past());
+  question.HotelID = Math.floor(i / 10) + 1;
+  question.UserID = Math.floor(100 * Math.random()) + 1;
+  question.PostedDate = faker.date.past();
 
   questions.push(question);
 }
 
-// generate 5 answers for each of the 1000 questions
+
+// // generate 5 answers for each of the 1000 questions
 const answers = [];
-for (let i = 0; i < 5; i += 1) {
+for (let i = 0; i < 5000; i += 1) {
   const answer = {};
-  answer.ID = i;
   answer.Content = faker.lorem.sentences();
-  answer.QuestionID = Math.floor(i / 5);
-  answer.UserID = Math.floor(100 * Math.random());
+  answer.QuestionID = Math.floor(i / 5) + 1;
+  answer.UserID = Math.floor(100 * Math.random()) + 1;
   answer.Votes = Math.floor(21 * Math.random());
 
   answers.push(answer);
@@ -62,7 +60,7 @@ for (let i = 0; i < 5; i += 1) {
 
 module.exports = {
   users,
-  reviews,
+  reviewDists,
   questions,
   answers,
 };

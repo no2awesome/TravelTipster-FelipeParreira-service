@@ -5,43 +5,43 @@ CREATE DATABASE QA;
 USE QA;
 
 CREATE TABLE Users (
-    ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Username varchar(255),
-    SignUpDate varchar(255),
-    ThumbnailURL text,
-    ProfileURL text,
-    HelpfulVotes int,
-    CitiesVisited int,
-    Contributions int,
-    Photos int
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(255),
+    SignUpDate DATE,
+    ThumbnailURL TEXT,
+    ProfileURL TEXT,
+    HelpfulVotes INT,
+    CitiesVisited INT,
+    Contributions INT,
+    Photos INT
 );
 
 CREATE TABLE ReviewDistributions (
-    ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    UserID int NOT NULL,
-    Excellent int,
-    VeryGood int,
-    Poor int, 
-    Terrible int,
-    Average int,
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    Excellent INT,
+    VeryGood INT,
+    Poor INT, 
+    Terrible INT,
+    Average INT,
     FOREIGN KEY (UserID) REFERENCES Users(ID)
 );
 
 CREATE TABLE Questions (
-    ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    HoltelID int NOT NULL,
-    UserID int NOT NULL,
-    Content text, 
-    PostedDate varchar(255),
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    HotelID INT NOT NULL,
+    UserID INT NOT NULL,
+    Content TEXT, 
+    PostedDate DATE,
     FOREIGN KEY (UserID) REFERENCES Users(ID)
 );
 
 CREATE TABLE Answers (
-    ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    QuestionID int NOT NULL,
-    UserID int NOT NULL,
-    Content text, 
-    Votes int,
+    ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    QuestionID INT NOT NULL,
+    UserID INT NOT NULL,
+    Content TEXT, 
+    Votes INT,
     FOREIGN KEY (UserID) REFERENCES Users(ID),
     FOREIGN KEY (QuestionID) REFERENCES Questions(ID)
 );

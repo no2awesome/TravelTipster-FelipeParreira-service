@@ -8,7 +8,11 @@
     "node": ">=6.13.0"
   },
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "faker": "^4.1.0",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
+  },
   "devDependencies": {
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",
