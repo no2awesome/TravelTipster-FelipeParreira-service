@@ -24,3 +24,5 @@ coverage
 build/
 dist/
 
+# Config files (contain credentials)
+*/config.js
