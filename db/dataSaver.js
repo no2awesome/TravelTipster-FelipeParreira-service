@@ -1,7 +1,9 @@
+// import the models
 const {
   Users, ReviewDistributions, Questions, Answers,
 } = require('./models');
 
+// import the data
 const {
   users, reviewDists, questions, answers,
 } = require('./dataGenerator');

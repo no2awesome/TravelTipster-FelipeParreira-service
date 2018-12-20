@@ -7,7 +7,9 @@
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {},
+  "scripts": {
+    "db": "mysql -u root -p < db/schema.sql && node db/dataSaver.js"
+  },
   "dependencies": {
     "faker": "^4.1.0",
     "mysql2": "^1.6.4",
