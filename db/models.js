@@ -11,6 +11,9 @@ const Users = db.define('User', {
   ThumbnailURL: Sequelize.STRING,
   Contributions: Sequelize.INTEGER,
   Photos: Sequelize.INTEGER,
+  Ranking: Sequelize.INTEGER,
+  HomeCity: Sequelize.STRING,
+  Category: Sequelize.STRING,
 }, { timestamps: false });
 
 const ReviewDistributions = db.define('ReviewDistributions', {

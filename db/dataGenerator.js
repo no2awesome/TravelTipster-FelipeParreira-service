@@ -13,6 +13,9 @@ for (let i = 1; i < 101; i += 1) {
   user.HelpfulVotes = Math.floor(21 * Math.random());
   user.Contributions = Math.floor(16 * Math.random());
   user.Photos = Math.floor(16 * Math.random());
+  user.Ranking = Math.floor(5 * Math.random()) + 1;
+  user.HomeCity = `${faker.address.city()}, ${faker.address.state()}`;
+  user.Category = ['Contributor', 'Admin'][Number(Math.random() < 0.05)];
 
   users.push(user);
 }
