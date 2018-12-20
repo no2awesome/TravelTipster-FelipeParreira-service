@@ -36,12 +36,15 @@ const Answers = db.define('Answers', {
   Votes: Sequelize.INTEGER,
 }, { timestamps: false });
 
-// defines association among models
+// defines associations among models
 Users.hasMany(Questions, { foreignKey: 'UserID' });
 Questions.belongsTo(Users, { foreignKey: 'UserID' });
 
 Users.hasMany(Answers, { foreignKey: 'UserID' });
 Answers.belongsTo(Users, { foreignKey: 'UserID' });
+
+Questions.hasMany(Answers, { foreignKey: 'QuestionID' });
+Answers.belongsTo(Questions, { foreignKey: 'QuestionID' });
 
 Users.hasOne(ReviewDistributions, { foreignKey: 'UserID' });
 

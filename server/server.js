@@ -23,12 +23,35 @@ app.use(express.static(path.join(__dirname, '../public')));
 // ||**************************************************||
 
 // import models from the DB
-const {} = require();
+const {
+  Users, ReviewDistributions, Questions, Answers,
+} = require('../db/models');
+
+// import the db connection
+const db = require('../db/index');
+db.sync()
+  .then(() => {
+    Questions.find({
+        attributes: { attributes: ['Content', 'PostedDate'] },
+        where: { HotelID: 1 },
+        include: [Users],
+      })
+        .then((data) => {
+          console.log('DATA', data);
+     })
+     .then(() => {
+         db.close();
+      });
+  });
 
 // GET questions for a certain hotel
 app.get('hotels/:id/questions', (req, res) => {
   const hotelId = req.params.id;
-  
+  Questions.findAll({
+    attributes: { attributes: ['Content', 'PostedDate'] },
+    where: { HotelID: hotelId },
+    include: [Users],
+  });
 });
 
 // POST a question to a hotel
