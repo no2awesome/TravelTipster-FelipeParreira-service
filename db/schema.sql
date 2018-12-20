@@ -11,7 +11,9 @@ CREATE TABLE Users (
     ThumbnailURL text,
     ProfileURL text,
     HelpfulVotes int,
-    CitiesVisited int
+    CitiesVisited int,
+    Contributions int,
+    Photos int
 );
 
 CREATE TABLE ReviewDistributions (
@@ -30,7 +32,7 @@ CREATE TABLE Questions (
     HoltelID int NOT NULL,
     UserID int NOT NULL,
     Content text, 
-    QuestionDate varchar(255),
+    PostedDate varchar(255),
     FOREIGN KEY (UserID) REFERENCES Users(ID)
 );
 
