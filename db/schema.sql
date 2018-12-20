@@ -14,7 +14,10 @@ CREATE TABLE Users (
     HelpfulVotes INT,
     CitiesVisited INT,
     Contributions INT,
-    Photos INT
+    Photos INT,
+    Ranking INT,
+    HomeCity VARCHAR(255),
+    Category VARCHAR(255)
 );
 
 CREATE TABLE ReviewDistributions (
