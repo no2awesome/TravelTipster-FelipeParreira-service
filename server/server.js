@@ -18,49 +18,64 @@ const port = 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 app.use(express.static(path.join(__dirname, '../public')));
 
-// routing and dealing with API requests
+// ||**************************************************||
+// ******* routing and dealing with API requests ********
+// ||**************************************************||
+
+// import models from the DB
+const {} = require();
 
 // GET questions for a certain hotel
 app.get('hotels/:id/questions', (req, res) => {
-
+  const hotelId = req.params.id;
+  
 });
 
 // POST a question to a hotel
 app.post('hotels/:id/questions', (req, res) => {
-
+  const hotelId = req.params.id;
 });
 
 // DELETE a question for a hotel
 app.delete('hotels/:id/questions/:questionId', (req, res) => {
-
+  const hotelId = req.params.id;
+  const questionId = req.params.id;
 });
 
 // POST a report for a certain question
 app.post('hotels/:id/questions/:questionId/reports', (req, res) => {
-
+  const hotelId = req.params.id;
+  const questionId = req.params.id;
 });
 
 // POST an answer for a certain question
 app.post('hotels/:id/questions/:questionId/answers', (req, res) => {
-
+  const hotelId = req.params.id;
+  const questionId = req.params.id;
 });
 
 // DELETE an answer for a certain question
-app.delete('hotels/:id/questions/:questionId/answers/:answersId', (req, res) => {
-
+app.delete('hotels/:id/questions/:questionId/answers/:answerId', (req, res) => {
+  const hotelId = req.params.id;
+  const questionId = req.params.id;
+  const answerId = req.params.id;
 });
 
 // Upvote or downvote a certain answer to a particular question
-app.patch('hotels/:id/questions/:questionId/answers/:answersId/votes', (req, res) => {
-
+app.patch('hotels/:id/questions/:questionId/answers/:answerId/votes', (req, res) => {
+  const hotelId = req.params.id;
+  const questionId = req.params.id;
+  const answerId = req.params.id;
 });
 
 // POST a report for a certain question
-app.post('hotels/:id/questions/:questionId/answers/:answersId/reports', (req, res) => {
-
+app.post('hotels/:id/questions/:questionId/answers/:answerId/reports', (req, res) => {
+  const hotelId = req.params.id;
+  const questionId = req.params.id;
+  const answerId = req.params.id;
 });
 
 // POST a message for a certain user
-app.post('users/:usersId/messages', (req, res) => {
-
+app.post('users/:userId/messages', (req, res) => {
+  const userId = req.params.userId;
 });
