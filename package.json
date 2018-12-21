@@ -27,8 +27,7 @@
     "webpack": "^4.28.0",
     "webpack-cli": "^3.1.2",
     "faker": "^4.1.0",
-    "mysql2": "^1.6.4",
-    "sequelize": "^4.42.0"
+    "mysql2": "^1.6.4"
   },
   "devDependencies": {
     "eslint": "^5.10.0",

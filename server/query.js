@@ -151,6 +151,7 @@ const deleteAnswer = (AnswerID, UserID, res) => {
   db.sync()
     .then(() => {
       const foundAnswer = Answers.findOne({
+        raw: true,
         where: {
           ID: AnswerID,
           UserID,
@@ -178,12 +179,47 @@ const deleteAnswer = (AnswerID, UserID, res) => {
     });
 };
 
+const voteAnswer = (AnswerID, vote, res) => {
+  db.sync()
+    .then(() => {
+      const foundAnswer = Answers.findOne({
+        raw: true,
+        where: {
+          ID: AnswerID,
+        },
+      });
+
+      return Promise.resolve(foundAnswer);
+    })
+    .then((answer) => {
+      if (!answer) {
+        throw answer;
+      }
+
+      return Answers.update({
+        Votes: answer.Votes + vote,
+      }, {
+        where: { ID: AnswerID },
+      });
+
+      // console.log('ANSWER', answer);
+    })
+    .then((() => {
+      res.send('Vote added!');
+    }))
+    .catch(() => {
+      res.status(404);
+      res.send('The answer looked for doesn\'t exist.');
+    });
+};
+
 module.exports = {
   getAllQuestions,
   postQuestion,
   deleteQuestion,
   postAnswer,
   deleteAnswer,
+  voteAnswer,
 };
 
 // TODO check if db.close() can be removed from other queries and still work.

@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // import helper query functions
 const {
-  getAllQuestions, postQuestion, deleteQuestion, postAnswer, deleteAnswer,
+  getAllQuestions, postQuestion, deleteQuestion, postAnswer, deleteAnswer, voteAnswer,
 } = require('./query');
 
 // GET questions for a certain hotel
@@ -64,28 +64,28 @@ app.post('/hotels/:hotelId/questions/:questionId/reports', (req, res) => {
 });
 
 // POST an answer for a certain question
-app.post('/hotels/:id/questions/:questionId/answers', (req, res) => {
+app.post('/hotels/:hotelId/questions/:questionId/answers', (req, res) => {
   const { questionId } = req.params;
   const { content, userId } = req.body;
   postAnswer(questionId, userId, content, res);
 });
 
 // DELETE an answer for a certain question
-app.delete('/hotels/:id/questions/:questionId/answers/:answerId', (req, res) => {
+app.delete('/hotels/:hotelId/questions/:questionId/answers/:answerId', (req, res) => {
   const { answerId } = req.params;
   const { userId } = req.body;
   deleteAnswer(answerId, userId, res);
 });
 
 // Upvote or downvote a certain answer to a particular question
-app.patch('/hotels/:id/questions/:questionId/answers/:answerId/votes', (req, res) => {
-  const hotelId = req.params.id;
-  const questionId = req.params.id;
-  const answerId = req.params.id;
+app.patch('/hotels/:hotelId/questions/:questionId/answers/:answerId/votes', (req, res) => {
+  const { vote } = req.body;
+  const { answerId } = req.params;
+  voteAnswer(answerId, Number(vote), res);
 });
 
 // POST a report for a certain question
-app.post('/hotels/:id/questions/:questionId/answers/:answerId/reports', (req, res) => {
+app.post('/hotels/:hotelId/questions/:questionId/answers/:answerId/reports', (req, res) => {
   const hotelId = req.params.id;
   const questionId = req.params.id;
   const answerId = req.params.id;
