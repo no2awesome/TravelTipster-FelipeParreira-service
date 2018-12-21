@@ -44,10 +44,9 @@ app.get('/hotels/:hotelId/questions', (req, res) => {
 // POST a question to a hotel
 app.post('/hotels/:hotelId/questions', (req, res) => {
   const { hotelId } = req.params;
-  let { userId } = req.body;
-  const { postedDate, content } = req.body;
-  userId = Number(userId);
-  postQuestion(hotelId, userId, postedDate, content, res);
+  const { postedDate, content, userId } = req.body;
+  // postedDate should be in the format: yyyy/mm/dd (as a string)
+  postQuestion(hotelId, Number(userId), postedDate, content, res);
 });
 
 // DELETE a question for a hotel

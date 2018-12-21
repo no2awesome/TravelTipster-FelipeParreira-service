@@ -71,7 +71,6 @@ const getAllQuestions = (HotelID, res) => {
         questionData[i].AnswersUsers = users.splice(0, questionData[i].Answers.length);
       }
       console.log('question', questionData[0]);
-      db.close();
       res.send(JSON.stringify(questionData));
       res.end();
     });
@@ -84,7 +83,6 @@ const postQuestion = (HotelID, UserID, PostedDate, Content, res) => {
         UserID, HotelID, Content, PostedDate,
       })
         .then(() => {
-          db.close();
           res.status(201);
           res.end('Question posted successfully!');
         });
@@ -122,11 +120,9 @@ const deleteQuestion = (QuestionID, UserID, res) => {
       return Promise.all([deletedAnswers, deletedQuestion]);
     })
     .then(() => {
-      db.close();
       res.send('Question deleted successfully!');
     })
     .catch(() => {
-      db.close();
       res.status(401);
       res.send('You are not the author of that question :(');
     });
@@ -212,23 +208,20 @@ const voteAnswer = (AnswerID, vote, res) => {
     });
 };
 
+// The following 3 functions are just a stub functions
+// check their invocation inside server.js
+
 const postReportForQuestion = (res) => {
-  // this is just a stub function
-  // check the invocation of this function inside server.js
   res.status(201);
   res.send('Report for question posted!');
 };
 
 const postMessageToUser = (res) => {
-  // this is just a stub function
-  // check the invocation of this function inside server.js
   res.status(201);
   res.send('Message for user saved!');
 };
 
 const postReportForAnswer = (res) => {
-  // this is just a stub function
-  // check the invocation of this function inside server.js
   res.status(201);
   res.send('Report for answer posted!');
 };
@@ -244,5 +237,3 @@ module.exports = {
   postReportForAnswer,
   postMessageToUser,
 };
-
-// TODO check if db.close() can be removed from other queries and still work.
