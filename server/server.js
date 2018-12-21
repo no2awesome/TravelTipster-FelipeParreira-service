@@ -8,7 +8,7 @@ const app = express();
 
 // set up middleware
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(morgan('combined'));
 
 // choose PORT
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // ||**************************************************||
 
 // import helper query functions
-const { getAllQuestions } = require('./query');
+const { getAllQuestions, postQuestion } = require('./query');
 
 // GET questions for a certain hotel
 app.get('/hotels/:id/questions', (req, res) => {
@@ -34,6 +34,10 @@ app.get('/hotels/:id/questions', (req, res) => {
 // POST a question to a hotel
 app.post('/hotels/:id/questions', (req, res) => {
   const hotelId = req.params.id;
+  let { userId } = req.body;
+  const { postedDate, content } = req.body;
+  userId = Number(userId);
+  postQuestion(hotelId, userId, postedDate, content, res);
 });
 
 // DELETE a question for a hotel
