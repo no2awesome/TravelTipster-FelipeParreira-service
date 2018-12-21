@@ -35,22 +35,22 @@ const getAllQuestions = (hotelId, res) => {
             questionData[i].User = users[i];
           }
 
-          const promisedAnswers = [];
+          const promisedAnswersGroups = [];
           for (let i = 0; i < questionData.length; i += 1) {
-            const promisedAnswer = Answers.findAll({
+            const promisedAnswerGroup = Answers.findAll({
               raw: true,
               where: { QuestionID: questionData[i].QuestionID },
             });
-            promisedAnswers.push(promisedAnswer);
+            promisedAnswersGroups.push(promisedAnswerGroup);
           }
 
-          return Promise.all(promisedAnswers);
+          return Promise.all(promisedAnswersGroups);
         })
-        .then((answers) => {
-          for (let i = 0; i < answers.length; i += 1) {
-            questionData[i].Answers = answers[i];
+        .then((answerGroups) => {
+          for (let i = 0; i < answerGroups.length; i += 1) {
+            questionData[i].Answers = answerGroups[i];
           }
-          const flatennedAnswers = answers.flat();
+          const flatennedAnswers = answerGroups.flat();
           const promisedUsers = [];
           for (let i = 0; i < flatennedAnswers.length; i += 1) {
             const promisedUser = Users.findOne({
@@ -65,7 +65,7 @@ const getAllQuestions = (hotelId, res) => {
         })
         .then((users) => {
           for (let i = 0; i < questionData.length; i += 1) {
-            questionData[i].AnswersUsers = users.slice(i, i + 5);
+            questionData[i].AnswersUsers = users.splice(0, questionData[i].Answers.length);
           }
           console.log('question', questionData[0]);
           db.close();
