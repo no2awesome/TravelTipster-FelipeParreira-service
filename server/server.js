@@ -23,7 +23,9 @@ app.use(express.static(path.join(__dirname, '../public')));
 // ||**************************************************||
 
 // import helper query functions
-const { getAllQuestions, postQuestion, deleteQuestion } = require('./query');
+const {
+  getAllQuestions, postQuestion, deleteQuestion, postAnswer,
+} = require('./query');
 
 // GET questions for a certain hotel
 app.get('/hotels/:hotelId/questions', (req, res) => {
@@ -48,15 +50,24 @@ app.delete('/hotels/:hotelId/questions/:questionId', (req, res) => {
 });
 
 // POST a report for a certain question
-app.post('/hotels/:id/questions/:questionId/reports', (req, res) => {
-  const hotelId = req.params.id;
-  const questionId = req.params.id;
+app.post('/hotels/:hotelId/questions/:questionId/reports', (req, res) => {
+  // TODO: check if question exists and then send back a good response
+  const { questionId } = req.params;
+  const { userId } = req.body;
+  if (questionId !== undefined && userId !== undefined) {
+    res.status(201);
+    res.send('Report created successfully!');
+  } else {
+    res.status(400);
+    res.send('Report could not be created :(');
+  }
 });
 
 // POST an answer for a certain question
 app.post('/hotels/:id/questions/:questionId/answers', (req, res) => {
-  const hotelId = req.params.id;
-  const questionId = req.params.id;
+  const { questionId } = req.params;
+  const { content, userId } = req.body;
+  postAnswer(questionId, userId, content, res);
 });
 
 // DELETE an answer for a certain question

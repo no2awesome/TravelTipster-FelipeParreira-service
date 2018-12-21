@@ -106,7 +106,6 @@ const deleteQuestion = (QuestionID, UserID, res) => {
       if (!question) {
         throw question;
       }
-      
       const deletedAnswers = Answers.destroy({
         where: {
           QuestionID,
@@ -118,7 +117,7 @@ const deleteQuestion = (QuestionID, UserID, res) => {
           UserID,
         },
       });
-      
+
       return Promise.all([deletedAnswers, deletedQuestion]);
     })
     .then(() => {
@@ -132,8 +131,25 @@ const deleteQuestion = (QuestionID, UserID, res) => {
     });
 };
 
+const postAnswer = (QuestionID, UserID, Content, res) => {
+  db.sync()
+    .then(() => {
+      Answers.create({
+        QuestionID,
+        UserID,
+        Content,
+        Votes: 0,
+      })
+        .then(() => {
+          res.status(201);
+          res.send('Answer posted successfully!');
+        });
+    });
+};
+
 module.exports = {
   getAllQuestions,
   postQuestion,
   deleteQuestion,
+  postAnswer,
 };
