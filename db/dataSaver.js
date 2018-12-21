@@ -8,6 +8,7 @@ const {
   users, reviewDists, questions, answers,
 } = require('./dataGenerator');
 
+// import the db connection
 const db = require('./index');
 
 
