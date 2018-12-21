@@ -23,17 +23,17 @@ app.use(express.static(path.join(__dirname, '../public')));
 // ||**************************************************||
 
 // import helper query functions
-const { getAllQuestions, postQuestion } = require('./query');
+const { getAllQuestions, postQuestion, deleteQuestion } = require('./query');
 
 // GET questions for a certain hotel
-app.get('/hotels/:id/questions', (req, res) => {
-  const hotelId = req.params.id;
+app.get('/hotels/:hotelId/questions', (req, res) => {
+  const { hotelId } = req.params;
   getAllQuestions(hotelId, res);
 });
 
 // POST a question to a hotel
-app.post('/hotels/:id/questions', (req, res) => {
-  const hotelId = req.params.id;
+app.post('/hotels/:hotelId/questions', (req, res) => {
+  const { hotelId } = req.params;
   let { userId } = req.body;
   const { postedDate, content } = req.body;
   userId = Number(userId);
@@ -41,9 +41,10 @@ app.post('/hotels/:id/questions', (req, res) => {
 });
 
 // DELETE a question for a hotel
-app.delete('/hotels/:id/questions/:questionId', (req, res) => {
-  const hotelId = req.params.id;
-  const questionId = req.params.id;
+app.delete('/hotels/:hotelId/questions/:questionId', (req, res) => {
+  const { questionId } = req.params;
+  const { userId } = req.body;
+  deleteQuestion(questionId, userId, res);
 });
 
 // POST a report for a certain question

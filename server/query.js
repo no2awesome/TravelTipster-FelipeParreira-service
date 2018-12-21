@@ -83,13 +83,57 @@ const postQuestion = (HotelID, UserID, PostedDate, Content, res) => {
         UserID, HotelID, Content, PostedDate,
       })
         .then(() => {
+          db.close();
           res.status(201);
           res.end('Question posted successfully!');
         });
     });
 };
 
+const deleteQuestion = (QuestionID, UserID, res) => {
+  db.sync()
+    .then(() => {
+      const foundQuestion = Questions.findOne({
+        where: {
+          ID: QuestionID,
+          UserID,
+        },
+      });
+
+      return Promise.resolve(foundQuestion);
+    })
+    .then((question) => {
+      if (!question) {
+        throw question;
+      }
+      
+      const deletedAnswers = Answers.destroy({
+        where: {
+          QuestionID,
+        },
+      });
+      const deletedQuestion = Questions.destroy({
+        where: {
+          ID: QuestionID,
+          UserID,
+        },
+      });
+      
+      return Promise.all([deletedAnswers, deletedQuestion]);
+    })
+    .then(() => {
+      db.close();
+      res.send('Question deleted successfully!');
+    })
+    .catch(() => {
+      db.close();
+      res.status(401);
+      res.send('You are not the author of that question :(');
+    });
+};
+
 module.exports = {
   getAllQuestions,
   postQuestion,
+  deleteQuestion,
 };
