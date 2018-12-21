@@ -31,6 +31,7 @@ const {
   deleteAnswer,
   voteAnswer,
   postReportForQuestion,
+  postReportForAnswer,
   postMessageToUser,
 } = require('./query');
 
@@ -58,15 +59,12 @@ app.delete('/hotels/:hotelId/questions/:questionId', (req, res) => {
 
 // POST a report for a certain question
 app.post('/hotels/:hotelId/questions/:questionId/reports', (req, res) => {
-  const { questionId } = req.params;
-  const { userId } = req.body;
-  if (questionId !== undefined && userId !== undefined) {
-    res.status(201);
-    res.send('Report created successfully!');
-  } else {
-    res.status(400);
-    res.send('Report could not be created :(');
-  }
+  // const { questionId } = req.params;
+  // const { userId, content } = req.body;
+  // the following function is just a stub
+  // since our Q&A module is not able to retrieve reports,
+  // we are not saving anything; you can implement this in the future if you want.
+  postReportForQuestion(res);
 });
 
 // POST an answer for a certain question
@@ -90,14 +88,14 @@ app.patch('/hotels/:hotelId/questions/:questionId/answers/:answerId/votes', (req
   voteAnswer(answerId, Number(vote), res);
 });
 
-// POST a report for a certain question
+// POST a report for a certain answer
 app.post('/hotels/:hotelId/questions/:questionId/answers/:answerId/reports', (req, res) => {
-  // const { questionId } = req.params;
+  // const { answerId } = req.params;
   // const { content, userId } = req.body;
   // the following function is just a stub
   // since our Q&A module is not able to retrieve reports,
   // we are not saving anything; you can implement this in the future if you want.
-  postReportForQuestion(res);
+  postReportForAnswer(res);
 });
 
 // POST a message for a certain user

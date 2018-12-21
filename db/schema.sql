@@ -1,5 +1,4 @@
--- the next line should be deleted for production
-DROP DATABASE QA;
+DROP DATABASE IF EXISTS QA;
 
 CREATE DATABASE QA;
 

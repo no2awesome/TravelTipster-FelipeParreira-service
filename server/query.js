@@ -1,3 +1,4 @@
+// import the models
 const {
   Users, ReviewDistributions, Questions, Answers,
 } = require('../db/models');
@@ -213,12 +214,23 @@ const voteAnswer = (AnswerID, vote, res) => {
 
 const postReportForQuestion = (res) => {
   // this is just a stub function
+  // check the invocation of this function inside server.js
+  res.status(201);
   res.send('Report for question posted!');
 };
 
 const postMessageToUser = (res) => {
   // this is just a stub function
+  // check the invocation of this function inside server.js
+  res.status(201);
   res.send('Message for user saved!');
+};
+
+const postReportForAnswer = (res) => {
+  // this is just a stub function
+  // check the invocation of this function inside server.js
+  res.status(201);
+  res.send('Report for answer posted!');
 };
 
 module.exports = {
@@ -229,6 +241,7 @@ module.exports = {
   deleteAnswer,
   voteAnswer,
   postReportForQuestion,
+  postReportForAnswer,
   postMessageToUser,
 };
 
