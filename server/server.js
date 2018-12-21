@@ -82,6 +82,7 @@ app.delete('/hotels/:hotelId/questions/:questionId/answers/:answerId', (req, res
 
 // Upvote or downvote a certain answer to a particular question
 app.patch('/hotels/:hotelId/questions/:questionId/answers/:answerId/votes', (req, res) => {
+  // vote should be 1 or -1
   const { vote } = req.body;
   const { answerId } = req.params;
   voteAnswer(answerId, Number(vote), res);
