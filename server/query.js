@@ -147,9 +147,43 @@ const postAnswer = (QuestionID, UserID, Content, res) => {
     });
 };
 
+const deleteAnswer = (AnswerID, UserID, res) => {
+  db.sync()
+    .then(() => {
+      const foundAnswer = Answers.findOne({
+        where: {
+          ID: AnswerID,
+          UserID,
+        },
+      });
+
+      return Promise.resolve(foundAnswer);
+    })
+    .then((answer) => {
+      if (!answer) {
+        throw answer;
+      }
+      Answers.destroy({
+        where: {
+          ID: AnswerID,
+        },
+      })
+        .then(() => {
+          res.send('Answer deleted succesfully!');
+        });
+    })
+    .catch(() => {
+      res.status(401);
+      res.send('You are not the author of that answer :(');
+    });
+};
+
 module.exports = {
   getAllQuestions,
   postQuestion,
   deleteQuestion,
   postAnswer,
+  deleteAnswer,
 };
+
+// TODO check if db.close() can be removed from other queries and still work.

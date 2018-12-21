@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // import helper query functions
 const {
-  getAllQuestions, postQuestion, deleteQuestion, postAnswer,
+  getAllQuestions, postQuestion, deleteQuestion, postAnswer, deleteAnswer,
 } = require('./query');
 
 // GET questions for a certain hotel
@@ -72,9 +72,9 @@ app.post('/hotels/:id/questions/:questionId/answers', (req, res) => {
 
 // DELETE an answer for a certain question
 app.delete('/hotels/:id/questions/:questionId/answers/:answerId', (req, res) => {
-  const hotelId = req.params.id;
-  const questionId = req.params.id;
-  const answerId = req.params.id;
+  const { answerId } = req.params;
+  const { userId } = req.body;
+  deleteAnswer(answerId, userId, res);
 });
 
 // Upvote or downvote a certain answer to a particular question
