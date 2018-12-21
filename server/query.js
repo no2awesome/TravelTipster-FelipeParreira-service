@@ -201,8 +201,6 @@ const voteAnswer = (AnswerID, vote, res) => {
       }, {
         where: { ID: AnswerID },
       });
-
-      // console.log('ANSWER', answer);
     })
     .then((() => {
       res.send('Vote added!');
@@ -213,6 +211,16 @@ const voteAnswer = (AnswerID, vote, res) => {
     });
 };
 
+const postReportForQuestion = (res) => {
+  // this is just a stub function
+  res.send('Report for question posted!');
+};
+
+const postMessageToUser = (res) => {
+  // this is just a stub function
+  res.send('Message for user saved!');
+};
+
 module.exports = {
   getAllQuestions,
   postQuestion,
@@ -220,6 +228,8 @@ module.exports = {
   postAnswer,
   deleteAnswer,
   voteAnswer,
+  postReportForQuestion,
+  postMessageToUser,
 };
 
 // TODO check if db.close() can be removed from other queries and still work.

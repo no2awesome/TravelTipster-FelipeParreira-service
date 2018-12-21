@@ -24,7 +24,14 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // import helper query functions
 const {
-  getAllQuestions, postQuestion, deleteQuestion, postAnswer, deleteAnswer, voteAnswer,
+  getAllQuestions,
+  postQuestion,
+  deleteQuestion,
+  postAnswer,
+  deleteAnswer,
+  voteAnswer,
+  postReportForQuestion,
+  postMessageToUser,
 } = require('./query');
 
 // GET questions for a certain hotel
@@ -51,7 +58,6 @@ app.delete('/hotels/:hotelId/questions/:questionId', (req, res) => {
 
 // POST a report for a certain question
 app.post('/hotels/:hotelId/questions/:questionId/reports', (req, res) => {
-  // TODO: check if question exists and then send back a good response
   const { questionId } = req.params;
   const { userId } = req.body;
   if (questionId !== undefined && userId !== undefined) {
@@ -86,12 +92,20 @@ app.patch('/hotels/:hotelId/questions/:questionId/answers/:answerId/votes', (req
 
 // POST a report for a certain question
 app.post('/hotels/:hotelId/questions/:questionId/answers/:answerId/reports', (req, res) => {
-  const hotelId = req.params.id;
-  const questionId = req.params.id;
-  const answerId = req.params.id;
+  // const { questionId } = req.params;
+  // const { content, userId } = req.body;
+  // the following function is just a stub
+  // since our Q&A module is not able to retrieve reports,
+  // we are not saving anything; you can implement this in the future if you want.
+  postReportForQuestion(res);
 });
 
 // POST a message for a certain user
 app.post('/users/:userId/messages', (req, res) => {
-  const { userId } = req.params;
+  // const { userId } = req.params;
+  // const { content, senderId } = req.body;
+  // the following function is just a stub
+  // since our Q&A module is not able to retrieve messages,
+  // we are not saving anything; you can implement this in the future if you want.
+  postMessageToUser(res);
 });
