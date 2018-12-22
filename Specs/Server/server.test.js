@@ -1,5 +1,5 @@
 /* eslint no-undef: 0 */ // --> OFF
-// const request = require('request');
+const request = require('request-promise');
 // const httpMocks = require('node-mocks-http');
 const { toBeType } = require('jest-tobetype');
 const fetch = require('node-fetch');
@@ -69,5 +69,34 @@ describe('GET all questions', async () => {
     expect(user).toBeType('object');
     expect(user.Username).toBeDefined();
     expect(user.id).toEqual(answer.UserID);
+  });
+});
+
+describe('POST question for a certain hotel', () => {
+  let questions;
+  let question;
+  const body = {
+    postedDate: '2018/12/22',
+    content: 'Is this route really working?',
+    userId: 23,
+  };
+
+  beforeEach(async () => {
+    await request.post({ url: 'http://localhost:3000/hotels/4/questions' }).form(body)
+      .then(async () => {
+        questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
+        [question] = JSON.parse(questions).slice(-1);
+      });
+  });
+
+  afterEach(() => {
+    request.delete({ url: `http://localhost:3000/hotels/4/questions/${question.QuestionID}` }).form({ userId: 23 });
+  });
+
+  test('it should POST a question to a certain hotel', () => {
+    expect(question).toBeDefined();
+    expect(question.UserID).toBe(body.userId);
+    expect(question.Content).toBe(body.content);
+    expect(question.PostedDate.split('-').join('/')).toEqual(body.postedDate);
   });
 });
