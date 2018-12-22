@@ -72,7 +72,7 @@ describe('GET all questions', async () => {
   });
 });
 
-describe('POST question for a certain hotel', () => {
+describe('POST a question for a certain hotel', () => {
   let questions;
   let question;
   const body = {
@@ -98,5 +98,38 @@ describe('POST question for a certain hotel', () => {
     expect(question.UserID).toBe(body.userId);
     expect(question.Content).toBe(body.content);
     expect(question.PostedDate.split('-').join('/')).toEqual(body.postedDate);
+  });
+});
+
+describe('DELETE a question for a certain hotel', async () => {
+  let questions;
+  const body = {
+    postedDate: '2018/12/22',
+    content: 'Is this route really working?',
+    userId: 23,
+  };
+
+  beforeEach(async () => {
+    let question;
+
+    await request.post({ url: 'http://localhost:3000/hotels/4/questions' }).form(body)
+      .then(async () => {
+        questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
+        [question] = JSON.parse(questions).slice(-1);
+      })
+      .then(async () => {
+        await request.delete({ url: `http://localhost:3000/hotels/4/questions/${question.QuestionID}` }).form({ userId: 23 })
+          .then(async () => {
+            const response = await fetch('http://localhost:3000/hotels/4/questions');
+            questions = await response.json();
+          });
+      });
+  });
+
+  test('it should not send back a deleted question', () => {
+    expect(questions).toBeDefined();
+    expect(questions).toBeType('array');
+    expect(questions.length).toBe(10);
+    expect(questions.slice(-1)[0].Content === body.content).toBeFalsy();
   });
 });
