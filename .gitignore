@@ -26,3 +26,9 @@ dist/
 
 # Config files (contain credentials)
 */config.js
+
+# Files used for exploring new concepts
+*/*.t.*.js
+
+# Bundled JS file for production
+*/bundle.js
