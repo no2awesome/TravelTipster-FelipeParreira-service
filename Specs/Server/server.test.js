@@ -130,6 +130,81 @@ describe('DELETE a question for a certain hotel', async () => {
     expect(questions).toBeDefined();
     expect(questions).toBeType('array');
     expect(questions.length).toBe(10);
-    expect(questions.slice(-1)[0].Content === body.content).toBeFalsy();
+    expect(questions.slice(-1)[0].Content).not.toBe(body.content);
+  });
+});
+
+describe('POST a report for a question of a certain hotel', () => {
+  test('it should receive a succesful response after trying to post a repot', async () => {
+    await request.post('http://localhost:3000/hotels/3/questions/1/reports')
+      .on('response', (response) => {
+        expect(response.statusCode).toBe(201);
+      });
+  });
+});
+
+describe('POST an answer for a certain question', () => {
+  let questions;
+  let question;
+  let answer;
+  const body = {
+    content: 'Is this route really working for answers?',
+    userId: 23,
+  };
+
+  beforeEach(async () => {
+    await request.post({ url: 'http://localhost:3000/hotels/4/questions/31/answers' }).form(body)
+      .then(async () => {
+        questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
+        [question] = JSON.parse(questions);
+        [answer] = question.Answers.slice(-1);
+      });
+  });
+
+  afterEach(() => {
+    request.delete({ url: `http://localhost:3000/hotels/4/questions/31/answers/${answer.id}` }).form({ userId: 23 });
+  });
+
+  test('it should POST an answer to a certain question', () => {
+    expect(answer).toBeDefined();
+    expect(answer.Content).toEqual(body.content);
+    expect(answer.UserID).toEqual(body.userId);
+  });
+});
+
+describe('DELETE an answer for a certain question', () => {
+  let questions;
+  let answers;
+  const body = {
+    content: 'Is this route really working for answers?',
+    userId: 23,
+  };
+
+  beforeEach(async () => {
+    let question;
+    let answer;
+
+    await request.post({ url: 'http://localhost:3000/hotels/4/questions/31/answers' }).form(body)
+      .then(async () => {
+        questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
+        [question] = JSON.parse(questions);
+        [answer] = question.Answers.slice(-1);
+      })
+      .then(async () => {
+        await request.delete({ url: `http://localhost:3000/hotels/4/questions/31/answers/${answer.id}` }).form({ userId: 23 })
+          .then(async () => {
+            const response = await fetch('http://localhost:3000/hotels/4/questions');
+            questions = await response.json();
+            answers = questions[0].Answers;
+          });
+      });
+  });
+
+  test('it should not send back a deleted answer', () => {
+    expect(answers).toBeDefined();
+    expect(answers).toBeType('array');
+    expect(answers.length).toBe(5);
+
+    expect(answers.slice(-1)[0].Content).not.toBe(body.content);
   });
 });
