@@ -8,7 +8,7 @@ workflows:
         jobs:
           build: 
             docker: 
-              -run: 
+              -run:
+                name: Running tests 
                 command: |
-                  npm install
                   jest sum.test.js
