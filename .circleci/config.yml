@@ -1,15 +1,15 @@
 version: 2.1
-
-orbs:
-    hello: circleci/hello-build@0.0.7 # uses the circleci/buildpack-deps Docker image
-
-workflows:
-    "Hello Workflow":
-        jobs:
-          build:
-            type: Sequence 
-            docker: 
-              -run:
-                name: Running tests 
-                command: |
-                  jest sum.test.js
+jobs:
+  build:
+    working_directory: ~/demo-react-native
+    docker:
+      - image: circleci/node:8
+    steps:
+    docker:
+      - image: circleci/node:8
+    steps:  
+      - run: npm install
+      - run: 
+        name: jest tests 
+        command: |
+          jest sum.test.js
