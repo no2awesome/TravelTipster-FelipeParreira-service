@@ -6,9 +6,9 @@ jobs:
     steps:  
       - checkout
       - run: 
-        name: Running server
-        command: npm start
-        background: true
+          name: Running server
+          command: npm start
+          background: true
       - run: npm install
       - run: npm test
           
