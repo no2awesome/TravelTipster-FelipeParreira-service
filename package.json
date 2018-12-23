@@ -11,7 +11,7 @@
     "start": "nodemon ./server/server.js",
     "react-dev": "webpack -d --watch",
     "db": "mysql -u root -p < db/schema.sql && node db/dataSaver.js",
-    "test": "jest Specs/sum.test.js"
+    "test": "jest ./Specs/sum.test.js"
   },
   "dependencies": {
     "@babel/preset-env": "^7.2.0",
