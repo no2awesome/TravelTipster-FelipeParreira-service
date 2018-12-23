@@ -35,6 +35,12 @@ const {
   postMessageToUser,
 } = require('./query');
 
+// Testing routes in circle ci
+app.get('/test', (req, res) => {
+  res.status(201);
+  res.send();
+});
+
 // GET questions for a certain hotel
 app.get('/hotels/:hotelId/questions', (req, res) => {
   const { hotelId } = req.params;
