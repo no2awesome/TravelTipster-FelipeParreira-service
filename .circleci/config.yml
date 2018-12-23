@@ -6,4 +6,9 @@ orbs:
 workflows:
     "Hello Workflow":
         jobs:
-          - Specs/sum.test.js
+          build: 
+            docker: 
+              -run: 
+                command: |
+                  npm install
+                  jest sum.test.js
