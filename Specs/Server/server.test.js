@@ -208,3 +208,40 @@ describe('DELETE an answer for a certain question', () => {
     expect(answers.slice(-1)[0].Content).not.toBe(body.content);
   });
 });
+
+describe('UPDATE number of votes for an answer', () => {
+  let previousVotes;
+  let questions;
+
+  beforeEach(async () => {
+    const response = await fetch('http://localhost:3000/hotels/4/questions');
+    questions = await response.json();
+    previousVotes = questions[0].Answers[0].Votes;
+  });
+
+  test('it should upvote an answer', async () => {
+    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/151/votes' }).form({ vote: '1' })
+      .then(async () => {
+        const response = await fetch('http://localhost:3000/hotels/4/questions');
+        questions = await response.json();
+        const currentVotes = questions[0].Answers[0].Votes;
+        console.log('currentVotes', currentVotes);
+        console.log('previousVotes', previousVotes);
+        expect(currentVotes).toBe(previousVotes + 1);
+        previousVotes = currentVotes;
+      });
+  });
+
+  test('it should downvote an answer', async () => {
+    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/151/votes' }).form({ vote: '-1' })
+      .then(async () => {
+        const response = await fetch('http://localhost:3000/hotels/4/questions');
+        questions = await response.json();
+        const currentVotes = questions[0].Answers[0].Votes;
+        console.log('currentVotes', currentVotes);
+        console.log('previousVotes', previousVotes);
+        expect(currentVotes).toBe(previousVotes - 1);
+        previousVotes = currentVotes;
+      });
+  });
+});
