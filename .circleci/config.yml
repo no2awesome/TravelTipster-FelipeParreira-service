@@ -1,5 +1,10 @@
 version: 2.1
 jobs:
+  server:
+    docker:
+      - image: circleci/node:11.4.0
+    steps: 
+      - run: npm start
   build:
     docker:
       - image: circleci/node:11.4.0
