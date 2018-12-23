@@ -5,5 +5,5 @@ jobs:
       - image: circleci/node:8
     steps:  
       - run: npm install
-      - run: cd Specs/ && npm test
+      - run: cd .. && cd Specs/ && npm test
           
