@@ -1,13 +1,9 @@
 /* eslint no-undef: 0 */ // --> OFF
 const request = require('request-promise');
-// const httpMocks = require('node-mocks-http');
 const { toBeType } = require('jest-tobetype');
 const fetch = require('node-fetch');
 
 expect.extend({ toBeType });
-
-// beforeAll();
-// afterAll();
 
 describe('GET all questions', async () => {
   let questions;
