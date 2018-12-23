@@ -5,7 +5,4 @@ jobs:
       - image: circleci/node:8
     steps:  
       - run: npm install
-      - run: 
-        name: jest tests 
-        command: |
-          jest sum.test.js
+      
