@@ -9,11 +9,6 @@ jobs:
           name: Running server
           command: npm start
           background: true
-      - run:
-          shell: /bin/sh
-          command: |
-            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://localhost:3000/graphql
-            :
       - run: npm install
-      - run: npm test
+      - run: sleep 50 && npm test
           
