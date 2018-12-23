@@ -135,8 +135,8 @@ describe('DELETE a question for a certain hotel', async () => {
 });
 
 describe('POST a report for a question of a certain hotel', () => {
-  test('it should receive a succesful response after trying to post a repot', async () => {
-    await request.post('http://localhost:3000/hotels/3/questions/1/reports')
+  test('it should receive a succesful response after trying to post a report', async () => {
+    await request.post('http://localhost:3000/hotels/4/questions/31/reports')
       .on('response', (response) => {
         expect(response.statusCode).toBe(201);
       });
@@ -225,8 +225,6 @@ describe('UPDATE number of votes for an answer', () => {
         const response = await fetch('http://localhost:3000/hotels/4/questions');
         questions = await response.json();
         const currentVotes = questions[0].Answers[0].Votes;
-        console.log('currentVotes', currentVotes);
-        console.log('previousVotes', previousVotes);
         expect(currentVotes).toBe(previousVotes + 1);
         previousVotes = currentVotes;
       });
@@ -238,10 +236,26 @@ describe('UPDATE number of votes for an answer', () => {
         const response = await fetch('http://localhost:3000/hotels/4/questions');
         questions = await response.json();
         const currentVotes = questions[0].Answers[0].Votes;
-        console.log('currentVotes', currentVotes);
-        console.log('previousVotes', previousVotes);
         expect(currentVotes).toBe(previousVotes - 1);
         previousVotes = currentVotes;
+      });
+  });
+});
+
+describe('POST a report for an answer of a certain question', () => {
+  test('it should receive a succesful response after trying to post a report', async () => {
+    await request.post('http://localhost:3000/hotels/4/questions/31/answers/151/reports')
+      .on('response', (response) => {
+        expect(response.statusCode).toBe(201);
+      });
+  });
+});
+
+describe('POST a message for a certain user', () => {
+  test('it should receive a succesful response after trying to post a message', async () => {
+    await request.post('http://localhost:3000/users/1/messages')
+      .on('response', (response) => {
+        expect(response.statusCode).toBe(201);
       });
   });
 });
