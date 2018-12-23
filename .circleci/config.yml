@@ -1,10 +1,6 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/demo-react-native
-    docker:
-      - image: circleci/node:8
-    steps:
     docker:
       - image: circleci/node:8
     steps:  
