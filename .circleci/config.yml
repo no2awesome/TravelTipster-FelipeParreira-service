@@ -6,7 +6,8 @@ orbs:
 workflows:
     "Hello Workflow":
         jobs:
-          build: 
+          build:
+            type: Sequence 
             docker: 
               -run:
                 name: Running tests 
