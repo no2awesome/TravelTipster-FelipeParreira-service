@@ -35,6 +35,12 @@ const {
   postMessageToUser,
 } = require('./query');
 
+// Testing routes in circle ci
+app.get('/test', (req, res) => {
+  res.status(201);
+  res.send();
+});
+
 // GET questions for a certain hotel
 app.get('/hotels/:hotelId/questions', (req, res) => {
   const { hotelId } = req.params;
@@ -58,8 +64,6 @@ app.delete('/hotels/:hotelId/questions/:questionId', (req, res) => {
 
 // POST a report for a certain question
 app.post('/hotels/:hotelId/questions/:questionId/reports', (req, res) => {
-  // const { questionId } = req.params;
-  // const { userId, content } = req.body;
   // the following function is just a stub
   // since our Q&A module is not able to retrieve reports,
   // we are not saving anything; you can implement this in the future if you want.
@@ -90,8 +94,6 @@ app.patch('/hotels/:hotelId/questions/:questionId/answers/:answerId/votes', (req
 
 // POST a report for a certain answer
 app.post('/hotels/:hotelId/questions/:questionId/answers/:answerId/reports', (req, res) => {
-  // const { answerId } = req.params;
-  // const { content, userId } = req.body;
   // the following function is just a stub
   // since our Q&A module is not able to retrieve reports,
   // we are not saving anything; you can implement this in the future if you want.
@@ -100,8 +102,6 @@ app.post('/hotels/:hotelId/questions/:questionId/answers/:answerId/reports', (re
 
 // POST a message for a certain user
 app.post('/users/:userId/messages', (req, res) => {
-  // const { userId } = req.params;
-  // const { content, senderId } = req.body;
   // the following function is just a stub
   // since our Q&A module is not able to retrieve messages,
   // we are not saving anything; you can implement this in the future if you want.

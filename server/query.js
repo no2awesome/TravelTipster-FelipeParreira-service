@@ -70,8 +70,7 @@ const getAllQuestions = (HotelID, res) => {
       for (let i = 0; i < questionData.length; i += 1) {
         questionData[i].AnswersUsers = users.splice(0, questionData[i].Answers.length);
       }
-      console.log('question', questionData[0]);
-      res.send(JSON.stringify(questionData));
+      res.send(questionData);
       res.end();
     });
 };
