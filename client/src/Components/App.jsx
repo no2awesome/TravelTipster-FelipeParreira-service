@@ -1,5 +1,7 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import QuestionList from './QuestionList.jsx'; // eslint-disable-line no-unused-vars
+import { Provider } from 'react-redux'; // eslint-disable-line no-unused-vars
+import { store } from './our-store-file'; // eslint-disable-line no-unused-vars
 
 class App extends Component {
   constructor(props) {
