@@ -30,8 +30,33 @@ class App extends Component {
     });
   }
 
-  submitQuestion(question) {
-    
+  submitQuestion(content, date) {
+    console.log(content, date);
+    $.ajax({
+      type: 'POST',
+      url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions`,
+      data: {
+        content,
+        postedDate: date,
+        userId: this.props.currentUser.UserID,
+      },
+      success: () => {
+        const updatedQuestions = this.state.questions.slice();
+        const question = {
+          Content: content,
+          PostedDate: date,
+          UserID: this.props.currentUser.UserID,
+          User: this.props.currentUser,
+        };
+
+        updatedQuestions.unshift(question);
+        console.log(updatedQuestions);
+        this.setState({
+          questions: updatedQuestions,
+        });
+      },
+      error: err => console.log('ERROR', err),
+    });
   }
 
 

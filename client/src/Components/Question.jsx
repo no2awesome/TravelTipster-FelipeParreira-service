@@ -6,9 +6,10 @@ const Question = (props) => {
 
   return (
     <li>
-      User: {question.User.Username}
+
+      User: {question.User ? question.User.Username : null}
       <br />
-      <img src={question.User.ThumbnailURL} />
+      <img src={question.User ? question.User.ThumbnailURL : null} />
       <br />
       {question.Content}
       <br />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import moment from 'moment';
 
 class QuestionForm extends Component {
   constructor(props) {
@@ -19,11 +20,9 @@ class QuestionForm extends Component {
 
   handleSubmitClick() {
     this.props.hideQuestionForm();
-
-    const question = {
-
-    };
-    this.props.submitQuestion(question);
+    const content = this.state.questionContent;
+    const date = moment().format('YYYY-MM-DD');
+    this.props.submitQuestion(content, date);
   }
 
   render() {

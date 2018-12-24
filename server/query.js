@@ -14,6 +14,7 @@ const getAllQuestions = (HotelID, res) => {
         raw: true,
         attributes: [['ID', 'QuestionID'], 'Content', 'PostedDate', 'UserID'],
         where: { HotelID },
+        order: [['ID', 'DESC']],
       });
       return promisedQuestions;
     })
@@ -43,6 +44,7 @@ const getAllQuestions = (HotelID, res) => {
         const promisedAnswerGroup = Answers.findAll({
           raw: true,
           where: { QuestionID: questionData[i].QuestionID },
+          order: [['ID', 'DESC']],
         });
         promisedAnswersGroups.push(promisedAnswerGroup);
       }

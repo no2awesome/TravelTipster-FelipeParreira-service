@@ -6,9 +6,9 @@ const AnswerList = (props) => {
 
   return (
     <ul>
-      {answers.map((answer, index) => (
+      {answers ? answers.map((answer, index) => (
           <Answer key={answer.id} answer={answer} user={users[index]} />
-      ))}
+      )) : null}
     </ul>
   );
 };
