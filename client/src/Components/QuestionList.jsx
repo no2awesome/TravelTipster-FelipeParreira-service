@@ -17,7 +17,7 @@ class QuestionList extends Component {
       success: (questions) => {
         console.log('questions', questions);
         this.setState({
-          questions: JSON.parse(questions),
+          questions,
         });
       },
       error: (err) => {

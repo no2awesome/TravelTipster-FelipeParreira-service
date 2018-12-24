@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <input type="text" class="form-control"/>
+        <input type="text" className="form-control"/>
         <QuestionList questions={this.state.questions} hotelId={4}/>
       </div>);
   }
