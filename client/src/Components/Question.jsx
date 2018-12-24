@@ -1,13 +1,19 @@
 import React from 'react'; // eslint-disable-line no-unused-vars,import/no-unresolved
+import AnswerList from './AnswerList.jsx'; // eslint-disable-line no-unused-vars
 
 const Question = (props) => {
-  const { data } = props;
+  const { question } = props;
 
   return (
     <li>
-      {data.Content}
+      User: {question.User.Username}
       <br />
-      {data.PostedDate}
+      <img src={question.User.ThumbnailURL} />
+      <br />
+      {question.Content}
+      <br />
+      {question.PostedDate}
+      <AnswerList answers={props.question.Answers} users={props.question.AnswersUsers} />
     </li>
   );
 };

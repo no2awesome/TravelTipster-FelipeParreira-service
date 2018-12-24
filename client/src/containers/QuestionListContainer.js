@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import QuestionList from '../Components/QuestionList.jsx';
-import addQuestion from '../actions/addQuestion';
 import deleteQuestion from '../actions/deleteQuestion';
 
 const mapStateToProps = questions => ({
@@ -8,7 +7,6 @@ const mapStateToProps = questions => ({
 });
 
 const mapDispatchToProps = {
-  handleAddQuestionClick: addQuestion,
   handleDeleteQuestionClick: deleteQuestion,
 };
 

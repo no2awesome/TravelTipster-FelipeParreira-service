@@ -1,6 +1,11 @@
 import Redux from 'redux'; // eslint-disable-line no-unused-vars,import/no-unresolved
 
-const answersReducer = (state = [], { type, answer }) => {
+const answersReducer = (state = [], { type, answer, answers }) => {
+  if (type === 'CHANGE_ANSWER_LIST') {
+    const newState = answers;
+    return newState;
+  }
+
   if (type === 'ADD_ANSWER') {
     const newState = state.slice();
     return newState.push(answer);
