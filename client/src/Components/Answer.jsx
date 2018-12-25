@@ -2,6 +2,18 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 
 const Answer = (props) => {
   const { answer, user } = props;
+  const upArrow = {
+    fontSize: '10px',
+    textAlign: 'center',
+    lineHeight: '50%',
+    position: 'absolute',
+    top: '20%',
+    left: '20%',
+  };
+  const downArrow = {
+    ...upArrow,
+    top: '35%',
+  };
 
   return (
     <li>
@@ -15,15 +27,19 @@ const Answer = (props) => {
         ? <button className="btn-primary" onClick={props.deleteAnswer}>Delete</button>
         : null
       }
-      <button
+      <button className="arrow"
       onClick={() => props.voteAnswer(answer.UserID,
         answer.QuestionID,
         answer.id,
-        true)}>Up</button>
-      <button onClick={() => props.voteAnswer(answer.UserID,
+        true)}>
+        <i className="fa fa-chevron-up" style={upArrow}></i></button>
+      <button className="arrow"
+      onClick={() => props.voteAnswer(answer.UserID,
         answer.QuestionID,
         answer.id,
-        false)}>Down</button>
+        false)}>
+          <i className="fa fa-chevron-down" style={downArrow}></i>
+        </button>
     </li>
   );
 };
