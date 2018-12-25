@@ -16,12 +16,13 @@ const Question = (props) => {
       {question.PostedDate}
       <br />
       {question.UserID === props.currentUser.UserID
-        ? <button>Delete</button>
+        ? <button onClick={props.deleteQuestion}>Delete</button>
         : null
       }
       <AnswerList answers={props.question.Answers} users={props.question.AnswersUsers}
       submitAnswer={props.submitAnswer} questionID={question.QuestionID}
-      voteAnswer={props.voteAnswer} currentUser={props.currentUser} />
+      voteAnswer={props.voteAnswer} currentUser={props.currentUser}
+      deleteAnswer={props.deleteAnswer} />
     </li>
   );
 };

@@ -41,7 +41,8 @@ class AnswerList extends Component {
           {answers ? answers.map((answer, index) => {
             const key = answer.id || answer.Content.substring(1, 4);
             return (<Answer key={key} answer={answer} user={users[index]}
-              voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser} />
+              voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser}
+              deleteAnswer={() => this.props.deleteAnswer(this.props.questionID, answer.id)} />
             );
           }) : null}
         </ul>

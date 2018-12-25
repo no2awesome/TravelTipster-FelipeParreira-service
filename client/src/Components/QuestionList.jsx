@@ -11,7 +11,9 @@ const QuestionList = (props) => {
         return (
           <Question key={key} question={question}
           submitAnswer={props.submitAnswer} voteAnswer={props.voteAnswer}
-          currentUser={props.currentUser} />
+          currentUser={props.currentUser}
+          deleteQuestion={() => props.deleteQuestion(question.QuestionID)}
+          deleteAnswer={props.deleteAnswer} />
         );
       })}
     </ul>

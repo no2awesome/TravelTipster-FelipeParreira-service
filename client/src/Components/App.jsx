@@ -15,6 +15,8 @@ class App extends Component {
     this.submitAnswer = this.submitAnswer.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.voteAnswer = this.voteAnswer.bind(this);
+    this.deleteQuestion = this.deleteQuestion.bind(this);
+    this.deleteAnswer = this.deleteAnswer.bind(this);
     // setInterval(this.componentDidMount, 1000);
   }
 
@@ -35,7 +37,6 @@ class App extends Component {
   }
 
   submitQuestion(content, date) {
-    console.log(content, date);
     $.ajax({
       type: 'POST',
       url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions`,
@@ -56,7 +57,6 @@ class App extends Component {
         };
 
         updatedQuestions.unshift(question);
-        console.log(updatedQuestions);
         this.setState({
           questions: updatedQuestions,
         });
@@ -80,8 +80,6 @@ class App extends Component {
           .filter(question => question.QuestionID === questionID);
         answeredQuestion = { ...answeredQuestion };
 
-        console.log('answeredQuestion', answeredQuestion);
-
         const answer = {
           Content: content,
           UserID: this.props.currentUser.UserID,
@@ -94,7 +92,6 @@ class App extends Component {
         answeredQuestion.AnswersUsers = answeredQuestion.AnswersUsers || [];
         answeredQuestion.AnswersUsers.unshift(this.props.currentUser);
 
-        console.log(updatedQuestions);
         this.setState({
           questions: updatedQuestions,
         });
@@ -119,12 +116,9 @@ class App extends Component {
           .filter(question => question.QuestionID === questionID);
         selectedQuestion = { ...selectedQuestion };
 
-        console.log('selectedQuestion', selectedQuestion);
-
         const [votedAnswer] = selectedQuestion.Answers.filter(answer => answer.id === answerID);
         votedAnswer.Votes += vote;
 
-        console.log(updatedQuestions);
         const votedAnswers = this.state.votedAnswers.slice();
         votedAnswers.push(answerID);
 
@@ -137,13 +131,42 @@ class App extends Component {
     });
   }
 
+  deleteQuestion(questionID) {
+    $.ajax({
+      type: 'DELETE',
+      url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions/${questionID}`,
+      data: { userId: this.props.currentUser.UserID },
+      success: () => {
+        let updatedQuestions = this.state.questions.slice();
+        updatedQuestions = updatedQuestions.filter(question => question.QuestionID !== questionID);
+        this.setState({
+          questions: updatedQuestions,
+        });
+      },
+      error: err => console.log('Error', err),
+    });
+  }
+
+  deleteAnswer(questionID, answerID) {
+    $.ajax({
+      type: 'DELETE',
+      url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions/${questionID}/answers/${answerID}`,
+      data: { userId: this.props.currentUser.UserID },
+      success: () => {
+        const updatedQuestions = 90;
+      },
+      error: err => console.log('Error', err),
+    });
+  }
+
 
   render() {
     return (
       <div>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}
-        voteAnswer={this.voteAnswer} currentUser={this.props.currentUser} />
+        voteAnswer={this.voteAnswer} currentUser={this.props.currentUser} 
+        deleteQuestion={this.deleteQuestion} deleteAnswer={this.deleteAnswer} />
       </div>);
   }
 }
