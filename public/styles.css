@@ -50,6 +50,10 @@ button.arrow:hover {
   top: 70%;
 }
 
+.fa-flag {
+  cursor: pointer;
+}
+
 button.big {
   padding: 8px 16px;
   font-size: 14px;
