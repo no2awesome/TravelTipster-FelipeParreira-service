@@ -10,6 +10,8 @@ const Answer = (props) => {
       User: {user.Username}
       <br />
       Votes: {answer.Votes}
+      <button onClick={() => props.voteAnswer(answer.QuestionID, answer.id, true)}>Up</button>
+      <button onClick={() => props.voteAnswer(answer.QuestionID, answer.id, false)}>Down</button>
     </li>
   );
 };

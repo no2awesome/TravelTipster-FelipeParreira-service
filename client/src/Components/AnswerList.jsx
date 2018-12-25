@@ -39,7 +39,8 @@ class AnswerList extends Component {
         }
         <ul>
           {answers ? answers.map((answer, index) => (
-              <Answer key={answer.id} answer={answer} user={users[index]} />
+              <Answer key={answer.id} answer={answer} user={users[index]}
+              voteAnswer={this.props.voteAnswer} />
           )) : null}
         </ul>
       </div>

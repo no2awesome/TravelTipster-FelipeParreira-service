@@ -8,7 +8,7 @@ const QuestionList = (props) => {
     <ul>
       {questions.map(question => (
           <Question key={question.QuestionID} question={question}
-          submitAnswer={props.submitAnswer} />
+          submitAnswer={props.submitAnswer} voteAnswer={props.voteAnswer} />
       ))}
     </ul>
   );

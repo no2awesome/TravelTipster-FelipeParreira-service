@@ -44,7 +44,7 @@ const getAllQuestions = (HotelID, res) => {
         const promisedAnswerGroup = Answers.findAll({
           raw: true,
           where: { QuestionID: questionData[i].QuestionID },
-          order: [['ID', 'DESC']],
+          order: [['Votes', 'DESC']],
         });
         promisedAnswersGroups.push(promisedAnswerGroup);
       }
