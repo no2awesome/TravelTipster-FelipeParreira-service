@@ -16,6 +16,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@emotion/core": "^10.0.5",
     "babel-loader": "^8.0.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
@@ -25,6 +26,7 @@
     "mysql2": "^1.6.4",
     "node-fetch": "^2.3.0",
     "path": "^0.12.7",
+    "radium": "^0.25.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",

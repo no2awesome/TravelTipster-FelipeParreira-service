@@ -1,0 +1,28 @@
+button {
+  color: #fff;
+  background-color: #00a680;
+  font-family: Arial;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-color: #00a680 #267060 #267060 #00a680;
+  border-radius: 2px;
+  padding: 8px 16px;
+}
+
+button:hover {
+  background-color: #00c094;
+}
+
+a {
+  outline: none;
+  color: #069;
+  font-family: Arial;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

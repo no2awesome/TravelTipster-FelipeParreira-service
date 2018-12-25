@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import Radium from 'radium'; // eslint-disable-line no-unused-vars
 import QuestionForm from './QuestionForm.jsx'; // eslint-disable-line no-unused-vars
 
 class Header extends Component {
@@ -25,13 +26,30 @@ class Header extends Component {
   }
 
   render() {
+    const titleStyle = {
+      color: '#000a12',
+      fontWeight: 700,
+      fontFamily: 'Arial',
+      fontSize: '28px',
+    };
+
+    const containerStyle = {
+      display: 'flex',
+      justifyContent: 'space-between',
+    };
+
+    const blockStyle = {
+      padding: '0 0 18px',
+      borderBottom: '1px solid #e5e5e5',
+    };
+
     return (
-      <div>
-        <div>
-          <div>Questions & Answers</div>
+      <div style={blockStyle}>
+        <div style={containerStyle}>
+          <div style={titleStyle}>Questions & Answers</div>
           <button onClick={this.showQuestionForm}>Ask a question</button>
         </div>
-        <span>See all {this.props.questions.length} questions</span>
+        <a href="#">See all {this.props.questions.length} questions</a>
         {this.state.showQuestionForm
           ? <QuestionForm hideQuestionForm={this.hideQuestionForm}
           submitQuestion={this.props.submitQuestion} />
