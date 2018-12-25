@@ -41,5 +41,5 @@ package-lock.json
 *.sh
 
 # Sample test files
-sum.*
-t.js
+*/sum.*
+*/t.js
