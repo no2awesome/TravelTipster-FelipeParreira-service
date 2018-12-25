@@ -6,10 +6,14 @@ const QuestionList = (props) => {
 
   return (
     <ul>
-      {questions.map(question => (
-          <Question key={question.QuestionID} question={question}
-          submitAnswer={props.submitAnswer} voteAnswer={props.voteAnswer} />
-      ))}
+      {questions.map((question) => {
+        const key = question.QuestionID || question.Content.substring(1, 4);
+        return (
+          <Question key={key} question={question}
+          submitAnswer={props.submitAnswer} voteAnswer={props.voteAnswer}
+          currentUser={props.currentUser} />
+        );
+      })}
     </ul>
   );
 };

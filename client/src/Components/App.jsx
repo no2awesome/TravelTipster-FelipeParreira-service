@@ -103,8 +103,8 @@ class App extends Component {
     });
   }
 
-  voteAnswer(questionID, answerID, isUp) {
-    if (this.state.votedAnswers.includes(answerID)) {
+  voteAnswer(userID, questionID, answerID, isUp) {
+    if (userID === this.props.currentUser.UserID || this.state.votedAnswers.includes(answerID)) {
       return;
     }
 
@@ -143,7 +143,7 @@ class App extends Component {
       <div>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}
-        voteAnswer={this.voteAnswer} />
+        voteAnswer={this.voteAnswer} currentUser={this.props.currentUser} />
       </div>);
   }
 }

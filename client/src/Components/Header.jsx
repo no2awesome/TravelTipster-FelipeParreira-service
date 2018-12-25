@@ -25,8 +25,6 @@ class Header extends Component {
   }
 
   render() {
-    const a = this.state;
-
     return (
       <div>
         <div>
@@ -35,7 +33,8 @@ class Header extends Component {
         </div>
         <span>See all {this.props.questions.length} questions</span>
         {this.state.showQuestionForm
-          ? <QuestionForm hideQuestionForm={this.hideQuestionForm} submitQuestion={this.props.submitQuestion} />
+          ? <QuestionForm hideQuestionForm={this.hideQuestionForm}
+          submitQuestion={this.props.submitQuestion} />
           : null
         }
       </div>

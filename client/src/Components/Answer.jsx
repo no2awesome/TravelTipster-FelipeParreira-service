@@ -10,8 +10,20 @@ const Answer = (props) => {
       User: {user.Username}
       <br />
       Votes: {answer.Votes}
-      <button onClick={() => props.voteAnswer(answer.QuestionID, answer.id, true)}>Up</button>
-      <button onClick={() => props.voteAnswer(answer.QuestionID, answer.id, false)}>Down</button>
+      <br />
+      {answer.UserID === props.currentUser.UserID
+        ? <button>Delete</button>
+        : null
+      }
+      <button
+      onClick={() => props.voteAnswer(answer.UserID,
+        answer.QuestionID,
+        answer.id,
+        true)}>Up</button>
+      <button onClick={() => props.voteAnswer(answer.UserID,
+        answer.QuestionID,
+        answer.id,
+        false)}>Down</button>
     </li>
   );
 };

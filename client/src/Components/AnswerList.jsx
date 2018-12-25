@@ -38,10 +38,12 @@ class AnswerList extends Component {
           : null
         }
         <ul>
-          {answers ? answers.map((answer, index) => (
-              <Answer key={answer.id} answer={answer} user={users[index]}
-              voteAnswer={this.props.voteAnswer} />
-          )) : null}
+          {answers ? answers.map((answer, index) => {
+            const key = answer.id || answer.Content.substring(1, 4);
+            return (<Answer key={key} answer={answer} user={users[index]}
+              voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser} />
+            );
+          }) : null}
         </ul>
       </div>
     );
