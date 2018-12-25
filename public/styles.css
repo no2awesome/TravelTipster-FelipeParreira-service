@@ -76,3 +76,17 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+textarea {
+  border-radius: 5px;
+  border: 1px solid #dfdddd;
+  border-top-width: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  padding: 10px;
+}
+
+textarea:focus {
+  outline: none !important;
+  border:1px solid #00a680;
+}

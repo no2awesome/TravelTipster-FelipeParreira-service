@@ -23,13 +23,37 @@ class AnswerForm extends Component {
   }
 
   render() {
+    const promptStyle = {
+      textTransform: 'uppercase',
+      fontWeight: 'bold',
+      fontSize: '12px',
+      color: '#767676',
+      fontFamily: 'Arial',
+    };
+
+    const formContainer = {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '150px',
+      justifyContent: 'space-between',
+      marginBottom: '20px',
+    };
+
+    const buttonContainer = {
+      display: 'flex',
+      width: '133px',
+      justifyContent: 'space-between',
+    };
+
     return (
-      <div>
-        <p>WHAT IS YOUR ANSWER?</p>
-        <textarea placeholder="Answer this traveler's question here." value={this.state.answerContent} onChange={this.handleTextAreaChange}>
+      <div style={formContainer}>
+        <p style={promptStyle}>WHAT IS YOUR ANSWER?</p>
+        <textarea rows="2" cols="50" placeholder={`Hi, ${this.props.currentUser.Username}. Answer this traveler's question here.`} value={this.state.answerContent} onChange={this.handleTextAreaChange}>
         </textarea>
-        <button onClick={this.handleSubmitClick}>Submit</button>
-        <button onClick={this.props.hideAnswerForm} >Cancel</button>
+        <div style={buttonContainer}>
+          <button className="btn-primary small" onClick={this.handleSubmitClick}>Submit</button>
+          <button className="btn-secondary small" onClick={this.props.hideAnswerForm} >Cancel</button>
+        </div>
       </div>
     );
   }

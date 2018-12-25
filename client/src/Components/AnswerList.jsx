@@ -44,21 +44,25 @@ class AnswerList extends Component {
 
     const listStyle = {
       listStyleType: 'none',
+      marginLeft: '-35px',
     };
 
     const buttonContainer = {
       marginBottom: '20px',
-      // width: '205px',
       display: 'flex',
-      // justifyContent: 'space-between',
     };
 
     const answerButton = {
       marginRight: '10px',
     };
 
+    const answerListContainer = {
+      display: 'flex',
+      flexDirection: 'column',
+    };
+
     return (
-      <div>
+      <div style={answerListContainer}>
         <div style={buttonContainer}>
           <button style={answerButton} className="btn-primary small" onClick={this.showAnswerForm}>Answer</button>
           <button className="btn-secondary small" onClick={this.toggleShowAllAnswers}>
@@ -70,7 +74,8 @@ class AnswerList extends Component {
         </div>
         {this.state.showAnswerForm
           ? <AnswerForm hideAnswerForm={this.hideAnswerForm}
-          submitAnswer={this.props.submitAnswer} questionID={this.props.questionID} />
+          submitAnswer={this.props.submitAnswer} questionID={this.props.questionID}
+          currentUser={this.props.currentUser} />
           : null
         }
         <ul style={listStyle}>
