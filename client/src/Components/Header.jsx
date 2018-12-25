@@ -47,7 +47,7 @@ class Header extends Component {
       <div style={blockStyle}>
         <div style={containerStyle}>
           <div style={titleStyle}>Questions & Answers</div>
-          <button onClick={this.showQuestionForm}>Ask a question</button>
+          <button className="btn-primary big" onClick={this.showQuestionForm}>Ask a question</button>
         </div>
         <a href="#">See all {this.props.questions.length} questions</a>
         {this.state.showQuestionForm

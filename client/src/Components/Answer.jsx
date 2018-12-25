@@ -12,7 +12,7 @@ const Answer = (props) => {
       Votes: {answer.Votes}
       <br />
       {answer.UserID === props.currentUser.UserID
-        ? <button onClick={props.deleteAnswer}>Delete</button>
+        ? <button className="btn-primary" onClick={props.deleteAnswer}>Delete</button>
         : null
       }
       <button

@@ -16,7 +16,7 @@ const Question = (props) => {
       {question.PostedDate}
       <br />
       {question.UserID === props.currentUser.UserID
-        ? <button onClick={props.deleteQuestion}>Delete</button>
+        ? <button className="btn-primary small" onClick={props.deleteQuestion}>Delete</button>
         : null
       }
       <AnswerList answers={props.question.Answers} users={props.question.AnswersUsers}

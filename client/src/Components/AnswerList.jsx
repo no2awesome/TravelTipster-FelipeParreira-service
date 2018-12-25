@@ -44,8 +44,8 @@ class AnswerList extends Component {
 
     return (
       <div>
-        <button onClick={this.showAnswerForm}>Answer</button>
-        <button onClick={this.toggleShowAllAnswers}>
+        <button className="btn-primary small" onClick={this.showAnswerForm}>Answer</button>
+        <button className="btn-secondary small" onClick={this.toggleShowAllAnswers}>
           {!this.state.showAllAnswers
             ? `Show all ${length} answers`
             : 'Hide all answers'
