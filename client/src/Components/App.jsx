@@ -153,7 +153,17 @@ class App extends Component {
       url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions/${questionID}/answers/${answerID}`,
       data: { userId: this.props.currentUser.UserID },
       success: () => {
-        const updatedQuestions = 90;
+        const updatedQuestions = this.state.questions.slice();
+        const [selectedQuestion] = updatedQuestions
+          .filter(question => question.QuestionID === questionID);
+        selectedQuestion.Answers = [...selectedQuestion.Answers];
+        selectedQuestion.Answers = selectedQuestion.Answers
+          .filter(answer => answer.id !== answerID);
+
+        console.log('updatedQuestions', updatedQuestions);
+        this.setState({
+          questions: updatedQuestions,
+        });
       },
       error: err => console.log('Error', err),
     });
