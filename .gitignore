@@ -32,3 +32,14 @@ dist/
 
 # Bundled JS file for production
 */bundle.js
+
+# Log files
+npm-debug.log*
+package-lock.json
+
+# Bash (shell) files
+*.sh
+
+# Sample test files
+sum.*
+t.js
