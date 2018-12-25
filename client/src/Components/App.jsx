@@ -160,7 +160,6 @@ class App extends Component {
         selectedQuestion.Answers = selectedQuestion.Answers
           .filter(answer => answer.id !== answerID);
 
-        console.log('updatedQuestions', updatedQuestions);
         this.setState({
           questions: updatedQuestions,
         });
@@ -175,7 +174,7 @@ class App extends Component {
       <div>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}
-        voteAnswer={this.voteAnswer} currentUser={this.props.currentUser} 
+        voteAnswer={this.voteAnswer} currentUser={this.props.currentUser}
         deleteQuestion={this.deleteQuestion} deleteAnswer={this.deleteAnswer} />
       </div>);
   }

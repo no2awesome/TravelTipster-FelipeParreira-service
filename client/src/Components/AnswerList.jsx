@@ -7,10 +7,12 @@ class AnswerList extends Component {
     super(props);
     this.state = {
       showAnswerForm: false,
+      showAllAnswers: false,
     };
 
     this.showAnswerForm = this.showAnswerForm.bind(this);
     this.hideAnswerForm = this.hideAnswerForm.bind(this);
+    this.toggleShowAllAnswers = this.toggleShowAllAnswers.bind(this);
   }
 
   showAnswerForm() {
@@ -25,26 +27,43 @@ class AnswerList extends Component {
     });
   }
 
+  toggleShowAllAnswers() {
+    this.setState({
+      showAllAnswers: !this.state.showAllAnswers,
+    });
+  }
+
   render() {
-    const { answers, users } = this.props;
+    let { answers } = this.props;
+    const { users } = this.props;
+    answers = answers || [];
+    const { length } = answers;
+    if (!this.state.showAllAnswers) {
+      answers = answers.slice(0, 1);
+    }
 
     return (
       <div>
         <button onClick={this.showAnswerForm}>Answer</button>
-        <button>See all {answers.length} answers</button>
+        <button onClick={this.toggleShowAllAnswers}>
+          {!this.state.showAllAnswers
+            ? `Show all ${length} answers`
+            : 'Hide all answers'
+          }
+        </button>
         {this.state.showAnswerForm
           ? <AnswerForm hideAnswerForm={this.hideAnswerForm}
           submitAnswer={this.props.submitAnswer} questionID={this.props.questionID} />
           : null
         }
         <ul>
-          {answers ? answers.map((answer, index) => {
+          {answers.map((answer, index) => {
             const key = answer.id || answer.Content.substring(1, 4);
             return (<Answer key={key} answer={answer} user={users[index]}
               voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser}
               deleteAnswer={() => this.props.deleteAnswer(this.props.questionID, answer.id)} />
             );
-          }) : null}
+          })}
         </ul>
       </div>
     );
