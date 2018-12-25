@@ -14,7 +14,8 @@ const Question = (props) => {
       {question.Content}
       <br />
       {question.PostedDate}
-      <AnswerList answers={props.question.Answers} users={props.question.AnswersUsers} />
+      <AnswerList answers={props.question.Answers} users={props.question.AnswersUsers}
+      submitAnswer={props.submitAnswer} questionID={question.QuestionID} />
     </li>
   );
 };

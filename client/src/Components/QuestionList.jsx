@@ -7,7 +7,8 @@ const QuestionList = (props) => {
   return (
     <ul>
       {questions.map(question => (
-          <Question key={question.QuestionID} question={question}/>
+          <Question key={question.QuestionID} question={question}
+          submitAnswer={props.submitAnswer} />
       ))}
     </ul>
   );

@@ -12,6 +12,9 @@ class App extends Component {
     };
 
     this.submitQuestion = this.submitQuestion.bind(this);
+    this.submitAnswer = this.submitAnswer.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    // setInterval(this.componentDidMount, 1000);
   }
 
   componentDidMount() {
@@ -59,12 +62,39 @@ class App extends Component {
     });
   }
 
+  submitAnswer(content, questionID) {
+    console.log(content, questionID);
+    $.ajax({
+      type: 'POST',
+      url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions`,
+      data: {
+        content,
+        userId: this.props.currentUser.UserID,
+      },
+      success: () => {
+        const updatedQuestions = this.state.questions.slice();
+        const question = {
+          Content: content,
+          UserID: this.props.currentUser.UserID,
+          User: this.props.currentUser,
+        };
+
+        updatedQuestions.unshift(question);
+        console.log(updatedQuestions);
+        this.setState({
+          questions: updatedQuestions,
+        });
+      },
+      error: err => console.log('ERROR', err),
+    });
+  }
+
 
   render() {
     return (
       <div>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion} />
-        <QuestionList questions={this.state.questions} />
+        <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer} />
       </div>);
   }
 }
