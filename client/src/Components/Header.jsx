@@ -52,7 +52,7 @@ class Header extends Component {
         <a href="#">See all {this.props.questions.length} questions</a>
         {this.state.showQuestionForm
           ? <QuestionForm hideQuestionForm={this.hideQuestionForm}
-          submitQuestion={this.props.submitQuestion} />
+          submitQuestion={this.props.submitQuestion} currentUser={this.props.currentUser} />
           : null
         }
       </div>

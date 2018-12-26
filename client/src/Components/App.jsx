@@ -172,7 +172,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header questions={this.state.questions} submitQuestion={this.submitQuestion} />
+        <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
+        currentUser={this.props.currentUser} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}
         voteAnswer={this.voteAnswer} currentUser={this.props.currentUser}
         deleteQuestion={this.deleteQuestion} deleteAnswer={this.deleteAnswer} />
