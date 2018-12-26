@@ -41,18 +41,21 @@ class Header extends Component {
     const blockStyle = {
       padding: '0 0 18px',
       borderBottom: '1px solid #e5e5e5',
+      width: '850px',
+      paddingRight: '35px',
+      paddingLeft: '35px',
     };
 
     return (
       <div style={blockStyle}>
         <div style={containerStyle}>
           <div style={titleStyle}>Questions & Answers</div>
-          <button onClick={this.showQuestionForm}>Ask a question</button>
+          <button className="btn-primary big" onClick={this.showQuestionForm}>Ask a question</button>
         </div>
         <a href="#">See all {this.props.questions.length} questions</a>
         {this.state.showQuestionForm
           ? <QuestionForm hideQuestionForm={this.hideQuestionForm}
-          submitQuestion={this.props.submitQuestion} />
+          submitQuestion={this.props.submitQuestion} currentUser={this.props.currentUser} />
           : null
         }
       </div>

@@ -42,21 +42,43 @@ class AnswerList extends Component {
       answers = answers.slice(0, 1);
     }
 
+    const listStyle = {
+      listStyleType: 'none',
+      marginLeft: '-35px',
+    };
+
+    const buttonContainer = {
+      marginBottom: '20px',
+      display: 'flex',
+    };
+
+    const answerButton = {
+      marginRight: '10px',
+    };
+
+    const answerListContainer = {
+      display: 'flex',
+      flexDirection: 'column',
+    };
+
     return (
-      <div>
-        <button onClick={this.showAnswerForm}>Answer</button>
-        <button onClick={this.toggleShowAllAnswers}>
-          {!this.state.showAllAnswers
-            ? `Show all ${length} answers`
-            : 'Hide all answers'
-          }
-        </button>
+      <div style={answerListContainer}>
+        <div style={buttonContainer}>
+          <button style={answerButton} className="btn-primary small" onClick={this.showAnswerForm}>Answer</button>
+          <button className="btn-secondary small" onClick={this.toggleShowAllAnswers}>
+            {!this.state.showAllAnswers
+              ? `Show all ${length} answers`
+              : 'Hide all answers'
+            }
+          </button>
+        </div>
         {this.state.showAnswerForm
           ? <AnswerForm hideAnswerForm={this.hideAnswerForm}
-          submitAnswer={this.props.submitAnswer} questionID={this.props.questionID} />
+          submitAnswer={this.props.submitAnswer} questionID={this.props.questionID}
+          currentUser={this.props.currentUser} />
           : null
         }
-        <ul>
+        <ul style={listStyle}>
           {answers.map((answer, index) => {
             const key = answer.id || answer.Content.substring(1, 4);
             return (<Answer key={key} answer={answer} user={users[index]}

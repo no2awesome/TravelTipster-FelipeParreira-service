@@ -170,9 +170,23 @@ class App extends Component {
 
 
   render() {
+    const containerStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '850px',
+      margin: '0 auto',
+      border: '1px solid #e5e5e5',
+      paddingRight: '100px',
+      paddingLeft: '30px',
+      paddingTop: '30px',
+      borderRadius: '5px',
+      backgroundColor: 'white',
+    };
+
     return (
-      <div>
-        <Header questions={this.state.questions} submitQuestion={this.submitQuestion} />
+      <div style={containerStyle}>
+        <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
+        currentUser={this.props.currentUser} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}
         voteAnswer={this.voteAnswer} currentUser={this.props.currentUser}
         deleteQuestion={this.deleteQuestion} deleteAnswer={this.deleteAnswer} />
