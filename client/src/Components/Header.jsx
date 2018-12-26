@@ -41,6 +41,9 @@ class Header extends Component {
     const blockStyle = {
       padding: '0 0 18px',
       borderBottom: '1px solid #e5e5e5',
+      width: '850px',
+      paddingRight: '35px',
+      paddingLeft: '35px',
     };
 
     return (

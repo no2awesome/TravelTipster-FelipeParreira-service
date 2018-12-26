@@ -55,6 +55,8 @@ const Answer = (props) => {
     justifyContent: 'space-between',
     height: '100px',
     float: 'right',
+    marginLeft: '20px',
+    marginTop: '20px',
   };
 
   return (
@@ -62,11 +64,11 @@ const Answer = (props) => {
       <div>
         <p style={reviewedStyle}>Response from {user.Username} | Reviewed this property | <i className="fa fa-flag" style={flagStyle}></i> </p>
         <p style={answerStyle}>{answer.Content}</p>
+        {answer.UserID === props.currentUser.UserID
+          ? <button className="btn-primary small" onClick={props.deleteAnswer}>Delete</button>
+          : null
+        }
       </div>
-      {answer.UserID === props.currentUser.UserID
-        ? <button className="btn-primary" onClick={props.deleteAnswer}>Delete</button>
-        : null
-      }
       <div style={votingContainer}>
         <button className="arrow"
         onClick={() => props.voteAnswer(answer.UserID,

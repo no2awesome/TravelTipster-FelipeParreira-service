@@ -3,9 +3,15 @@ import Question from './Question.jsx'; // eslint-disable-line no-unused-vars
 
 const QuestionList = (props) => {
   const { questions } = props;
+  const listStyle = {
+    listStyleType: 'none',
+    width: '850px',
+    paddingRight: '35px',
+    paddingLeft: '15px',
+  };
 
   return (
-    <ul>
+    <ul style={listStyle}>
       {questions.map((question) => {
         const key = question.QuestionID || question.Content.substring(1, 4);
         return (
