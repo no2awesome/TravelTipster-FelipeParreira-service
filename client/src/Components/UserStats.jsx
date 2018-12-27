@@ -44,6 +44,8 @@ const UserStats = (props) => {
     boxShadow: '0 2px 12px rgba(0,0,0,0.35)',
     padding: '10px 36px',
     postion: 'relative',
+    zIndex: '500',
+    backgroundColor: 'white',
   };
 
   const subSummary = {

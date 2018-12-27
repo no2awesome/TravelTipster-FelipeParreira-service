@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import UserStats from './UserStats.jsx'; // eslint-disable-line no-unused-vars
 
 const Answer = (props) => {
   const { answer, user } = props;
@@ -63,6 +64,7 @@ const Answer = (props) => {
     <li className="answer" style={answerItemStyle}>
       <div>
         <p style={reviewedStyle}>Response from {user.Username} | Reviewed this property | <i className="fa fa-flag" style={flagStyle}></i> </p>
+        <UserStats user={user} />
         <p style={answerStyle}>{answer.Content}</p>
         {answer.UserID === props.currentUser.UserID
           ? <button className="btn-primary small" onClick={props.deleteAnswer}>Delete</button>

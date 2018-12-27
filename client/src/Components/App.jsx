@@ -2,7 +2,6 @@ import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import $ from 'jquery';
 import QuestionList from './QuestionList.jsx'; // eslint-disable-line no-unused-vars
 import Header from './Header.jsx'; // eslint-disable-line no-unused-vars
-import UserStats from './UserStats.jsx'; // eslint-disable-line no-unused-vars
 
 class App extends Component {
   constructor(props) {
@@ -184,28 +183,8 @@ class App extends Component {
       backgroundColor: 'white',
     };
 
-    const user = {
-      Username: 'Genesis.Kunde93',
-      ProfileURL: 'https://localhost:3000/users/8/profile',
-      ThumbnailURL: 'https://s3.amazonaws.com/uifaces/faces/twitter/brandonflatsoda/128.jpg',
-      SignUpDate: '2018-11-08',
-      CitiesVisited: 4,
-      HelpfulVotes: 12,
-      Photos: 1,
-      Contributions: 2,
-      HomeCity: 'Lake Imaside, Alaska',
-      Category: 'Contributor',
-      Ranking: 2,
-      'ReviewDistribution.Excellent': 10,
-      'ReviewDistribution.VeryGood': 1,
-      'ReviewDistribution.Average': 1,
-      'ReviewDistribution.Poor': 7,
-      'ReviewDistribution.Terrible': 1,
-    };
-
     return (
       <div style={containerStyle}>
-        <UserStats user={user} />
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}

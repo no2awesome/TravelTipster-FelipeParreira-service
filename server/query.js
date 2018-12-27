@@ -25,7 +25,7 @@ const getAllQuestions = (HotelID, res) => {
         const promisedUser = Users.findOne({
           raw: true,
           where: { ID: questions[i].UserID },
-          attributes: ['Username', 'ProfileURL', 'ThumbnailURL', 'SignUpDate', 'CitiesVisited', 'HelpfulVotes', 'HomeCity', 'Category', 'Ranking'],
+          attributes: ['Username', 'ProfileURL', 'ThumbnailURL', 'SignUpDate', 'CitiesVisited', 'HelpfulVotes', 'HomeCity', 'Category', 'Ranking', 'Photos', 'Contributions'],
           include: { model: ReviewDistributions, attributes: ['Excellent', 'VeryGood', 'Average', 'Poor', 'Terrible'] },
         });
 

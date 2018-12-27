@@ -1,6 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars,import/no-unresolved
 import moment from 'moment';
 import AnswerList from './AnswerList.jsx'; // eslint-disable-line no-unused-vars
+import UserStats from './UserStats.jsx'; // eslint-disable-line no-unused-vars
 
 const Question = (props) => {
   const { question } = props;
@@ -58,6 +59,7 @@ const Question = (props) => {
     marginBottom: '10px',
   };
 
+  // <UserStats user={question.User} />
   return (
     <li style={questionItemStyle}>
       <div style={userMiniProfile}>
