@@ -6,8 +6,8 @@ const fetch = require('node-fetch');
 expect.extend({ toBeType });
 
 describe('test', () => {
-  test(async () => {
-    await request.post('http://localhost:3000/test')
+  test('test', async () => {
+    await request.get('http://localhost:3000/test')
       .on('response', (response) => {
         expect(response.statusCode).toBe(201);
       });
@@ -90,7 +90,7 @@ describe('POST a question for a certain hotel', () => {
     await request.post({ url: 'http://localhost:3000/hotels/4/questions' }).form(body)
       .then(async () => {
         questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
-        [question] = JSON.parse(questions).slice(-1);
+        [question] = JSON.parse(questions).slice(0, 1);
       });
   });
 
@@ -120,7 +120,7 @@ describe('DELETE a question for a certain hotel', async () => {
     await request.post({ url: 'http://localhost:3000/hotels/4/questions' }).form(body)
       .then(async () => {
         questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
-        [question] = JSON.parse(questions).slice(-1);
+        [question] = JSON.parse(questions).slice(0, 1);
       })
       .then(async () => {
         await request.delete({ url: `http://localhost:3000/hotels/4/questions/${question.QuestionID}` }).form({ userId: 23 })
@@ -161,7 +161,7 @@ describe('POST an answer for a certain question', () => {
     await request.post({ url: 'http://localhost:3000/hotels/4/questions/31/answers' }).form(body)
       .then(async () => {
         questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
-        [question] = JSON.parse(questions);
+        [question] = JSON.parse(questions).slice(-1);
         [answer] = question.Answers.slice(-1);
       });
   });
@@ -192,7 +192,7 @@ describe('DELETE an answer for a certain question', () => {
     await request.post({ url: 'http://localhost:3000/hotels/4/questions/31/answers' }).form(body)
       .then(async () => {
         questions = await request.get({ url: 'http://localhost:3000/hotels/4/questions' });
-        [question] = JSON.parse(questions);
+        [question] = JSON.parse(questions).slice(-1);
         [answer] = question.Answers.slice(-1);
       })
       .then(async () => {
@@ -221,26 +221,26 @@ describe('UPDATE number of votes for an answer', () => {
   beforeEach(async () => {
     const response = await fetch('http://localhost:3000/hotels/4/questions');
     questions = await response.json();
-    previousVotes = questions[0].Answers[0].Votes;
+    previousVotes = questions.slice(-1)[0].Answers.slice(-1)[0].Votes;
   });
 
   test('it should upvote an answer', async () => {
-    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/151/votes' }).form({ vote: '1' })
+    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/154/votes' }).form({ vote: '1' })
       .then(async () => {
         const response = await fetch('http://localhost:3000/hotels/4/questions');
         questions = await response.json();
-        const currentVotes = questions[0].Answers[0].Votes;
+        const currentVotes = questions.slice(-1)[0].Answers.slice(-1)[0].Votes;
         expect(currentVotes).toBe(previousVotes + 1);
         previousVotes = currentVotes;
       });
   });
 
   test('it should downvote an answer', async () => {
-    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/151/votes' }).form({ vote: '-1' })
+    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/154/votes' }).form({ vote: '-1' })
       .then(async () => {
         const response = await fetch('http://localhost:3000/hotels/4/questions');
         questions = await response.json();
-        const currentVotes = questions[0].Answers[0].Votes;
+        const currentVotes = questions.slice(-1)[0].Answers.slice(-1)[0].Votes;
         expect(currentVotes).toBe(previousVotes - 1);
         previousVotes = currentVotes;
       });

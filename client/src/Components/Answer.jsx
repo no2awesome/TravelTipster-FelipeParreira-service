@@ -60,7 +60,7 @@ const Answer = (props) => {
   };
 
   return (
-    <li style={answerItemStyle}>
+    <li className="answer" style={answerItemStyle}>
       <div>
         <p style={reviewedStyle}>Response from {user.Username} | Reviewed this property | <i className="fa fa-flag" style={flagStyle}></i> </p>
         <p style={answerStyle}>{answer.Content}</p>
