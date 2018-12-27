@@ -2,6 +2,7 @@ import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import $ from 'jquery';
 import QuestionList from './QuestionList.jsx'; // eslint-disable-line no-unused-vars
 import Header from './Header.jsx'; // eslint-disable-line no-unused-vars
+import UserStats from './UserStats.jsx'; // eslint-disable-line no-unused-vars
 
 class App extends Component {
   constructor(props) {
@@ -185,6 +186,7 @@ class App extends Component {
 
     return (
       <div style={containerStyle}>
+        <UserStats />
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}
