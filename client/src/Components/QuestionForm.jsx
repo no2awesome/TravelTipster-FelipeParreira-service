@@ -52,7 +52,7 @@ class QuestionForm extends Component {
     };
 
     return (
-      <div style={formContainer}>
+      <div className="question-form" style={formContainer}>
         <p style={titleStyle}>
         Get quick answers from Omni San Francisco Hotel staff and past guests.
         </p>
