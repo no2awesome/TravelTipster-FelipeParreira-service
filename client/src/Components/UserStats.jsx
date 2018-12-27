@@ -40,7 +40,7 @@ const UserStats = (props) => {
     color: '#4a4a4a',
     fontFamily: 'Arial,Tahoma,"Bitstream Vera Sans",sans-serif',
     border: '1px solid #e0e0e0',
-    width: '410px',
+    width: '415px',
     boxShadow: '0 2px 12px rgba(0,0,0,0.35)',
     padding: '10px 36px',
     postion: 'relative',
@@ -132,9 +132,23 @@ const UserStats = (props) => {
     borderRadius: '50%',
   };
 
+  const excellent = user['ReviewDistribution.Excellent'];
+  const veryGood = user['ReviewDistribution.VeryGood'];
+  const average = user['ReviewDistribution.Average'];
+  const poor = user['ReviewDistribution.Poor'];
+  const terrible = user['ReviewDistribution.Terrible'];
+
+  const total = excellent + veryGood + average + poor + terrible;
+
+  const excel = Math.round(50 * excellent / total);
+  const vg = Math.round(50 * veryGood / total);
+  const avg = Math.round(50 * average / total);
+  const pr = Math.round(50 * poor / total);
+  const tb = Math.round(50 * terrible / total);
+
   return (
     <div style={containerStyle}>
-      <a style={userName}>april</a>
+      <a style={userName}>{user.Username}</a>
       <i className="fa fa-times" style={wdwIconStyle}></i>
       <div style={heading}>
         <p style={userRankStyle}>Level <span style={level}>{user.Ranking}</span> Contributor</p>
@@ -155,11 +169,11 @@ const UserStats = (props) => {
       <div>
         <h4 style={reviewStyle}>Review Distribution</h4>
         <div>
-          <div style={bar}><span style={barTitle}>Excellent</span> <span style={statsBar}><span style={filledBar}>{'h'.repeat(0)}</span>{'h'.repeat(50)}</span> <span style={figure}>0</span></div>
-          <div style={bar}><span style={barTitle}>Very good</span> <span style={statsBar}><span style={filledBar}>{'h'.repeat(10)}</span>{'h'.repeat(40)}</span> <span style={figure}>1</span></div>
-          <div style={bar}><span style={barTitle}>Average</span> <span style={statsBar}><span style={filledBar}>{'h'.repeat(20)}</span>{'h'.repeat(30)}</span> <span style={figure}>2</span></div>
-          <div style={bar}><span style={barTitle}>Poor</span><span style={statsBar}><span style={filledBar}>{'h'.repeat(10)}</span>{'h'.repeat(40)}</span> <span style={figure}>1</span></div>
-          <div style={bar}><span style={barTitle}>Terrible</span><span style={statsBar}><span style={filledBar}>{'h'.repeat(10)}</span>{'h'.repeat(40)}</span> <span style={figure}>1</span></div>
+          <div style={bar}><span style={barTitle}>Excellent</span> <span style={statsBar}><span style={filledBar}>{'h'.repeat(excel)}</span>{'h'.repeat(50 - excel)}</span> <span style={figure}>{excellent}</span></div>
+          <div style={bar}><span style={barTitle}>Very good</span> <span style={statsBar}><span style={filledBar}>{'h'.repeat(vg)}</span>{'h'.repeat(50 - vg)}</span> <span style={figure}>{veryGood}</span></div>
+          <div style={bar}><span style={barTitle}>Average</span> <span style={statsBar}><span style={filledBar}>{'h'.repeat(avg)}</span>{'h'.repeat(50 - avg)}</span> <span style={figure}>{average}</span></div>
+          <div style={bar}><span style={barTitle}>Poor</span><span style={statsBar}><span style={filledBar}>{'h'.repeat(pr)}</span>{'h'.repeat(50 - pr)}</span> <span style={figure}>{poor}</span></div>
+          <div style={bar}><span style={barTitle}>Terrible</span><span style={statsBar}><span style={filledBar}>{'h'.repeat(tb)}</span>{'h'.repeat(50 - tb)}</span> <span style={figure}>{terrible}</span></div>
         </div>
       </div>
     </div>
