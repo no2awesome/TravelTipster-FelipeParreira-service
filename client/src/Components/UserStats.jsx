@@ -1,6 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 
 const UserStats = (props) => {
+  const { user } = props;
   const iconStyle = {
     fontSize: '12px',
     color: '#00a680',
@@ -47,14 +48,15 @@ const UserStats = (props) => {
 
   const subSummary = {
     display: 'flex',
-    justifyContent: 'left',
-    marginBottom: '-10px',
+    flexDirection: 'column',
+    height: '50px',
+    justifyContent: 'flex-start',
   };
 
   const summary = {
     display: 'flex',
-    flexDirection: 'column',
     width: '100%',
+    marginBottom: '30px',
   };
 
   const msgBtn = {
@@ -69,7 +71,7 @@ const UserStats = (props) => {
     float: 'right',
   };
 
-  const fistSumStyle = {
+  const firstSumStyle = {
     marginRight: '150px',
   };
 
@@ -135,19 +137,19 @@ const UserStats = (props) => {
       <a style={userName}>april</a>
       <i className="fa fa-times" style={wdwIconStyle}></i>
       <div style={heading}>
-        <p style={userRankStyle}>Level <span style={level}>2</span> Contributor</p>
+        <p style={userRankStyle}>Level <span style={level}>{user.Ranking}</span> Contributor</p>
         <button style={msgBtn}><i className='far fa-envelope' style={msgIconStyle}></i> Send Message</button>
       </div>
-      <p style={userHist}>Trip Advisor member since 2011</p>
-      <p>From Torrance, California</p>
+      <p style={userHist}>Trip Advisor member since {user.SignUpDate.split('-')[0]}</p>
+      <p>From {user.HomeCity}</p>
       <div style={summary}>
         <div style={subSummary}>
-          <p style={fistSumStyle}><i className='far fa-edit' style={iconStyle}></i> 5 Contributions</p>
-          <p><i className='fas fa-globe' style={iconStyle}></i> 5 Cities Visited</p>
+          <p className="top-sum" style={firstSumStyle}><i className='far fa-edit' style={iconStyle}></i> {user.Contributions} Contributions</p>
+          <p style={firstSumStyle}><i className='fas fa-thumbs-up' style={iconStyle}></i> {user.HelpfulVotes} Helpful Votes</p>
         </div>
         <div style={subSummary}>
-          <p style={fistSumStyle}><i className='fas fa-thumbs-up' style={iconStyle}></i> 4 Helpful Votes</p>
-          <p><i className='fas fa-camera' style={iconStyle}></i> 4 Photos</p>
+          <p className="top-sum"><i className='fas fa-globe' style={iconStyle}></i> {user.CitiesVisited} Cities Visited</p>
+          <p><i className='fas fa-camera' style={iconStyle}></i> {user.Photos} Photos</p>
         </div>
       </div>
       <div>

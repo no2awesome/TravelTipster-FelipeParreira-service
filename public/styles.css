@@ -95,3 +95,7 @@ textarea:focus {
 body {
   background-color: #f2f2f2;
 }
+
+.top-sum {
+  margin-bottom: -2px;
+}
