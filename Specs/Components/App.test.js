@@ -388,7 +388,18 @@ describe('AnswerList Component', () => {
     expect(answerForm.exists()).toBe(false);
   });
 
-  it('');
+  it('should show more answers when the correspondent button is clicked', () => {
+    expect(wrapper.state().showAllAnswers).toBeFalsy();
+    const showMoreBtn = wrapper.find('button').at(1);
+    let answers = wrapper.find('Answer');
+    expect(answers.length).toBe(1);
+    expect(showMoreBtn.text()).toBe('Show all 5 answers');
+    showMoreBtn.simulate('click');
+    expect(wrapper.state().showAllAnswers).toBeTruthy();
+    answers = wrapper.find('Answer');
+    expect(answers.length).toBe(5);
+    expect(showMoreBtn.text()).toBe('Hide all answers');
+  });
 });
 
 // describe('Answer Component', () => {
