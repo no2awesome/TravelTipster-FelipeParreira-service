@@ -74,7 +74,7 @@ describe('Header Component', () => {
     expect(outerDiv).toBeDefined();
     const questionForm = outerDiv.find('QuestionForm');
     expect(questionForm).toBeDefined();
-    expect(questionForm).toEqual({});
+    expect(questionForm.exists()).toBe(false);
   });
 
   it('should show the question form when the `question` button is clicked', () => {
@@ -177,7 +177,7 @@ describe('Question Component', () => {
   it('should contain an answer list', () => {
     const answerList = wrapper.find('AnswerList');
     expect(answerList).toBeDefined();
-    expect(answerList.props()).not.toEqual({});
+    expect(answerList.exists()).toBe(true);
   });
 });
 
@@ -191,7 +191,7 @@ describe('AnswerList Component', () => {
   it('should not show all answers neither the answer form initially', () => {
     expect(wrapper.state().showAnswerForm || wrapper.state().showAllAnswers).toBe(false);
     const answerForm = wrapper.find('AnswerForm');
-    expect(answerForm).toEqual({});
+    expect(answerForm.exists()).toBe(false);
   });
 
   it('it should contain buttons to answer and to show all answers', () => {
