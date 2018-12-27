@@ -32,18 +32,6 @@ describe('App Component', () => {
     expect(header).toBeDefined();
     expect(questionList).toBeDefined();
   });
-
-  it('should increase the number of votes of an answer when the proper button is clicked', () => {
-    const upVoteBtn = wrapper.find('QuestionList').children();
-    // const downVoteBtn = wrapper.find('button.arrow').at(1);
-    console.log('upVoteBtn', upVoteBtn.props());
-    // let votes = wrapper.find('span').at(0).text();
-    // console.log(votes);
-    // upVoteBtn.simulate('click');
-    // votes = wrapper.find('span').at(0).text();
-    // console.log(votes);
-    // console.log('upVoteBtn', upVoteBtn.props());
-  });
 });
 
 describe('Header Component', () => {
