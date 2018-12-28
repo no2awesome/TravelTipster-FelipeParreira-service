@@ -41,9 +41,6 @@
   width: 415px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
   padding: 10px 36px;
-  /* position: absolute;
-  top: -150px;
-  left: 100px; */
   z-index: 500;
   background-color: white;
 }
@@ -143,8 +140,7 @@
   height: 0; 
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;  
-  border-right:16px solid white; 
-  /* outline: 1px solid #e0e0e0; */
+  border-right:16px solid white;
   position: absolute;
   top: 170px;
   left: -15.5px;

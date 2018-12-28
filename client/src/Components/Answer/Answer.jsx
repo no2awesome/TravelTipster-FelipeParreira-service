@@ -3,8 +3,6 @@ import UserStats from '../UserStats/UserStats.jsx'; // eslint-disable-line no-un
 import styles from './Answer.css';
 import genStyles from '../App/App.css';
 
-// import CssModules from 'react-css-modules';
-
 class Answer extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +14,6 @@ class Answer extends Component {
   }
 
   toggleShowUserStats() {
-    // e.preventDefault();
     this.setState({
       showUserStats: !this.state.showUserStats,
     });
@@ -28,7 +25,6 @@ class Answer extends Component {
     return (
       <li className={`${styles.answerItemStyle} answer`}>
         <div className={styles.answerSum}>
-
           <div className={styles.reviewedStyle}>
             <div onMouseEnter={this.toggleShowUserStats}
             onMouseLeave={this.toggleShowUserStats}>
