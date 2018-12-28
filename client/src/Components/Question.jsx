@@ -86,7 +86,7 @@ class Question extends Component {
     };
 
     return (
-    <li style={questionItemStyle}>
+    <li className={styles.some} style={questionItemStyle}>
     <div onMouseEnter={this.toggleShowUserStats} onMouseLeave={this.toggleShowUserStats}
     style={userMiniProfile}>
       <img style={userPicStyle} src={question.User ? question.User.ThumbnailURL : null} />

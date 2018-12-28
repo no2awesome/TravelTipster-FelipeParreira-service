@@ -1,6 +1,6 @@
 const path = require('path');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const combineLoaders = require('webpack-combine-loaders');
+const combineLoaders = require('webpack-combine-loaders');
 // const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 
 // const locals = {
@@ -25,7 +25,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        loader: combineLoaders([
+          {
+            loader: 'style-loader',
+          }, {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            },
+          },
+        ]),
       },
     ],
   },
@@ -33,4 +43,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.join(__dirname, '/public'),
   },
+  // plugins: [
+  //   new ExtractTextPlugin('stylesBundled.css'),
+  // ],
 };
