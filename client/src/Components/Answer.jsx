@@ -1,5 +1,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import UserStats from './UserStats.jsx'; // eslint-disable-line no-unused-vars
+import styles from './style3.css';
+
+import UserStats from './UserStats.jsx'; // eslint-disable-line no-unused-var
+// import CssModules from 'react-css-modules';
 
 const Answer = (props) => {
   const { answer, user } = props;
@@ -60,11 +63,11 @@ const Answer = (props) => {
     marginTop: '20px',
   };
 
+  // <UserStats user={user} />
   return (
-    <li className="answer" style={answerItemStyle}>
+    <li className={`${styles.some} answer`} style={answerItemStyle}>
       <div>
         <p style={reviewedStyle}>Response from {user.Username} | Reviewed this property | <i className="fa fa-flag" style={flagStyle}></i> </p>
-        <UserStats user={user} />
         <p style={answerStyle}>{answer.Content}</p>
         {answer.UserID === props.currentUser.UserID
           ? <button className="btn-primary small" onClick={props.deleteAnswer}>Delete</button>

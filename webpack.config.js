@@ -1,4 +1,13 @@
 const path = require('path');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const combineLoaders = require('webpack-combine-loaders');
+// const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
+
+// const locals = {
+//   routes: [
+//     '/',
+//   ],
+// };
 
 module.exports = {
   entry: path.join(__dirname, '/client/src/index.jsx'),
@@ -13,6 +22,10 @@ module.exports = {
             presets: ['@babel/preset-react', '@babel/preset-env'],
           },
         },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
