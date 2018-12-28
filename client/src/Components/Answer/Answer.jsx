@@ -24,29 +24,16 @@ class Answer extends Component {
 
   render() {
     const { answer, user } = this.props;
-    const cont = {
-      display: 'flex',
-    };
-
-    const cont2 = {
-      position: 'relative',
-      top: '-1070%',
-      left: '100%',
-    };
-
-    const cont3 = {
-
-    };
 
     return (
       <li className={`${styles.answerItemStyle} answer`}>
         <div className={styles.answerSum}>
 
-          <div style={cont} className={styles.reviewedStyle}>
-            <div style={cont3} onMouseEnter={this.toggleShowUserStats}
+          <div className={styles.reviewedStyle}>
+            <div onMouseEnter={this.toggleShowUserStats}
             onMouseLeave={this.toggleShowUserStats}>
               <div>Response from {user.Username} |</div>
-              <div style={cont2}>
+              <div className={styles.UserStatsContainer}>
                 {this.state.showUserStats
                   ? <UserStats user={user} toggleShowUserStats={this.toggleShowUserStats}
                   styles={styles.userStatsStyle}/>
