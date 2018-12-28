@@ -1,6 +1,8 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import Answer from '../Answer/Answer.jsx'; // eslint-disable-line no-unused-vars
 import AnswerForm from '../AnswerForm/AnswerForm.jsx'; // eslint-disable-line no-unused-vars
+import styles from './AnswerList.css';
+import genStyles from '../App/App.css';
 
 class AnswerList extends Component {
   constructor(props) {
@@ -42,30 +44,11 @@ class AnswerList extends Component {
       answers = answers.slice(0, 1);
     }
 
-    const listStyle = {
-      listStyleType: 'none',
-      marginLeft: '-35px',
-    };
-
-    const buttonContainer = {
-      marginBottom: '20px',
-      display: 'flex',
-    };
-
-    const answerButton = {
-      marginRight: '10px',
-    };
-
-    const answerListContainer = {
-      display: 'flex',
-      flexDirection: 'column',
-    };
-
     return (
-      <div style={answerListContainer}>
-        <div style={buttonContainer}>
-          <button style={answerButton} className="btn-primary small" onClick={this.showAnswerForm}>Answer</button>
-          <button className="btn-secondary small" onClick={this.toggleShowAllAnswers}>
+      <div className={styles.answerListContainer}>
+        <div className={styles.buttonContainer}>
+          <button className={`${styles.answerButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.showAnswerForm}>Answer</button>
+          <button className={`${genStyles['btn-secondary']} ${genStyles.small}`} onClick={this.toggleShowAllAnswers}>
             {!this.state.showAllAnswers
               ? `Show all ${length} answers`
               : 'Hide all answers'
@@ -78,7 +61,7 @@ class AnswerList extends Component {
           currentUser={this.props.currentUser} />
           : null
         }
-        <ul style={listStyle}>
+        <ul className={styles.listStyle}>
           {answers.map((answer, index) => {
             const key = answer.id || answer.Content.substring(1, 4);
             return (<Answer key={key} answer={answer} user={users[index]}

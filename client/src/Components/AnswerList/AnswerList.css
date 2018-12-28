@@ -1,0 +1,18 @@
+.listStyle {
+  list-style-type: none;
+  margin-left: -35px;
+}
+
+.buttonContainer {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.answerButton {
+  margin-right: 10px;
+}
+
+.answerListContainer {
+  display: flex;
+  flex-direction: column;
+}
