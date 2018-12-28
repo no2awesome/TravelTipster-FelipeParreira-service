@@ -1,0 +1,24 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 133px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.titleStyle {
+  font-size: 20px;
+  color: #000a12;
+  font-family: Arial;
+}
+
+.warningStyle {
+  font-size: 12px;
+  color: #4a4a4a;
+  font-family: Arial;
+  margin-top: -10px;
+}
