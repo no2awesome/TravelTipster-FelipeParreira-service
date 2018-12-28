@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
-import Answer from './Answer.jsx'; // eslint-disable-line no-unused-vars
-import AnswerForm from './AnswerForm.jsx'; // eslint-disable-line no-unused-vars
+import Answer from '../Answer/Answer.jsx'; // eslint-disable-line no-unused-vars
+import AnswerForm from '../AnswerForm/AnswerForm.jsx'; // eslint-disable-line no-unused-vars
 
 class AnswerList extends Component {
   constructor(props) {

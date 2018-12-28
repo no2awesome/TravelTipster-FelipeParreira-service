@@ -1,7 +1,8 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import $ from 'jquery';
-import QuestionList from './QuestionList.jsx'; // eslint-disable-line no-unused-vars
-import Header from './Header.jsx'; // eslint-disable-line no-unused-vars
+import QuestionList from '../QuestionList/QuestionList.jsx'; // eslint-disable-line no-unused-vars
+import Header from '../Header/Header.jsx'; // eslint-disable-line no-unused-vars
+// import styles from './styles.css';
 
 class App extends Component {
   constructor(props) {

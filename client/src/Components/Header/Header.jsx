@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import Radium from 'radium'; // eslint-disable-line no-unused-vars
-import QuestionForm from './QuestionForm.jsx'; // eslint-disable-line no-unused-vars
+import QuestionForm from '../QuestionForm/QuestionForm.jsx'; // eslint-disable-line no-unused-vars
 
 class Header extends Component {
   constructor(props) {

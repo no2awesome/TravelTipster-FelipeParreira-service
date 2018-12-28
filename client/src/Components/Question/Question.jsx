@@ -1,8 +1,8 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars,import/no-unresolved
 import moment from 'moment';
-import AnswerList from './AnswerList.jsx'; // eslint-disable-line no-unused-vars
-import UserStats from './UserStats.jsx'; // eslint-disable-line no-unused-vars
-import styles from './style4.css';
+import AnswerList from '../AnswerList/AnswerList.jsx'; // eslint-disable-line no-unused-vars
+import UserStats from '../UserStats/UserStats.jsx'; // eslint-disable-line no-unused-vars
+// import styles from './style4.css';
 
 class Question extends Component {
   constructor(props) {
@@ -86,7 +86,7 @@ class Question extends Component {
     };
 
     return (
-    <li className={styles.some} style={questionItemStyle}>
+    <li style={questionItemStyle}>
     <div onMouseEnter={this.toggleShowUserStats} onMouseLeave={this.toggleShowUserStats}
     style={userMiniProfile}>
       <img style={userPicStyle} src={question.User ? question.User.ThumbnailURL : null} />
