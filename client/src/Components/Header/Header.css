@@ -1,0 +1,19 @@
+.titleStyle {
+  color: #000a12;
+  font-weight: 700;
+  font-family: Arial;
+  font-size: 28px;
+}
+
+.containerStyle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blockStyle {
+  padding: 0 0 18px;
+  border-bottom: 1px solid #e5e5e5;
+  width: 850px;
+  padding-right: 35px;
+  padding-left: 35px;
+}
