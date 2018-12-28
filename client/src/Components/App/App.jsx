@@ -3,6 +3,7 @@ import $ from 'jquery';
 import QuestionList from '../QuestionList/QuestionList.jsx'; // eslint-disable-line no-unused-vars
 import Header from '../Header/Header.jsx'; // eslint-disable-line no-unused-vars
 import styles from './App.css';
+import NavBar from '../NavBar/NavBar.jsx'; // eslint-disable-line no-unused-vars
 
 class App extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends Component {
     this.state = {
       questions: [],
       votedAnswers: [],
+      currentPage: 0,
     };
 
     this.submitQuestion = this.submitQuestion.bind(this);
@@ -18,6 +20,7 @@ class App extends Component {
     this.voteAnswer = this.voteAnswer.bind(this);
     this.deleteQuestion = this.deleteQuestion.bind(this);
     this.deleteAnswer = this.deleteAnswer.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
     // setInterval(this.componentDidMount, 1000);
   }
 
@@ -169,15 +172,27 @@ class App extends Component {
     });
   }
 
+  handlePageClick(pageNumber) {
+    if (pageNumber === this.state.currentPage) {
+      return;
+    }
+    this.setState({
+      currentPage: pageNumber,
+    });
+  }
+
 
   render() {
     return (
       <div className={styles.containerStyle}>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
-        <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}
+        <QuestionList currentPage={this.state.currentPage}
+        questions={this.state.questions} submitAnswer={this.submitAnswer}
         voteAnswer={this.voteAnswer} currentUser={this.props.currentUser}
         deleteQuestion={this.deleteQuestion} deleteAnswer={this.deleteAnswer} />
+        <NavBar handlePageClick={this.handlePageClick}
+        currentPage={this.state.currentPage} numOfQuestions={this.state.questions.length} />
       </div>);
   }
 }
