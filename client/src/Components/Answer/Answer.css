@@ -19,6 +19,10 @@
 }
 
 .reviewedStyle {
+  position: relative;
+}
+
+.reviewedStyle {
   color: #000a12;
 }
 
@@ -52,4 +56,15 @@
   float: right;
   margin-left: 20px;
   margin-top: 20px;
+}
+
+.answerSum {
+  position: relative;
+}
+
+.userStatsStyle {
+  position: absolute;
+  overflow: visible;
+  top: 100%;
+  /* background-color: red; */
 }
