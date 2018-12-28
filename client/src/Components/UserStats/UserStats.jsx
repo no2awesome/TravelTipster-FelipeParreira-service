@@ -22,8 +22,10 @@ const UserStats = (props) => {
 
   return (
     <div className={styles.containerStyle}>
+      <div className={styles.dummy}></div>
+      <div className={styles['arrow-left']}></div>
       <a className={styles.userName}>{user.Username}</a>
-      <i className={`${styles.wdwIconStyle} fa fa-times`}></i>
+      <i onClick={props.toggleShowUserStats} className={`${styles.wdwIconStyle} fa fa-times`}></i>
       <div className={styles.heading}>
         <p className={styles.userRankStyle}>Level <span
         className={styles.level}>{user.Ranking}</span> Contributor</p>

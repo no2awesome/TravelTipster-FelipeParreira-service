@@ -32,7 +32,7 @@ class Question extends Component {
       src={question.User ? question.User.ThumbnailURL : null} />
       <p className={styles.usernameStyle}>{question.User ? question.User.Username : null}</p>
       {this.state.showUserStats
-        ? <UserStats className={styles.userStatsStyle} user={question.User} />
+        ? <UserStats toggleShowUserStats={this.toggleShowUserStats} className={styles.userStatsStyle} user={question.User} />
         : null
       }
     </div>

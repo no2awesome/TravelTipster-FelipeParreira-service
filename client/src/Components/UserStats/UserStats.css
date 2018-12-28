@@ -11,9 +11,13 @@
   font-size: 18px;
   float: right;
   position: absolute;
-  left: 49.5%;
-  top: 6.5%;
+  left: 94%;
+  top: 3%;
   cursor: pointer;
+}
+
+.wdwIconStyle:hover {
+  color: #00c094;
 }
 
 
@@ -37,7 +41,9 @@
   width: 415px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
   padding: 10px 36px;
-  position: relative;
+  position: absolute;
+  top: -150px;
+  left: 100px;
   z-index: 500;
   background-color: white;
 }
@@ -65,6 +71,10 @@
   text-align: center;
   font-size: 13px;
   float: right;
+}
+
+.msgBtn:hover {
+  background-color: #e5e5e5;
 }
 
 .firstSumStyle {
@@ -126,4 +136,36 @@
   height: 16px;
   text-align: center;
   border-radius: 50%;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;  
+  border-right:15px solid white; 
+  /* outline: 1px solid #e0e0e0; */
+  position: absolute;
+  top: 170px;
+  left: -15.5px;
+}
+
+.arrow-left:before {
+  content: " ";
+  position: absolute;
+  z-index: -100;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-right: 17px solid #e0e0e0; 
+  top: -17px;
+  left: -2px;
+}
+
+.dummy {
+  content: " ";
+  position: absolute;
+  z-index: -1000;
+  border: 50px solid transparent;
+  top: 35%;
+  left: -20%;
 }
