@@ -95,3 +95,20 @@ textarea:focus {
 body {
   background-color: #f2f2f2;
 }
+
+.top-sum {
+  margin-bottom: -2px;
+}
+
+.containerStyle {
+  display: flex;
+  flex-direction: column;
+  width: 850px;
+  margin: 0 auto;
+  border: 1px solid #e5e5e5;
+  padding-right: 100px;
+  padding-left: 30px;
+  padding-top: 30px;
+  border-radius: 5px;
+  background-color: white;
+}

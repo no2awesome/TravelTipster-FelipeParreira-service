@@ -1,0 +1,61 @@
+.questionStyle {
+  width: 700px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #000a12;
+  font-family: Arial;
+}
+
+.flagStyle {
+  font-size: 10px;
+  color: #b7b7b7;
+}
+
+.dateStyle {
+  font-size: 12px;
+  color: #4a4a4a;
+  font-family: Arial;
+}
+
+.questionItemStyle {
+  display: flex;
+  justify-content: space-between;
+  width: 850px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-right: 25px;
+  padding-left: 35px;
+}
+
+.userMiniProfile {
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  margin-top: 20px;
+  height: 70px;
+  position: relative;
+}
+
+.userPicStyle {
+  max-width: 70px;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.usernameStyle {
+  color: #000a12;
+  cursor: pointer;
+  font-family: Arial;
+  font-size: 11px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.deleteButton {
+  margin-bottom: 10px;
+}
+
+.userStatsStyle {
+  position: absolute;
+  top: -150px;
+  left: 100px;
+}

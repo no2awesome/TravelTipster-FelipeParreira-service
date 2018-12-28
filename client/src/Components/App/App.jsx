@@ -1,7 +1,8 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import $ from 'jquery';
-import QuestionList from './QuestionList.jsx'; // eslint-disable-line no-unused-vars
-import Header from './Header.jsx'; // eslint-disable-line no-unused-vars
+import QuestionList from '../QuestionList/QuestionList.jsx'; // eslint-disable-line no-unused-vars
+import Header from '../Header/Header.jsx'; // eslint-disable-line no-unused-vars
+import styles from './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -170,21 +171,8 @@ class App extends Component {
 
 
   render() {
-    const containerStyle = {
-      display: 'flex',
-      flexDirection: 'column',
-      width: '850px',
-      margin: '0 auto',
-      border: '1px solid #e5e5e5',
-      paddingRight: '100px',
-      paddingLeft: '30px',
-      paddingTop: '30px',
-      borderRadius: '5px',
-      backgroundColor: 'white',
-    };
-
     return (
-      <div style={containerStyle}>
+      <div className={styles.containerStyle}>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
         <QuestionList questions={this.state.questions} submitAnswer={this.submitAnswer}

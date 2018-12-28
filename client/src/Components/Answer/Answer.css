@@ -1,0 +1,76 @@
+.upArrow, .downArrow {
+  font-size: 10px;
+  text-align: center;
+  line-height: 50%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+
+.downArrow {
+  top: 35%;
+}
+
+.answerStyle, .reviewedStyle {
+  font-size: 14px;
+  line-height: 18px;
+  color: #4a4a4a;
+  font-family: Arial;
+}
+
+.reviewedStyle {
+  position: relative;
+  display: flex;
+}
+
+.reviewedStyle {
+  color: #000a12;
+}
+
+.flagStyle {
+  font-size: 14px;
+  color: #b7b7b7;
+}
+
+.answerItemStyle {
+  border-left: 1px solid #e5e5e5;
+  padding-left: 30px;
+  display: flex;
+  width: 700px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.voteCountStyle {
+  text-align: center;
+  font-size: 12px;
+  color: #4a4a4a;
+  font-family: Arial;
+}
+
+.votingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100px;
+  float: right;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.answerSum {
+  position: relative;
+}
+
+.userStatsStyle {
+  position: absolute;
+  top: -2000%;
+  left: 17px;
+}
+
+.UserStatsContainer {
+  position: relative;
+  top: -1070%;
+  left: 100%;
+}

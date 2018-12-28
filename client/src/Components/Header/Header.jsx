@@ -1,6 +1,8 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import Radium from 'radium'; // eslint-disable-line no-unused-vars
-import QuestionForm from './QuestionForm.jsx'; // eslint-disable-line no-unused-vars
+import QuestionForm from '../QuestionForm/QuestionForm.jsx'; // eslint-disable-line no-unused-vars
+import styles from './Header.css';
+import genStyles from '../App/App.css';
 
 class Header extends Component {
   constructor(props) {
@@ -26,31 +28,11 @@ class Header extends Component {
   }
 
   render() {
-    const titleStyle = {
-      color: '#000a12',
-      fontWeight: 700,
-      fontFamily: 'Arial',
-      fontSize: '28px',
-    };
-
-    const containerStyle = {
-      display: 'flex',
-      justifyContent: 'space-between',
-    };
-
-    const blockStyle = {
-      padding: '0 0 18px',
-      borderBottom: '1px solid #e5e5e5',
-      width: '850px',
-      paddingRight: '35px',
-      paddingLeft: '35px',
-    };
-
     return (
-      <div style={blockStyle}>
-        <div style={containerStyle}>
-          <div style={titleStyle}>Questions & Answers</div>
-          <button className="btn-primary big" onClick={this.showQuestionForm}>Ask a question</button>
+      <div className={styles.blockStyle}>
+        <div className={styles.containerStyle}>
+          <div className={styles.titleStyle}>Questions & Answers</div>
+          <button className={`${genStyles['btn-primary']} ${genStyles.big}`} onClick={this.showQuestionForm}>Ask a question</button>
         </div>
         <a href="#">See all {this.props.questions.length} questions</a>
         {this.state.showQuestionForm

@@ -1,0 +1,21 @@
+.promptStyle {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  color: #767676;
+  font-family: Arial;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 133px;
+  justify-content: space-between;
+}
