@@ -64,7 +64,6 @@
 
 .userStatsStyle {
   position: absolute;
-  overflow: visible;
-  top: 100%;
-  /* background-color: red; */
+  top: -2000%;
+  left: 17px;
 }

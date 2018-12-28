@@ -41,9 +41,9 @@
   width: 415px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
   padding: 10px 36px;
-  position: absolute;
+  /* position: absolute;
   top: -150px;
-  left: 100px;
+  left: 100px; */
   z-index: 500;
   background-color: white;
 }

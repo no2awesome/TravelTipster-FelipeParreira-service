@@ -21,7 +21,7 @@ const UserStats = (props) => {
   const tb = Math.round(50 * terrible / total);
 
   return (
-    <div className={styles.containerStyle}>
+    <div className={`${styles.containerStyle} ${props.styles}`}>
       <div className={styles.dummy}></div>
       <div className={styles['arrow-left']}></div>
       <a className={styles.userName}>{user.Username}</a>

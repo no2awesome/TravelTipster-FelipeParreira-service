@@ -16,6 +16,7 @@ class Answer extends Component {
   }
 
   toggleShowUserStats() {
+    // e.preventDefault();
     this.setState({
       showUserStats: !this.state.showUserStats,
     });
@@ -23,20 +24,43 @@ class Answer extends Component {
 
   render() {
     const { answer, user } = this.props;
+    const cont = {
+      display: 'flex',
+    };
+
+    const cont2 = {
+      position: 'relative',
+      top: '-1070%',
+      left: '100%',
+    };
+
+    const cont3 = {
+
+    };
 
     return (
       <li className={`${styles.answerItemStyle} answer`}>
-        <div className={styles.answerSum} onMouseEnter={this.toggleShowUserStats}
-        onMouseLeave={this.toggleShowUserStats}>
-          <p className={styles.reviewedStyle}>Response from {user.Username} | Reviewed this property | <i className={`${styles.flagStyle} fa fa-flag`}></i> </p>
+        <div className={styles.answerSum}>
+
+          <div style={cont} className={styles.reviewedStyle}>
+            <div style={cont3} onMouseEnter={this.toggleShowUserStats}
+            onMouseLeave={this.toggleShowUserStats}>
+              <div>Response from {user.Username} |</div>
+              <div style={cont2}>
+                {this.state.showUserStats
+                  ? <UserStats user={user} toggleShowUserStats={this.toggleShowUserStats}
+                  styles={styles.userStatsStyle}/>
+                  : null
+                }
+              </div>
+            </div>
+            <div>&nbsp;Reviewed this property | <i className={`${styles.flagStyle} fa fa-flag`}></i></div>
+          </div>
+
+
           <p className={styles.answerStyle}>{answer.Content}</p>
           {answer.UserID === this.props.currentUser.UserID
             ? <button className={`${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteAnswer}>Delete</button>
-            : null
-          }
-          {this.state.showUserStats
-            ? <UserStats user={user} toggleShowUserStats={this.toggleShowUserStats} 
-            className={styles.userStatsStyle}/>
             : null
           }
         </div>
