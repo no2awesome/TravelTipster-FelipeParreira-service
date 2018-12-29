@@ -9,6 +9,8 @@
 .flagStyle {
   font-size: 10px;
   color: #b7b7b7;
+  cursor: pointer;
+  position: relative;
 }
 
 .dateStyle {
@@ -58,4 +60,14 @@
   position: absolute;
   top: -150px;
   left: 100px;
+}
+
+.reportContainer {
+  position: relative;
+  display: inline;
+  background-color: red;
+}
+
+.headerContainer {
+  position: relative;
 }
