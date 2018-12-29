@@ -48,9 +48,9 @@ class Question extends Component {
       reportWasSubmitted: !!isSubmission,
     });
 
-    // if (isSubmission) {
-    // Thank you. We appreciate your input.
-    // }
+    if (isSubmission) {
+      this.props.postReportForQuestion(this.props.question.QuestionID);
+    }
   }
 
   render() {
