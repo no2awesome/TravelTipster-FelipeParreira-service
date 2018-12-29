@@ -36,7 +36,9 @@ class ReportForm extends Component {
     }
 
     return (
-      <div className={styles.supraContainer}>
+      <div>
+        <div className={styles.backGround} onClick={closeForm}>
+        </div>
         <div className={styles.container}>
           <div className={styles.header}>
             <div>Report a Problem</div>
