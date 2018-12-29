@@ -65,14 +65,14 @@ class Answer extends Component {
             <div>&nbsp;Reviewed this property | <i
             onMouseEnter={this.toggleReportToolTip} onMouseLeave={this.toggleReportToolTip}
             className={`${styles.flagStyle} fa fa-flag`}>
-            {this.state.showReportToolTip
-              ? <QAToolTip message={'Problem with this answer?'} />
-              : null
-            }
+            <div className={styles.reportToolTipContainer}>
+              {this.state.showReportToolTip
+                ? <QAToolTip message={'Problem with this answer?'} />
+                : null
+              }
+            </div>
             </i></div>
           </div>
-
-
           <p className={styles.answerStyle}>{answer.Content}</p>
           {answer.UserID === this.props.currentUser.UserID
             ? <button className={`${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteAnswer}>Delete</button>

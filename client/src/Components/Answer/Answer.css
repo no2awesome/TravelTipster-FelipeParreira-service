@@ -80,3 +80,9 @@
 .btnContainer {
   position: relative;
 }
+
+.reportToolTipContainer {
+  position: absolute;
+  top: -125%;
+  left: 180%;
+}
