@@ -14,6 +14,10 @@ class Question extends Component {
       showUserStats: false,
       showToolTip: false,
       showReportForm: false,
+      reportState: {
+        reportContent: '',
+        isInvalidInput: false,
+      },
     };
 
     this.toggleShowUserStats = this.toggleShowUserStats.bind(this);
@@ -36,9 +40,10 @@ class Question extends Component {
     });
   }
 
-  toggleReportForm() {
+  toggleReportForm(reportState) {
     this.setState({
       showReportForm: !this.state.showReportForm,
+      reportState,
     });
   }
 
@@ -55,11 +60,13 @@ class Question extends Component {
       reportFormContainerStyles += `${styles.hidden}`;
     }
 
+    const { reportState } = this.state;
+    console.log('reportState', reportState);
     return (
     <li className={styles.questionItemStyle}>
       <div className={reportFormContainerStyles}>
         {this.state.showReportForm
-          ? <ReportForm closeForm={this.toggleReportForm} />
+          ? <ReportForm closeForm={this.toggleReportForm} initialState={reportState} />
           : null
         }
       </div>
@@ -78,7 +85,7 @@ class Question extends Component {
         <div className={styles.headerContainer}>
           <p className={styles.questionStyle}>{question.Content}</p>
           <div className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
-          <i onClick={this.toggleReportForm}
+          <i onClick={() => this.toggleReportForm(this.state.reportState)}
           onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
           onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>
           {this.state.showToolTip

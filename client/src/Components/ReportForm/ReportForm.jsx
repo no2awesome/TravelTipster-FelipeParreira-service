@@ -5,13 +5,9 @@ import genStyles from '../App/App.css';
 class ReportForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      reportContent: '',
-      isInvalidInput: false,
-    };
+    this.state = props.initialState;
 
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
-    this.handleSubmitClick = this.handleSubmitClick.bind(this);
   }
 
   handleTextAreaChange(e) {
@@ -24,11 +20,6 @@ class ReportForm extends Component {
     });
   }
 
-  handleSubmitClick() {
-
-    // this.props.
-  }
-
   render() {
     const { closeForm } = this.props;
     let footNoteStyles = `${styles.footNote}`;
@@ -39,18 +30,19 @@ class ReportForm extends Component {
       textareaStyles += ` ${styles.invalidInput}`;
       btnStyles += ` ${genStyles.disabled}`;
     }
+    console.log('state', this.state);
     if (this.state.reportContent.length === 0 && !this.state.isInvalidInput) {
       btnStyles += ` ${genStyles.disabled}`;
     }
 
     return (
       <div>
-        <div className={styles.backGround} onClick={closeForm}>
+        <div className={styles.backGround} onClick={() => closeForm(this.state)}>
         </div>
         <div className={styles.container}>
           <div className={styles.header}>
             <div>Report a Problem</div>
-            <div onClick={closeForm} ><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
+            <div onClick={() => closeForm(this.state)} ><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
           </div>
           <div className={styles.body}>
             <div className={styles.description}>
@@ -66,7 +58,7 @@ class ReportForm extends Component {
           </div>
           <div className={styles.footer}>
             <button
-            onClick={closeForm}
+            onClick={() => closeForm()}
             className={btnStyles}>Submit</button>
           </div>
         </div>
