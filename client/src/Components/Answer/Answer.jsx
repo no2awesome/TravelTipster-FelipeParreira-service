@@ -2,6 +2,7 @@ import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import UserStats from '../UserStats/UserStats.jsx'; // eslint-disable-line no-unused-vars
 import VoteToolTip from '../VoteToolTip/VoteToolTip.jsx'; // eslint-disable-line no-unused-vars
 import QAToolTip from '../QAToolTip/QAToolTip.jsx'; // eslint-disable-line no-unused-vars
+import ReportForm from '../ReportForm/ReportForm.jsx'; // eslint-disable-line no-unused-vars
 import styles from './Answer.css';
 import genStyles from '../App/App.css';
 
@@ -13,11 +14,13 @@ class Answer extends Component {
       showUpVoteToolTip: false,
       showDownVoteToolTip: false,
       showReportToolTip: false,
+      showReportForm: false,
     };
 
     this.toggleShowUserStats = this.toggleShowUserStats.bind(this);
     this.toggleVoteToolTip = this.toggleVoteToolTip.bind(this);
     this.toggleReportToolTip = this.toggleReportToolTip.bind(this);
+    this.toggleReportForm = this.toggleReportForm.bind(this);
   }
 
   toggleShowUserStats() {
@@ -50,6 +53,12 @@ class Answer extends Component {
     });
   }
 
+  toggleReportForm() {
+    this.setState({
+      showReportForm: !this.state.showReportForm,
+    });
+  }
+
   render() {
     const { answer, user } = this.props;
     let arrowBtnStyles = `${genStyles.arrow}`;
@@ -62,6 +71,10 @@ class Answer extends Component {
 
     return (
       <li className={`${styles.answerItemStyle} answer`}>
+        {this.state.showReportForm
+          ? <ReportForm closeForm={this.toggleReportForm} />
+          : null
+        }
         <div className={styles.answerSum}>
           <div className={styles.reviewedStyle}>
             <div onMouseEnter={this.toggleShowUserStats}
@@ -76,6 +89,7 @@ class Answer extends Component {
               </div>
             </div>
             <div>&nbsp;Reviewed this property | <i
+            onClick={this.toggleReportForm}
             onMouseEnter={() => this.toggleReportToolTip(isTheSameUser)}
             onMouseLeave={() => this.toggleReportToolTip(isTheSameUser)}
             className={`${reportIconStyle} fa fa-flag`}>
