@@ -8,7 +8,6 @@ class ReportForm extends Component {
     this.state = props.initialState;
 
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
-    // this.handleSubmitClick = this.handleSubmitClick.bind(this);
   }
 
   handleTextAreaChange(e) {
@@ -20,11 +19,6 @@ class ReportForm extends Component {
       isInvalidInput: inputLength < 50 || inputLength > 500,
     });
   }
-
-  // handleSubmitClick() {
-  //   this.props.;
-
-  // }
 
   render() {
     const { closeForm } = this.props;

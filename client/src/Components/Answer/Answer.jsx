@@ -15,6 +15,11 @@ class Answer extends Component {
       showDownVoteToolTip: false,
       showReportToolTip: false,
       showReportForm: false,
+      reportWasSubmitted: false,
+      reportState: {
+        reportContent: '',
+        isInvalidInput: false,
+      },
     };
 
     this.toggleShowUserStats = this.toggleShowUserStats.bind(this);
@@ -53,14 +58,22 @@ class Answer extends Component {
     });
   }
 
-  toggleReportForm() {
+  toggleReportForm(reportState, isSubmission) {
     this.setState({
       showReportForm: !this.state.showReportForm,
+      reportState,
+      reportWasSubmitted: !!isSubmission,
     });
+
+    if (isSubmission) {
+      const { answer } = this.props;
+      this.props.postReport(answer.QuestionID, answer.id);
+    }
   }
 
   render() {
     const { answer, user } = this.props;
+
     let arrowBtnStyles = `${genStyles.arrow}`;
     let reportIconStyle = `${styles.flagStyle}`;
     const isTheSameUser = answer.UserID === this.props.currentUser.UserID;
@@ -69,38 +82,51 @@ class Answer extends Component {
       reportIconStyle += ` ${genStyles.disabled}`;
     }
 
+    const { reportState } = this.state;
+    let reviewedHeader = (
+      <div className={styles.reviewedStyle}>
+        <div onMouseEnter={this.toggleShowUserStats}
+        onMouseLeave={this.toggleShowUserStats}>
+          <div>Response from {user.Username} |</div>
+          <div className={styles.UserStatsContainer}>
+            {this.state.showUserStats
+              ? <UserStats user={user} toggleShowUserStats={this.toggleShowUserStats}
+              styles={styles.userStatsStyle}/>
+              : null
+            }
+          </div>
+        </div>
+        <div>&nbsp;Reviewed this property | <i
+        onClick={() => this.toggleReportForm(this.state.reportState)}
+        onMouseEnter={() => this.toggleReportToolTip(isTheSameUser)}
+        onMouseLeave={() => this.toggleReportToolTip(isTheSameUser)}
+        className={`${reportIconStyle} fa fa-flag`}>
+        <div className={styles.reportToolTipContainer}>
+          {this.state.showReportToolTip
+            ? <QAToolTip message={'Problem with this answer?'} />
+            : null
+          }
+        </div>
+        </i></div>
+      </div>
+    );
+
+    if (this.state.reportWasSubmitted) {
+      reviewedHeader = (
+        <div className={styles.reviewedStyle}>
+          Thank you. We appreciate your input.
+        </div>
+      );
+    }
+
     return (
       <li className={`${styles.answerItemStyle} answer`}>
         {this.state.showReportForm
-          ? <ReportForm closeForm={this.toggleReportForm} />
+          ? <ReportForm closeForm={this.toggleReportForm} initialState={reportState} />
           : null
         }
         <div className={styles.answerSum}>
-          <div className={styles.reviewedStyle}>
-            <div onMouseEnter={this.toggleShowUserStats}
-            onMouseLeave={this.toggleShowUserStats}>
-              <div>Response from {user.Username} |</div>
-              <div className={styles.UserStatsContainer}>
-                {this.state.showUserStats
-                  ? <UserStats user={user} toggleShowUserStats={this.toggleShowUserStats}
-                  styles={styles.userStatsStyle}/>
-                  : null
-                }
-              </div>
-            </div>
-            <div>&nbsp;Reviewed this property | <i
-            onClick={this.toggleReportForm}
-            onMouseEnter={() => this.toggleReportToolTip(isTheSameUser)}
-            onMouseLeave={() => this.toggleReportToolTip(isTheSameUser)}
-            className={`${reportIconStyle} fa fa-flag`}>
-            <div className={styles.reportToolTipContainer}>
-              {this.state.showReportToolTip
-                ? <QAToolTip message={'Problem with this answer?'} />
-                : null
-              }
-            </div>
-            </i></div>
-          </div>
+          {reviewedHeader}
           <p className={styles.answerStyle}>{answer.Content}</p>
           {answer.UserID === this.props.currentUser.UserID
             ? <button className={`${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteAnswer}>Delete</button>

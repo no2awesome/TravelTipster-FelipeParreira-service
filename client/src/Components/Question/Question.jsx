@@ -49,7 +49,7 @@ class Question extends Component {
     });
 
     if (isSubmission) {
-      this.props.postReportForQuestion(this.props.question.QuestionID);
+      this.props.postReport(this.props.question.QuestionID);
     }
   }
 
@@ -117,7 +117,8 @@ class Question extends Component {
           ? <button className={`${styles.deleteButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteQuestion}>Delete</button>
           : null
         }
-        <AnswerList answers={this.props.question.Answers} users={this.props.question.AnswersUsers}
+        <AnswerList postReport={this.props.postReport}
+        answers={this.props.question.Answers} users={this.props.question.AnswersUsers}
         submitAnswer={this.props.submitAnswer} questionID={question.QuestionID}
         voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser}
         deleteAnswer={this.props.deleteAnswer} />
