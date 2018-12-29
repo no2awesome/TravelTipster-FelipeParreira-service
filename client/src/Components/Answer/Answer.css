@@ -30,6 +30,8 @@
 .flagStyle {
   font-size: 14px;
   color: #b7b7b7;
+  cursor: pointer;
+  position: relative;
 }
 
 .answerItemStyle {
@@ -73,4 +75,14 @@
   position: relative;
   top: -1070%;
   left: 100%;
+}
+
+.btnContainer {
+  position: relative;
+}
+
+.reportToolTipContainer {
+  position: absolute;
+  top: -125%;
+  left: 180%;
 }

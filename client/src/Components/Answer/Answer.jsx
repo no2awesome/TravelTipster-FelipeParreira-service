@@ -1,5 +1,7 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import UserStats from '../UserStats/UserStats.jsx'; // eslint-disable-line no-unused-vars
+import VoteToolTip from '../VoteToolTip/VoteToolTip.jsx'; // eslint-disable-line no-unused-vars
+import QAToolTip from '../QAToolTip/QAToolTip.jsx'; // eslint-disable-line no-unused-vars
 import styles from './Answer.css';
 import genStyles from '../App/App.css';
 
@@ -8,14 +10,37 @@ class Answer extends Component {
     super(props);
     this.state = {
       showUserStats: false,
+      showUpVoteToolTip: false,
+      showDownVoteToolTip: false,
+      showReportToolTip: false,
     };
 
     this.toggleShowUserStats = this.toggleShowUserStats.bind(this);
+    this.toggleVoteToolTip = this.toggleVoteToolTip.bind(this);
+    this.toggleReportToolTip = this.toggleReportToolTip.bind(this);
   }
 
   toggleShowUserStats() {
     this.setState({
       showUserStats: !this.state.showUserStats,
+    });
+  }
+
+  toggleVoteToolTip(isUp) {
+    if (isUp) {
+      this.setState({
+        showUpVoteToolTip: !this.state.showUpVoteToolTip,
+      });
+    } else {
+      this.setState({
+        showDownVoteToolTip: !this.state.showDownVoteToolTip,
+      });
+    }
+  }
+
+  toggleReportToolTip() {
+    this.setState({
+      showReportToolTip: !this.state.showReportToolTip,
     });
   }
 
@@ -37,10 +62,17 @@ class Answer extends Component {
                 }
               </div>
             </div>
-            <div>&nbsp;Reviewed this property | <i className={`${styles.flagStyle} fa fa-flag`}></i></div>
+            <div>&nbsp;Reviewed this property | <i
+            onMouseEnter={this.toggleReportToolTip} onMouseLeave={this.toggleReportToolTip}
+            className={`${styles.flagStyle} fa fa-flag`}>
+            <div className={styles.reportToolTipContainer}>
+              {this.state.showReportToolTip
+                ? <QAToolTip message={'Problem with this answer?'} />
+                : null
+              }
+            </div>
+            </i></div>
           </div>
-
-
           <p className={styles.answerStyle}>{answer.Content}</p>
           {answer.UserID === this.props.currentUser.UserID
             ? <button className={`${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteAnswer}>Delete</button>
@@ -48,24 +80,38 @@ class Answer extends Component {
           }
         </div>
         <div className={styles.votingContainer}>
-          <button className={genStyles.arrow}
-          onClick={() => this.props.voteAnswer(answer.UserID,
-            answer.QuestionID,
-            answer.id,
-            true)}>
-            <i className={`${styles.upArrow} fa fa-chevron-up`}></i></button>
+          <div className={styles.btnContainer} onMouseEnter={() => this.toggleVoteToolTip(true)}
+          onMouseLeave={() => this.toggleVoteToolTip(true)}>
+            <button className={genStyles.arrow}
+            onClick={() => this.props.voteAnswer(answer.UserID,
+              answer.QuestionID,
+              answer.id,
+              true)}>
+              <i className={`${styles.upArrow} fa fa-chevron-up`}></i></button>
+              {this.state.showUpVoteToolTip
+                ? <VoteToolTip message={'Helpful answer'} />
+                : null
+              }
+          </div>
           <span className={styles.voteCountStyle}>
             {answer.Votes}
             <br />
             <span>Votes</span>
           </span>
-          <button className={genStyles.arrow}
-          onClick={() => this.props.voteAnswer(answer.UserID,
-            answer.QuestionID,
-            answer.id,
-            false)}>
-              <i className={`${styles.downArrow} fa fa-chevron-down`}></i>
-          </button>
+          <div className={styles.btnContainer} onMouseEnter={() => this.toggleVoteToolTip(false)}
+          onMouseLeave={() => this.toggleVoteToolTip(false)}>
+            <button className={genStyles.arrow}
+            onClick={() => this.props.voteAnswer(answer.UserID,
+              answer.QuestionID,
+              answer.id,
+              false)}>
+                <i className={`${styles.downArrow} fa fa-chevron-down`}></i>
+            </button>
+            {this.state.showDownVoteToolTip
+              ? <VoteToolTip message={'Not as helpful'} />
+              : null
+            }
+          </div>
         </div>
       </li>
     );
