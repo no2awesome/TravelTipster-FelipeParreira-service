@@ -8,6 +8,7 @@ class ReportForm extends Component {
     this.state = props.initialState;
 
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+    // this.handleSubmitClick = this.handleSubmitClick.bind(this);
   }
 
   handleTextAreaChange(e) {
@@ -20,6 +21,11 @@ class ReportForm extends Component {
     });
   }
 
+  // handleSubmitClick() {
+  //   this.props.;
+
+  // }
+
   render() {
     const { closeForm } = this.props;
     let footNoteStyles = `${styles.footNote}`;
@@ -30,7 +36,7 @@ class ReportForm extends Component {
       textareaStyles += ` ${styles.invalidInput}`;
       btnStyles += ` ${genStyles.disabled}`;
     }
-    console.log('state', this.state);
+
     if (this.state.reportContent.length === 0 && !this.state.isInvalidInput) {
       btnStyles += ` ${genStyles.disabled}`;
     }
@@ -58,7 +64,7 @@ class ReportForm extends Component {
           </div>
           <div className={styles.footer}>
             <button
-            onClick={() => closeForm()}
+            onClick={() => closeForm({ reportContent: '', isInvalidInput: false }, true)}
             className={btnStyles}>Submit</button>
           </div>
         </div>

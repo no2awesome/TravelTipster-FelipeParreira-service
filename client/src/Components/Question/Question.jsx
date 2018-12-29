@@ -14,6 +14,7 @@ class Question extends Component {
       showUserStats: false,
       showToolTip: false,
       showReportForm: false,
+      reportWasSubmitted: false,
       reportState: {
         reportContent: '',
         isInvalidInput: false,
@@ -40,11 +41,16 @@ class Question extends Component {
     });
   }
 
-  toggleReportForm(reportState) {
+  toggleReportForm(reportState, isSubmission) {
     this.setState({
       showReportForm: !this.state.showReportForm,
       reportState,
+      reportWasSubmitted: !!isSubmission,
     });
+
+    // if (isSubmission) {
+    // Thank you. We appreciate your input.
+    // }
   }
 
   render() {
@@ -61,7 +67,27 @@ class Question extends Component {
     }
 
     const { reportState } = this.state;
-    console.log('reportState', reportState);
+    let subHeaderContent = (
+      <div className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
+        <i onClick={() => this.toggleReportForm(this.state.reportState)}
+        onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
+        onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>
+        {this.state.showToolTip
+          ? <QAToolTip message={'Problem with this question?'} />
+          : null
+        }
+        </i>
+      </div>
+    );
+
+    if (this.state.reportWasSubmitted) {
+      subHeaderContent = (
+        <div className={styles.dateStyle}>
+          Thank you. We appreciate your input.
+        </div>
+      );
+    }
+
     return (
     <li className={styles.questionItemStyle}>
       <div className={reportFormContainerStyles}>
@@ -84,16 +110,7 @@ class Question extends Component {
       <div>
         <div className={styles.headerContainer}>
           <p className={styles.questionStyle}>{question.Content}</p>
-          <div className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
-          <i onClick={() => this.toggleReportForm(this.state.reportState)}
-          onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
-          onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>
-          {this.state.showToolTip
-            ? <QAToolTip message={'Problem with this question?'} />
-            : null
-          }
-          </i>
-          </div>
+          {subHeaderContent}
         </div>
         <br />
         {question.UserID === this.props.currentUser.UserID
