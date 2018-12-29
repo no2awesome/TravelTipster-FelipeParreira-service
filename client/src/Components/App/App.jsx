@@ -29,7 +29,6 @@ class App extends Component {
       type: 'GET',
       url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions`,
       success: (questions) => {
-        console.log('questions[questions.length - 1]', questions[questions.length - 1]);
         this.setState({
           questions,
         });
@@ -70,7 +69,6 @@ class App extends Component {
   }
 
   submitAnswer(content, questionID) {
-    console.log(content, questionID);
     $.ajax({
       type: 'POST',
       url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions/${questionID}/answers`,
