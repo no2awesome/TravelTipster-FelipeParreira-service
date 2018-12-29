@@ -42,3 +42,12 @@
   top: -5.5px;
   left: -6px;
 }
+
+.dummy {
+  position: absolute;
+  width: 20px;
+  height: 55px;
+  background-color: transparent;
+  top: 0%;
+  left: 100%;
+}

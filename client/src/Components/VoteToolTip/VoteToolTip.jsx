@@ -7,6 +7,7 @@ const VoteToolTip = (props) => {
     <div className={styles.container}>
       <div className={styles.msgContainer}>{message}</div>
       <div className={styles['arrow-right']}></div>
+      <div className={styles.dummy}></div>
     </div>
   );
 };
