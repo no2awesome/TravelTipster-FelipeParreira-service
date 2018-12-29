@@ -3,6 +3,7 @@ import moment from 'moment';
 import AnswerList from '../AnswerList/AnswerList.jsx'; // eslint-disable-line no-unused-vars
 import UserStats from '../UserStats/UserStats.jsx'; // eslint-disable-line no-unused-vars
 import QAToolTip from '../QAToolTip/QAToolTip.jsx'; // eslint-disable-line no-unused-vars
+import ReportForm from '../ReportForm/ReportForm.jsx'; // eslint-disable-line no-unused-vars
 import styles from './Question.css';
 import genStyles from '../App/App.css';
 
@@ -12,10 +13,12 @@ class Question extends Component {
     this.state = {
       showUserStats: false,
       showToolTip: false,
+      showReportForm: false,
     };
 
     this.toggleShowUserStats = this.toggleShowUserStats.bind(this);
     this.toggleShowToolTip = this.toggleShowToolTip.bind(this);
+    this.toggleReportForm = this.toggleReportForm.bind(this);
   }
 
   toggleShowUserStats() {
@@ -33,6 +36,12 @@ class Question extends Component {
     });
   }
 
+  toggleReportForm() {
+    this.setState({
+      showReportForm: !this.state.showReportForm,
+    });
+  }
+
   render() {
     const { question } = this.props;
     const isTheSameUser = question.UserID === this.props.currentUser.UserID;
@@ -43,22 +52,27 @@ class Question extends Component {
 
     return (
     <li className={styles.questionItemStyle}>
-    <div onMouseEnter={this.toggleShowUserStats} onMouseLeave={this.toggleShowUserStats}
-    className={styles.userMiniProfile}>
-      <img className={styles.userPicStyle}
-      src={question.User ? question.User.ThumbnailURL : null} />
-      <p className={styles.usernameStyle}>{question.User ? question.User.Username : null}</p>
-      {this.state.showUserStats
-        ? <UserStats toggleShowUserStats={this.toggleShowUserStats} user={question.User}
-        styles={styles.userStatsStyle} />
+      {this.state.showReportForm
+        ? <ReportForm closeForm={this.toggleReportForm} />
         : null
       }
-    </div>
+      <div onMouseEnter={this.toggleShowUserStats} onMouseLeave={this.toggleShowUserStats}
+      className={styles.userMiniProfile}>
+        <img className={styles.userPicStyle}
+        src={question.User ? question.User.ThumbnailURL : null} />
+        <p className={styles.usernameStyle}>{question.User ? question.User.Username : null}</p>
+        {this.state.showUserStats
+          ? <UserStats toggleShowUserStats={this.toggleShowUserStats} user={question.User}
+          styles={styles.userStatsStyle} />
+          : null
+        }
+      </div>
       <div>
         <div className={styles.headerContainer}>
           <p className={styles.questionStyle}>{question.Content}</p>
           <p className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
-          <i onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
+          <i onClick={this.toggleReportForm}
+          onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
           onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>
           {this.state.showToolTip
             ? <QAToolTip message={'Problem with this question?'} />

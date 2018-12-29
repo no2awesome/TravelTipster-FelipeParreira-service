@@ -24,6 +24,7 @@ class ReportForm extends Component {
   }
 
   render() {
+    const { closeForm } = this.props;
     let footNoteStyles = `${styles.footNote}`;
     let btnStyles = `${genStyles['btn-primary']} ${genStyles.big} ${styles.submit}`;
     if (this.state.isInvalidInput) {
@@ -38,7 +39,7 @@ class ReportForm extends Component {
       <div className={styles.container}>
         <div className={styles.header}>
           <div>Report a Problem</div>
-          <div><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
+          <div onClick={closeForm} ><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
         </div>
         <div className={styles.body}>
           <div className={styles.description}>
