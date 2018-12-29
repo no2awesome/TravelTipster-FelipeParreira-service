@@ -26,7 +26,10 @@ class Answer extends Component {
     });
   }
 
-  toggleVoteToolTip(isUp) {
+  toggleVoteToolTip(isUp, isTheSameUser) {
+    if (isTheSameUser) {
+      return;
+    }
     if (isUp) {
       this.setState({
         showUpVoteToolTip: !this.state.showUpVoteToolTip,
@@ -38,7 +41,10 @@ class Answer extends Component {
     }
   }
 
-  toggleReportToolTip() {
+  toggleReportToolTip(isTheSameUser) {
+    if (isTheSameUser) {
+      return;
+    }
     this.setState({
       showReportToolTip: !this.state.showReportToolTip,
     });
@@ -46,6 +52,13 @@ class Answer extends Component {
 
   render() {
     const { answer, user } = this.props;
+    let arrowBtnStyles = `${genStyles.arrow}`;
+    let reportIconStyle = `${styles.flagStyle}`;
+    const isTheSameUser = answer.UserID === this.props.currentUser.UserID;
+    if (isTheSameUser) {
+      arrowBtnStyles += ` ${styles.disabled}`;
+      reportIconStyle += ` ${styles.disabled}`;
+    }
 
     return (
       <li className={`${styles.answerItemStyle} answer`}>
@@ -63,8 +76,9 @@ class Answer extends Component {
               </div>
             </div>
             <div>&nbsp;Reviewed this property | <i
-            onMouseEnter={this.toggleReportToolTip} onMouseLeave={this.toggleReportToolTip}
-            className={`${styles.flagStyle} fa fa-flag`}>
+            onMouseEnter={() => this.toggleReportToolTip(isTheSameUser)}
+            onMouseLeave={() => this.toggleReportToolTip(isTheSameUser)}
+            className={`${reportIconStyle} fa fa-flag`}>
             <div className={styles.reportToolTipContainer}>
               {this.state.showReportToolTip
                 ? <QAToolTip message={'Problem with this answer?'} />
@@ -80,9 +94,10 @@ class Answer extends Component {
           }
         </div>
         <div className={styles.votingContainer}>
-          <div className={styles.btnContainer} onMouseEnter={() => this.toggleVoteToolTip(true)}
-          onMouseLeave={() => this.toggleVoteToolTip(true)}>
-            <button className={genStyles.arrow}
+          <div className={styles.btnContainer}
+          onMouseEnter={() => this.toggleVoteToolTip(true, isTheSameUser)}
+          onMouseLeave={() => this.toggleVoteToolTip(true, isTheSameUser)}>
+            <button className={arrowBtnStyles}
             onClick={() => this.props.voteAnswer(answer.UserID,
               answer.QuestionID,
               answer.id,
@@ -98,9 +113,10 @@ class Answer extends Component {
             <br />
             <span>Votes</span>
           </span>
-          <div className={styles.btnContainer} onMouseEnter={() => this.toggleVoteToolTip(false)}
-          onMouseLeave={() => this.toggleVoteToolTip(false)}>
-            <button className={genStyles.arrow}
+          <div className={styles.btnContainer}
+          onMouseEnter={() => this.toggleVoteToolTip(false, isTheSameUser)}
+          onMouseLeave={() => this.toggleVoteToolTip(false, isTheSameUser)}>
+            <button className={arrowBtnStyles}
             onClick={() => this.props.voteAnswer(answer.UserID,
               answer.QuestionID,
               answer.id,

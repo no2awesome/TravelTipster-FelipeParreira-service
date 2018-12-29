@@ -87,3 +87,15 @@
   top: -155%;
   left: 180%;
 }
+
+button.disabled {
+  cursor: auto;
+  pointer-events: none;
+  color: #767676;
+  border-color:#767676;
+}
+
+i.disabled {
+  cursor: auto;
+  pointer-events: none;
+}
