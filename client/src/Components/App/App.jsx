@@ -4,6 +4,7 @@ import QuestionList from '../QuestionList/QuestionList.jsx'; // eslint-disable-l
 import Header from '../Header/Header.jsx'; // eslint-disable-line no-unused-vars
 import styles from './App.css';
 import NavBar from '../NavBar/NavBar.jsx'; // eslint-disable-line no-unused-vars
+import ReportForm from '../ReportForm/ReportForm.jsx'; // eslint-disable-line no-unused-vars
 
 class App extends Component {
   constructor(props) {
@@ -183,6 +184,7 @@ class App extends Component {
   render() {
     return (
       <div className={styles.containerStyle}>
+        <ReportForm />
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
         <QuestionList currentPage={this.state.currentPage}
