@@ -37,10 +37,6 @@
   font-size: 14px;
 }
 
-.description h4:first-child {
-  /* margin-bottom: -5%; */
-}
-
 .italic {
   font-style: italic;
 }
@@ -74,6 +70,7 @@ button.submit {
   width: 100%;
   height: 13%;
   border-radius: 3px;
+  font-size: 14px;
 }
 
 .footNote {
@@ -83,4 +80,9 @@ button.submit {
   font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif;
   margin-top: 2%;
   margin-bottom: 4%;
+}
+
+.invalidInput {
+  color: red;
+  font-weight: bold;
 }
