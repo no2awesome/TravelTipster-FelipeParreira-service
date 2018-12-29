@@ -1,3 +1,13 @@
+.supraContainer {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0vh;
+  left: 0vw;
+  background-color: rgba(255, 255, 255, .5);
+  z-index: 1000;
+}
+
 .container {
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
@@ -5,7 +15,7 @@
   position: fixed;
   top: 30vh;
   left: 30vw;
-  z-index: 1000;
+  z-index: 10000;
   background-color: #fff;
 }
 

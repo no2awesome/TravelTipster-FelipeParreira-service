@@ -36,26 +36,28 @@ class ReportForm extends Component {
     }
 
     return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <div>Report a Problem</div>
-          <div onClick={closeForm} ><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
-        </div>
-        <div className={styles.body}>
-          <div className={styles.description}>
-            <h4>Why are you reporting this?
-            <br />
-            Add specific details about why you
-            feel this question or answer is inappropriate.&nbsp;
-            <span className={styles.italic}>(optional)</span></h4>
+      <div className={styles.supraContainer}>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <div>Report a Problem</div>
+            <div onClick={closeForm} ><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
           </div>
-          <textarea value={this.state.reportContent}
-          onChange={this.handleTextAreaChange} className={styles.textInput}></textarea>
-          <div className={footNoteStyles}>50 characters minimum, 500 maximum</div>
-        </div>
-        <div className={styles.footer}>
-          <button
-          className={btnStyles}>Submit</button>
+          <div className={styles.body}>
+            <div className={styles.description}>
+              <h4>Why are you reporting this?
+              <br />
+              Add specific details about why you
+              feel this question or answer is inappropriate.&nbsp;
+              <span className={styles.italic}>(optional)</span></h4>
+            </div>
+            <textarea value={this.state.reportContent}
+            onChange={this.handleTextAreaChange} className={styles.textInput}></textarea>
+            <div className={footNoteStyles}>50 characters minimum, 500 maximum</div>
+          </div>
+          <div className={styles.footer}>
+            <button
+            className={btnStyles}>Submit</button>
+          </div>
         </div>
       </div>
     );
