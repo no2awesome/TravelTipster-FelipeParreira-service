@@ -30,6 +30,8 @@
 .flagStyle {
   font-size: 14px;
   color: #b7b7b7;
+  cursor: pointer;
+  position: relative;
 }
 
 .answerItemStyle {

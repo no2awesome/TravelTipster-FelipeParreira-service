@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import UserStats from '../UserStats/UserStats.jsx'; // eslint-disable-line no-unused-vars
 import VoteToolTip from '../VoteToolTip/VoteToolTip.jsx'; // eslint-disable-line no-unused-vars
+import QAToolTip from '../QAToolTip/QAToolTip.jsx'; // eslint-disable-line no-unused-vars
 import styles from './Answer.css';
 import genStyles from '../App/App.css';
 
@@ -11,10 +12,12 @@ class Answer extends Component {
       showUserStats: false,
       showUpVoteToolTip: false,
       showDownVoteToolTip: false,
+      showReportToolTip: false,
     };
 
     this.toggleShowUserStats = this.toggleShowUserStats.bind(this);
-    this.toggleToolTip = this.toggleToolTip.bind(this);
+    this.toggleVoteToolTip = this.toggleVoteToolTip.bind(this);
+    this.toggleReportToolTip = this.toggleReportToolTip.bind(this);
   }
 
   toggleShowUserStats() {
@@ -23,7 +26,7 @@ class Answer extends Component {
     });
   }
 
-  toggleToolTip(isUp) {
+  toggleVoteToolTip(isUp) {
     if (isUp) {
       this.setState({
         showUpVoteToolTip: !this.state.showUpVoteToolTip,
@@ -33,6 +36,12 @@ class Answer extends Component {
         showDownVoteToolTip: !this.state.showDownVoteToolTip,
       });
     }
+  }
+
+  toggleReportToolTip() {
+    this.setState({
+      showReportToolTip: !this.state.showReportToolTip,
+    });
   }
 
   render() {
@@ -53,7 +62,14 @@ class Answer extends Component {
                 }
               </div>
             </div>
-            <div>&nbsp;Reviewed this property | <i className={`${styles.flagStyle} fa fa-flag`}></i></div>
+            <div>&nbsp;Reviewed this property | <i
+            onMouseEnter={this.toggleReportToolTip} onMouseLeave={this.toggleReportToolTip}
+            className={`${styles.flagStyle} fa fa-flag`}>
+            {this.state.showReportToolTip
+              ? <QAToolTip message={'Problem with this answer?'} />
+              : null
+            }
+            </i></div>
           </div>
 
 
@@ -64,8 +80,8 @@ class Answer extends Component {
           }
         </div>
         <div className={styles.votingContainer}>
-          <div className={styles.btnContainer} onMouseEnter={() => this.toggleToolTip(true)}
-          onMouseLeave={() => this.toggleToolTip(true)}>
+          <div className={styles.btnContainer} onMouseEnter={() => this.toggleVoteToolTip(true)}
+          onMouseLeave={() => this.toggleVoteToolTip(true)}>
             <button className={genStyles.arrow}
             onClick={() => this.props.voteAnswer(answer.UserID,
               answer.QuestionID,
@@ -82,8 +98,8 @@ class Answer extends Component {
             <br />
             <span>Votes</span>
           </span>
-          <div className={styles.btnContainer} onMouseEnter={() => this.toggleToolTip(false)}
-          onMouseLeave={() => this.toggleToolTip(false)}>
+          <div className={styles.btnContainer} onMouseEnter={() => this.toggleVoteToolTip(false)}
+          onMouseLeave={() => this.toggleVoteToolTip(false)}>
             <button className={genStyles.arrow}
             onClick={() => this.props.voteAnswer(answer.UserID,
               answer.QuestionID,
