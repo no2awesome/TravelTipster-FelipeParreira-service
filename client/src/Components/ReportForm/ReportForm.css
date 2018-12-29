@@ -97,7 +97,11 @@ button.submit {
   margin-bottom: 4%;
 }
 
-.invalidInput {
+div.invalidInput {
   color: red;
   font-weight: bold;
+}
+
+textarea.invalidInput {
+  border-color: red;
 }

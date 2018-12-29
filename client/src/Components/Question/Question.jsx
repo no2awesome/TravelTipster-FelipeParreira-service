@@ -50,12 +50,19 @@ class Question extends Component {
       reportIconStyle += ` ${genStyles.disabled}`;
     }
 
+    let reportFormContainerStyles = '';
+    if (!this.state.showReportForm) {
+      reportFormContainerStyles += `${styles.hidden}`;
+    }
+
     return (
     <li className={styles.questionItemStyle}>
-      {this.state.showReportForm
-        ? <ReportForm closeForm={this.toggleReportForm} />
-        : null
-      }
+      <div className={reportFormContainerStyles}>
+        {this.state.showReportForm
+          ? <ReportForm closeForm={this.toggleReportForm} />
+          : null
+        }
+      </div>
       <div onMouseEnter={this.toggleShowUserStats} onMouseLeave={this.toggleShowUserStats}
       className={styles.userMiniProfile}>
         <img className={styles.userPicStyle}
@@ -70,7 +77,7 @@ class Question extends Component {
       <div>
         <div className={styles.headerContainer}>
           <p className={styles.questionStyle}>{question.Content}</p>
-          <p className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
+          <div className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
           <i onClick={this.toggleReportForm}
           onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
           onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>
@@ -79,7 +86,7 @@ class Question extends Component {
             : null
           }
           </i>
-          </p>
+          </div>
         </div>
         <br />
         {question.UserID === this.props.currentUser.UserID

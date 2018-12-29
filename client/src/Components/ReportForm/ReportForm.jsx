@@ -11,6 +11,7 @@ class ReportForm extends Component {
     };
 
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+    this.handleSubmitClick = this.handleSubmitClick.bind(this);
   }
 
   handleTextAreaChange(e) {
@@ -23,12 +24,19 @@ class ReportForm extends Component {
     });
   }
 
+  handleSubmitClick() {
+
+    // this.props.
+  }
+
   render() {
     const { closeForm } = this.props;
     let footNoteStyles = `${styles.footNote}`;
+    let textareaStyles = `${styles.textInput}`;
     let btnStyles = `${genStyles['btn-primary']} ${genStyles.big} ${styles.submit}`;
     if (this.state.isInvalidInput) {
       footNoteStyles += ` ${styles.invalidInput}`;
+      textareaStyles += ` ${styles.invalidInput}`;
       btnStyles += ` ${genStyles.disabled}`;
     }
     if (this.state.reportContent.length === 0 && !this.state.isInvalidInput) {
@@ -53,11 +61,12 @@ class ReportForm extends Component {
               <span className={styles.italic}>(optional)</span></h4>
             </div>
             <textarea value={this.state.reportContent}
-            onChange={this.handleTextAreaChange} className={styles.textInput}></textarea>
+            onChange={this.handleTextAreaChange} className={textareaStyles}></textarea>
             <div className={footNoteStyles}>50 characters minimum, 500 maximum</div>
           </div>
           <div className={styles.footer}>
             <button
+            onClick={closeForm}
             className={btnStyles}>Submit</button>
           </div>
         </div>
