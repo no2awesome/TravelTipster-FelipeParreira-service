@@ -7,6 +7,7 @@
 .msgContainer {
   font-size: 12px;
   line-height: 16px;
+  font-weight: 500;
   color: #2c2c2c;
   font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif;
   padding: 18px;

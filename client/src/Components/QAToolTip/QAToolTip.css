@@ -6,17 +6,18 @@
 
 .msgContainer {
   font-size: 12px;
-  line-height: 16px;
+  line-height: 10px;
   color: #2c2c2c;
+  font-weight: 500;
   font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif;
-  padding: 18px;
+  padding: 18px !important;
   background-color: #fff;
   border: 1px solid;
   border-color: #e0e0e0;
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
   z-index: 100;
   width: max-content;
-  text-align: center;
+  text-align: right !important;
   height: 8px;
 }
 
