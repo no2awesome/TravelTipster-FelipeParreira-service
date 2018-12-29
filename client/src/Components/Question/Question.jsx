@@ -24,7 +24,10 @@ class Question extends Component {
     });
   }
 
-  toggleShowToolTip() {
+  toggleShowToolTip(isTheSameUser) {
+    if (isTheSameUser) {
+      return;
+    }
     this.setState({
       showToolTip: !this.state.showToolTip,
     });
@@ -32,6 +35,11 @@ class Question extends Component {
 
   render() {
     const { question } = this.props;
+    const isTheSameUser = question.UserID === this.props.currentUser.UserID;
+    let reportIconStyle = `${styles.flagStyle} fa fa-flag`;
+    if (isTheSameUser) {
+      reportIconStyle += ` ${genStyles.disabled}`;
+    }
 
     return (
     <li className={styles.questionItemStyle}>
@@ -50,7 +58,8 @@ class Question extends Component {
         <div className={styles.headerContainer}>
           <p className={styles.questionStyle}>{question.Content}</p>
           <p className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
-          <i onMouseEnter={this.toggleShowToolTip} onMouseLeave={this.toggleShowToolTip} className={`${styles.flagStyle} fa fa-flag`}>
+          <i onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
+          onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>
           {this.state.showToolTip
             ? <QAToolTip message={'Problem with this question?'} />
             : null

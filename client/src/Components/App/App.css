@@ -72,6 +72,11 @@ button.disabled {
   pointer-events: none;
 }
 
+i.disabled {
+  cursor: auto;
+  pointer-events: none;  
+}
+
 a {
   outline: none;
   color: #069;

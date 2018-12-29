@@ -57,7 +57,7 @@ class Answer extends Component {
     const isTheSameUser = answer.UserID === this.props.currentUser.UserID;
     if (isTheSameUser) {
       arrowBtnStyles += ` ${styles.disabled}`;
-      reportIconStyle += ` ${styles.disabled}`;
+      reportIconStyle += ` ${genStyles.disabled}`;
     }
 
     return (
