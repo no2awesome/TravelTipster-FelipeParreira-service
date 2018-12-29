@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import UserStats from '../UserStats/UserStats.jsx'; // eslint-disable-line no-unused-vars
+import VoteToolTip from '../VoteToolTip/VoteToolTip.jsx'; // eslint-disable-line no-unused-vars
 import styles from './Answer.css';
 import genStyles from '../App/App.css';
 
@@ -8,15 +9,30 @@ class Answer extends Component {
     super(props);
     this.state = {
       showUserStats: false,
+      showUpVoteToolTip: false,
+      showDownVoteToolTip: false,
     };
 
     this.toggleShowUserStats = this.toggleShowUserStats.bind(this);
+    this.toggleToolTip = this.toggleToolTip.bind(this);
   }
 
   toggleShowUserStats() {
     this.setState({
       showUserStats: !this.state.showUserStats,
     });
+  }
+
+  toggleToolTip(isUp) {
+    if (isUp) {
+      this.setState({
+        showUpVoteToolTip: !this.state.showUpVoteToolTip,
+      });
+    } else {
+      this.setState({
+        showDownVoteToolTip: !this.state.showDownVoteToolTip,
+      });
+    }
   }
 
   render() {
@@ -48,24 +64,38 @@ class Answer extends Component {
           }
         </div>
         <div className={styles.votingContainer}>
-          <button className={genStyles.arrow}
-          onClick={() => this.props.voteAnswer(answer.UserID,
-            answer.QuestionID,
-            answer.id,
-            true)}>
-            <i className={`${styles.upArrow} fa fa-chevron-up`}></i></button>
+          <div className={styles.btnContainer} onMouseEnter={() => this.toggleToolTip(true)}
+          onMouseLeave={() => this.toggleToolTip(true)}>
+            <button className={genStyles.arrow}
+            onClick={() => this.props.voteAnswer(answer.UserID,
+              answer.QuestionID,
+              answer.id,
+              true)}>
+              <i className={`${styles.upArrow} fa fa-chevron-up`}></i></button>
+              {this.state.showUpVoteToolTip
+                ? <VoteToolTip message={'Helpful answer'} />
+                : null
+              }
+          </div>
           <span className={styles.voteCountStyle}>
             {answer.Votes}
             <br />
             <span>Votes</span>
           </span>
-          <button className={genStyles.arrow}
-          onClick={() => this.props.voteAnswer(answer.UserID,
-            answer.QuestionID,
-            answer.id,
-            false)}>
-              <i className={`${styles.downArrow} fa fa-chevron-down`}></i>
-          </button>
+          <div className={styles.btnContainer} onMouseEnter={() => this.toggleToolTip(false)}
+          onMouseLeave={() => this.toggleToolTip(false)}>
+            <button className={genStyles.arrow}
+            onClick={() => this.props.voteAnswer(answer.UserID,
+              answer.QuestionID,
+              answer.id,
+              false)}>
+                <i className={`${styles.downArrow} fa fa-chevron-down`}></i>
+            </button>
+            {this.state.showDownVoteToolTip
+              ? <VoteToolTip message={'Not as helpful'} />
+              : null
+            }
+          </div>
         </div>
       </li>
     );

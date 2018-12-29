@@ -74,3 +74,7 @@
   top: -1070%;
   left: 100%;
 }
+
+.btnContainer {
+  position: relative;
+}

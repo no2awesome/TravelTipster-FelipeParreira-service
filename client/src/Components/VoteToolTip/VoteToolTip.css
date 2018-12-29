@@ -1,0 +1,43 @@
+.container {
+  position: absolute;
+  top: -80%;
+  left: -430%;
+}
+
+.msgContainer {
+  font-size: 12px;
+  line-height: 16px;
+  color: #2c2c2c;
+  font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif;
+  padding: 18px;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  z-index: 100;
+  min-width: 30px;
+  height: 15px;
+}
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-left: 11px solid #e0e0e0;
+  position: absolute;
+  top: 30%;
+  left: 99%;
+  z-index: 0;
+}
+
+.arrow-right:before {
+  content: " ";
+  position: absolute;
+  z-index: 2;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid white;
+  top: -10px;
+  left: -11px;
+}
