@@ -3,7 +3,9 @@ import Question from '../Question/Question.jsx'; // eslint-disable-line no-unuse
 import styles from './QuestionList.css';
 
 const QuestionList = (props) => {
-  const { questions } = props;
+  let { questions } = props;
+  const index = props.currentPage * 2;
+  questions = questions.slice(index, index + 2);
 
   return (
     <ul className={styles.listStyle}>

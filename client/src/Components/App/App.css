@@ -66,6 +66,12 @@ button.small {
   line-height: 16px;
 }
 
+button.disabled {
+  opacity: 0.5;
+  cursor: auto;
+  pointer-events: none;
+}
+
 a {
   outline: none;
   color: #069;
@@ -103,6 +109,7 @@ body {
 .containerStyle {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 850px;
   margin: 0 auto;
   border: 1px solid #e5e5e5;
