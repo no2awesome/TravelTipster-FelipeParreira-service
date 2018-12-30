@@ -1,0 +1,132 @@
+.container {
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  width: 650px;
+  max-height: 500px;
+  position: fixed;
+  top: 10vh;
+  left: 30vw;
+  z-index: 10000;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-family: Arial,Tahoma,"Bitstream Vera Sans",sans-serif;
+  text-align: left;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.header {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 16px;
+  color: #4a4a4a;
+  text-align: center;
+  display: flex;
+  height: 20%;
+  justify-content: center;
+}
+
+.wdwIconStyle, .arrowIconStyle {
+  margin-left: 1600%;
+  font-size: 20px;
+  color: #00a680;
+  cursor: pointer;
+}
+
+.arrowIconStyle {
+  margin-left: 0%;
+  font-size: 24px;
+  margin-top: 50%;
+}
+
+.wdwIconStyle:hover {
+  color: #00c094;
+}
+
+.image {
+  background-color: red;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 5%;
+}
+
+.username {
+  font-size: 14px;
+  color: #4a4a4a;
+}
+
+.fromContainer {
+  line-height: 25px;
+  width: 300px;
+  height: 30px;
+  background-color: #fff;
+  padding: 7px 10px;
+  cursor: pointer;
+  box-shadow: 1px 1px 0 0 rgba(0,0,0,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid;
+  border-color: #e6e6e6 #ccc #ccc #e6e6e6;
+  border-radius: 3px;
+}
+
+.fromContainer:hover {
+  background-color: #e6e6e6;
+}
+
+.miniProfileContainer {
+  display: flex;
+  width: 80%;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5%;
+}
+
+button.large {
+  padding-right: 25px;
+  padding-left: 25px;
+  margin-left: 72%;
+}
+
+.body {
+  padding-right: 5%;
+  padding-left: 5%;
+}
+
+.body div {
+  margin-bottom: 3%;
+}
+
+.body div h4 {
+  margin-bottom: 1%;
+}
+
+.subjectInput, .messageInput {
+  width: 100%;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 6px;
+  box-shadow: inset 0 2px 1px rgba(0,0,0,0.1);
+}
+
+.subjectInput {
+  resize: none;
+  height: 30px;
+  border-radius: 1.5px;
+  border: 1px solid #f2f2f2;
+  color: #111111;
+}
+
+.messageInput {
+  border-radius: 3px;
+  height: 120px;
+  border: 1px solid #e5e5e5;
+}
+
+.footer {
+  margin-top: 22%;
+}
