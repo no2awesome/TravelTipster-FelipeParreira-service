@@ -21,6 +21,7 @@ class App extends Component {
     this.deleteQuestion = this.deleteQuestion.bind(this);
     this.deleteAnswer = this.deleteAnswer.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
+    this.postReport = this.postReport.bind(this);
     // setInterval(this.componentDidMount, 1000);
   }
 
@@ -29,7 +30,6 @@ class App extends Component {
       type: 'GET',
       url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions`,
       success: (questions) => {
-        console.log('questions[questions.length - 1]', questions[questions.length - 1]);
         this.setState({
           questions,
         });
@@ -70,7 +70,6 @@ class App extends Component {
   }
 
   submitAnswer(content, questionID) {
-    console.log(content, questionID);
     $.ajax({
       type: 'POST',
       url: `http://localhost:3000/hotels/${this.props.currentHotelID}/questions/${questionID}/answers`,
@@ -181,13 +180,29 @@ class App extends Component {
     });
   }
 
+  postReport(questionID, answerID) {
+    let url = `http://localhost:3000/hotels/${this.props.currentHotelID}/questions/${questionID}/`;
+    if (answerID !== undefined) {
+      url += `answers/${answerID}/`;
+    }
+    url += 'reports';
+
+    $.ajax({
+      type: 'POST',
+      url,
+      success: () => console.log('Report sent!'),
+      error: err => console.log('Error', err),
+    });
+  }
+
 
   render() {
     return (
       <div className={styles.containerStyle}>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
-        <QuestionList currentPage={this.state.currentPage}
+        <QuestionList postReport={this.postReport}
+        currentPage={this.state.currentPage}
         questions={this.state.questions} submitAnswer={this.submitAnswer}
         voteAnswer={this.voteAnswer} currentUser={this.props.currentUser}
         deleteQuestion={this.deleteQuestion} deleteAnswer={this.deleteAnswer} />

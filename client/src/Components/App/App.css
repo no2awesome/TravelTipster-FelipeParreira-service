@@ -72,6 +72,11 @@ button.disabled {
   pointer-events: none;
 }
 
+i.disabled {
+  cursor: auto;
+  pointer-events: none;  
+}
+
 a {
   outline: none;
   color: #069;
@@ -90,7 +95,7 @@ textarea {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   padding: 10px;
-  width: 730px;
+  width: 70%;
 }
 
 textarea:focus {
@@ -113,8 +118,8 @@ body {
   width: 850px;
   margin: 0 auto;
   border: 1px solid #e5e5e5;
-  padding-right: 100px;
-  padding-left: 30px;
+  padding-right: 50px;
+  padding-left: 50px;
   padding-top: 30px;
   border-radius: 5px;
   background-color: white;
