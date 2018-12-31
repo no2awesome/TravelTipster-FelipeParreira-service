@@ -109,12 +109,12 @@ class Question extends Component {
       </div>
       <div>
         <div className={styles.headerContainer}>
-          <p className={styles.questionStyle}>{question.Content}</p>
+          <p className={`${styles.questionStyle} question-content`}>{question.Content}</p>
           {subHeaderContent}
         </div>
         <br />
         {question.UserID === this.props.currentUser.UserID
-          ? <button className={`${styles.deleteButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteQuestion}>Delete</button>
+          ? <button className={`${styles.deleteButton} ${genStyles['btn-primary']} ${genStyles.small} delete-question`} onClick={this.props.deleteQuestion}>Delete</button>
           : null
         }
         <AnswerList postReport={this.props.postReport}

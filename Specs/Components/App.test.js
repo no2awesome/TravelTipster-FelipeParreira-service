@@ -9,6 +9,11 @@ import QuestionForm from '../../client/src/Components/QuestionForm/QuestionForm.
 import AnswerForm from '../../client/src/Components/AnswerForm/AnswerForm.jsx'; // eslint-disable-line no-unused-vars
 import Answer from '../../client/src/Components/Answer/Answer.jsx'; // eslint-disable-line no-unused-vars
 import AnswerList from '../../client/src/Components/AnswerList/AnswerList.jsx'; // eslint-disable-line no-unused-vars
+import VoteToolTip from '../../client/src/Components/VoteToolTip/VoteToolTip.jsx'; // eslint-disable-line no-unused-vars
+import UserStats from '../../client/src/Components/UserStats/UserStats.jsx'; // eslint-disable-line no-unused-vars
+import QAToolTip from '../../client/src/Components/QAToolTip/QAToolTip.jsx'; // eslint-disable-line no-unused-vars
+import ReportForm from '../../client/src/Components/ReportForm/ReportForm.jsx'; // eslint-disable-line no-unused-vars
+import NavBar from '../../client/src/Components/NavBar/NavBar.jsx'; // eslint-disable-line no-unused-vars
 
 const { toBeType } = require('jest-tobetype'); // eslint-disable-line no-unused-vars
 
@@ -290,5 +295,166 @@ describe('AnswerForm Component', () => {
     const cancelButton = wrapper.find('button').get(1);
     expect(submitButton.props.children).toBe('Submit');
     expect(cancelButton.props.children).toBe('Cancel');
+  });
+});
+
+describe('Vote Tool Tip Component', () => {
+  const messageContent = 'Helpful answer';
+  const wrapper = shallow(<VoteToolTip message={messageContent} />);
+
+  it('should have a message passed to it', () => {
+    const message = wrapper.find('.message');
+    expect(message.props().children).toBe(messageContent);
+  });
+
+  it('should have three internal divs', () => {
+    expect(wrapper.find('div div').length).toBe(3);
+  });
+
+  it('should have an arrow right div', () => {
+    expect(wrapper.find('.arrow-right').length).toBe(1);
+  });
+
+  it('should have a dummy div', () => {
+    expect(wrapper.find('.dummy').length).toBe(1);
+  });
+});
+
+describe('User Stats Component', () => {
+  const user = questionData[0].User;
+  const wrapper = shallow(<UserStats user={user} />);
+
+  it('should have a send message button', () => {
+    const btn = wrapper.find('button');
+    expect(btn).toBeDefined();
+    expect(btn.length).toBe(1);
+    expect(btn.props().children.slice(-1)[0].trim()).toBe('Send Message');
+  });
+
+  it('should show a brief history of the user', () => {
+    const userHist = wrapper.find('.userHist');
+    expect(userHist).toBeDefined();
+    expect(userHist.length).toBe(1);
+    expect(userHist.props().children.join('')).toBe('Trip Advisor member since 2018');
+  });
+
+  it('should have an icon to close the floating window', () => {
+    const closeIcon = wrapper.find('.fa-times');
+    expect(closeIcon).toBeDefined();
+    expect(closeIcon.length).toBe(1);
+  });
+
+  it('should contain a summary of the user stats', () => {
+    const summary = wrapper.find('.summary');
+    const items = summary.find('p');
+    expect(items.length).toBe(4);
+    const contributions = items.at(0);
+    const helpfulVotes = items.at(1);
+    const citiesVisited = items.at(2);
+    const photos = items.at(3);
+    expect(contributions.props().children.slice(-2).join('').trim()).toBe('3 Contributions');
+    expect(helpfulVotes.props().children.slice(-2).join('').trim()).toBe('12 Helpful Votes');
+    expect(citiesVisited.props().children.slice(-2).join('').trim()).toBe('4 Cities Visited');
+    expect(photos.props().children.slice(-2).join('').trim()).toBe('10 Photos');
+  });
+
+  it('should contain a review distribution', () => {
+    const reviewDistro = wrapper.find('.review-distribution');
+    expect(reviewDistro).toBeDefined();
+    expect(reviewDistro.length).toBe(1);
+    const reviewData = reviewDistro.find('span');
+    expect(reviewData.at(0).props().children).toBe('Excellent');
+    expect(reviewData.at(3).props().children).toBe(10);
+    expect(reviewData.at(4).props().children).toBe('Very good');
+    expect(reviewData.at(7).props().children).toBe(1);
+    expect(reviewData.at(8).props().children).toBe('Average');
+    expect(reviewData.at(11).props().children).toBe(1);
+    expect(reviewData.at(12).props().children).toBe('Poor');
+    expect(reviewData.at(15).props().children).toBe(7);
+    expect(reviewData.at(16).props().children).toBe('Terrible');
+    expect(reviewData.at(19).props().children).toBe(1);
+  });
+});
+
+describe('QA Tool Tip', () => {
+  const messageContent = 'Problem with this answer?';
+  const wrapper = shallow(<QAToolTip message={messageContent} />);
+
+  it('should have a message passed to it', () => {
+    const message = wrapper.find('.message');
+    expect(message.props().children).toBe(messageContent);
+  });
+
+  it('should have three internal divs', () => {
+    expect(wrapper.find('div div').length).toBe(3);
+  });
+
+  it('should have an arrow left div', () => {
+    expect(wrapper.find('.arrow-left').length).toBe(1);
+  });
+
+  it('should have a dummy div', () => {
+    expect(wrapper.find('.dummy').length).toBe(1);
+  });
+});
+
+describe('Report Form Component', () => {
+  const initialState = {
+    reportContent: '',
+    isInvalidInput: false,
+  };
+  const wrapper = shallow(<ReportForm initialState={initialState} closeForm={() => {}} />);
+
+  it('should have a close window icon', () => {
+    const icon = wrapper.find('.fa-times');
+    expect(icon).toBeDefined();
+    expect(icon.length).toBe(1);
+  });
+
+  it('should have a description/warning to the user', () => {
+    const description = wrapper.find('h4');
+    expect(description).toBeDefined();
+    expect(description.length).toBe(1);
+    const descriptContent = description.props().children;
+    expect(`${descriptContent[0]} ${descriptContent[2]}`.trim()).toBe('Why are you reporting this? Add specific details about why you feel this question or answer is inappropriate.');
+  });
+
+  it('should contain a text area and a warning next to it', () => {
+    const textarea = wrapper.find('textarea');
+    const warning = wrapper.find('textarea + div');
+    expect(textarea).toBeDefined();
+    expect(textarea.length).toBe(1);
+    expect(warning).toBeDefined();
+    expect(warning.length).toBe(1);
+    expect(warning.props().children).toBe('50 characters minimum, 500 maximum');
+  });
+
+  it('should contain a submit button', () => {
+    const btn = wrapper.find('button');
+    expect(btn).toBeDefined();
+    expect(btn.length).toBe(1);
+    expect(btn.props().children).toBe('Submit');
+  });
+});
+
+describe('NavBar Component', () => {
+  const wrapper = shallow(<NavBar currentPage={0} numOfQuestions={10}
+    handlePageClick={() => {}} />);
+
+  it('should have a previous and next buttons', () => {
+    const prevBtn = wrapper.find('button').at(0);
+    const nextBtn = wrapper.find('button').at(1);
+    expect(prevBtn).toBeDefined();
+    expect(prevBtn.length).toBe(1);
+    expect(prevBtn.props().children).toBe('Previous');
+    expect(nextBtn).toBeDefined();
+    expect(nextBtn.length).toBe(1);
+    expect(nextBtn.props().children).toBe('Next');
+  });
+
+  it('should contain a pagination list', () => {
+    const paginationList = wrapper.find('.pagination-list');
+    expect(paginationList).toBeDefined();
+    expect(paginationList.length).toBe(1);
   });
 });

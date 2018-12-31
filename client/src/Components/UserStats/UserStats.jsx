@@ -31,9 +31,9 @@ const UserStats = (props) => {
         className={styles.level}>{user.Ranking}</span> Contributor</p>
         <button className={styles.msgBtn}><i className={`${styles.msgIconStyle} far fa-envelope`}></i> Send Message</button>
       </div>
-      <p className={styles.userHist}>Trip Advisor member since {user.SignUpDate.split('-')[0]}</p>
+      <p className={`${styles.userHist} userHist`}>Trip Advisor member since {user.SignUpDate.split('-')[0]}</p>
       <p>From {user.HomeCity}</p>
-      <div className={styles.summary}>
+      <div className={`${styles.summary} summary`}>
         <div className={styles.subSummary}>
           <p className={`${styles.firstSumStyle} ${genStyles['top-sum']}`}><i className={`${styles.iconStyle} far fa-edit`}></i> {user.Contributions} Contributions</p>
           <p className={styles.firstSumStyle}><i className={`${styles.iconStyle} fas fa-thumbs-up`}></i> {user.HelpfulVotes} Helpful Votes</p>
@@ -45,7 +45,7 @@ const UserStats = (props) => {
       </div>
       <div>
         <h4 className={styles.reviewStyle}>Review Distribution</h4>
-        <div>
+        <div className="review-distribution">
           <div className={styles.bar}><span className={styles.barTitle}>Excellent</span> <span className={styles.statsBar}><span className={styles.filledBar}>{'h'.repeat(excel)}</span>{'h'.repeat(50 - excel)}</span> <span className={styles.figure}>{excellent}</span></div>
           <div className={styles.bar}><span className={styles.barTitle}>Very good</span> <span className={styles.statsBar}><span className={styles.filledBar}>{'h'.repeat(vg)}</span>{'h'.repeat(50 - vg)}</span> <span className={styles.figure}>{veryGood}</span></div>
           <div className={styles.bar}><span className={styles.barTitle}>Average</span> <span className={styles.statsBar}><span className={styles.filledBar}>{'h'.repeat(avg)}</span>{'h'.repeat(50 - avg)}</span> <span className={styles.figure}>{average}</span></div>
