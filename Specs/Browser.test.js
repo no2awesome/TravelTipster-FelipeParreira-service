@@ -158,24 +158,43 @@ describe('Sending reports to answers', async () => {
 });
 
 describe('Using the nav bar to move to other pages', async () => {
+  let firstQuestion;
+  let secondQuestion;
+
   test('can move forward to another pages when clicking the next button', async () => {
+    firstQuestion = await page.$eval('.question-content', e => e.textContent);
     const nextBtn = '.next';
     await page.click(nextBtn);
+    secondQuestion = await page.$eval('.question-content', e => e.textContent);
+    const prevBtn = '.previous';
+    await page.click(prevBtn);
+    await page.click(nextBtn);
     const questionContent = await page.$eval('.question-content', e => e.textContent);
-    expect(questionContent).toBe('Non totam autem deleniti inventore necessitatibus sed qui velit debitis. Debitis qui quo perferendis cumque. Et suscipit perspiciatis.?');
+    expect(questionContent).toBe(secondQuestion);
   });
 
   test('can move backwards to another pages when clicking the previous button', async () => {
-    const nextBtn = '.previous';
-    await page.click(nextBtn);
+    const prevBtn = '.previous';
+    await page.click(prevBtn);
     const questionContent = await page.$eval('.question-content', e => e.textContent);
-    expect(questionContent).toBe('Sed voluptatem cumque labore sit sint rem ratione velit. Autem neque doloremque qui nostrum ut. Distinctio eum totam rerum magni et. Hic qui repellendus sint in sed. Dolores quia ad nemo sed officia sit quis consectetur. Delectus corporis ut consectetur et eos in.?');
+    expect(questionContent).toBe(firstQuestion);
   });
 
   test('can click in a displayed page number and move to that page', async () => {
+    const nextBtn = '.next';
+    await page.click(nextBtn);
+    await page.click(nextBtn);
+    await page.click(nextBtn);
+    await page.click(nextBtn);
+    const thirdQuestion = await page.$eval('.question-content', e => e.textContent);
+    const prevBtn = '.previous';
+    await page.click(prevBtn);
+    await page.click(prevBtn);
+    await page.click(prevBtn);
+    await page.click(prevBtn);
     const page5Btn = '.page-num:last-of-type';
     await page.click(page5Btn);
     const questionContent = await page.$eval('.question-content', e => e.textContent);
-    expect(questionContent).toBe('Recusandae maxime sapiente non voluptatibus est error dolorum. Animi iusto non inventore nam ut. Aut quisquam itaque temporibus ratione libero saepe nesciunt. Aliquid laborum libero et quis officiis eveniet et. Qui incidunt doloremque qui neque aut quam. Incidunt corrupti expedita numquam voluptatibus nulla unde suscipit.?');
+    expect(questionContent).toBe(thirdQuestion);
   });
 });
