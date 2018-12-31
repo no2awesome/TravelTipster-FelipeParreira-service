@@ -100,7 +100,7 @@ class Answer extends Component {
         onClick={() => this.toggleReportForm(this.state.reportState)}
         onMouseEnter={() => this.toggleReportToolTip(isTheSameUser)}
         onMouseLeave={() => this.toggleReportToolTip(isTheSameUser)}
-        className={`${reportIconStyle} fa fa-flag`}>
+        className={`fa fa-flag ${reportIconStyle}`}>
         <div className={styles.reportToolTipContainer}>
           {this.state.showReportToolTip
             ? <QAToolTip message={'Problem with this answer?'} />

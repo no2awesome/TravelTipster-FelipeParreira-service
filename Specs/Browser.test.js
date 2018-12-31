@@ -131,9 +131,7 @@ describe('Writing and deleting an answer', async () => {
   });
 });
 
-describe('Sending reports to a questions and answers', async () => {
-  jest.setTimeout(30000);
-
+describe('Sending reports to questions', async () => {
   test('can send report to questions', async () => {
     const flagIcon = '.fa-flag';
     const reportInput = '.report-input';
@@ -142,6 +140,19 @@ describe('Sending reports to a questions and answers', async () => {
     await page.type(reportInput, 'This is a test report This is a test report This is a test report');
     await page.click(submitBtn);
     const reportResponse = await page.$eval('.report-response', e => e.textContent);
+    expect(reportResponse).toBe('Thank you. We appreciate your input.');
+  });
+});
+
+describe('Sending reports to answers', async () => {
+  test('can send report to answers', async () => {
+    const flagIcon = '.fa-flag:last-of-type';
+    const reportInput = '.report-input';
+    const submitBtn = '.submit-report';
+    await page.click(flagIcon);
+    await page.type(reportInput, 'This is a test report This is a test report This is a test report');
+    await page.click(submitBtn);
+    const reportResponse = await page.$eval('.report-response:last-of-type', e => e.textContent);
     expect(reportResponse).toBe('Thank you. We appreciate your input.');
   });
 });
