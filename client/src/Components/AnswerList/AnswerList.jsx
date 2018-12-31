@@ -47,8 +47,8 @@ class AnswerList extends Component {
     return (
       <div className={styles.answerListContainer}>
         <div className={styles.buttonContainer}>
-          <button className={`${styles.answerButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.showAnswerForm}>Answer</button>
-          <button className={`${genStyles['btn-secondary']} ${genStyles.small}`} onClick={this.toggleShowAllAnswers}>
+          <button className={`answer-btn ${styles.answerButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.showAnswerForm}>Answer</button>
+          <button className={`showMoreAnswersBtn ${genStyles['btn-secondary']} ${genStyles.small}`} onClick={this.toggleShowAllAnswers}>
             {!this.state.showAllAnswers
               ? `Show all ${length} answers`
               : 'Hide all answers'

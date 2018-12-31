@@ -56,7 +56,7 @@ class Question extends Component {
   render() {
     const { question } = this.props;
     const isTheSameUser = question.UserID === this.props.currentUser.UserID;
-    let reportIconStyle = `${styles.flagStyle} fa fa-flag`;
+    let reportIconStyle = `fa fa-flag ${styles.flagStyle}`;
     if (isTheSameUser) {
       reportIconStyle += ` ${genStyles.disabled}`;
     }
@@ -82,7 +82,7 @@ class Question extends Component {
 
     if (this.state.reportWasSubmitted) {
       subHeaderContent = (
-        <div className={styles.dateStyle}>
+        <div className={`report-response ${styles.dateStyle}`}>
           Thank you. We appreciate your input.
         </div>
       );

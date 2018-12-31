@@ -127,9 +127,9 @@ class Answer extends Component {
         }
         <div className={styles.answerSum}>
           {reviewedHeader}
-          <p className={styles.answerStyle}>{answer.Content}</p>
+          <p className={`${styles.answerStyle} answer-content`}>{answer.Content}</p>
           {answer.UserID === this.props.currentUser.UserID
-            ? <button className={`${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteAnswer}>Delete</button>
+            ? <button className={`delete-answer ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteAnswer}>Delete</button>
             : null
           }
         </div>
