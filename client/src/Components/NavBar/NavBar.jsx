@@ -39,7 +39,7 @@ const NavBar = (props) => {
   return (
     <div className={styles.container}>
       <button onClick={() => handlePreviousClick(currentPage)}
-      className={previousBtnClasses}>Previous</button>
+      className={`previous ${previousBtnClasses}`}>Previous</button>
       <div className={`${styles.pagContainer} pagination-list`}>
         {pages.map((page, index) => {
           let style = page === currentPage + 1 ? styles.numMod : styles.num;
@@ -50,10 +50,10 @@ const NavBar = (props) => {
           }
 
           return (<div onClick={handleClick}
-          key={`${page}${index}`} className={style}>{page}</div>);
+          key={`${page}${index}`} className={`page-num ${style}`}>{page}</div>);
         })}
       </div>
-      <button onClick={() => handleNextClick(currentPage)} className={nextBtnClasses}>Next</button>
+      <button onClick={() => handleNextClick(currentPage)} className={`next ${nextBtnClasses}`}>Next</button>
     </div>
   );
 };
