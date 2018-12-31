@@ -68,7 +68,7 @@ class Question extends Component {
 
     const { reportState } = this.state;
     let subHeaderContent = (
-      <div className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
+      <div className={`${styles.dateStyle} date`}>{moment(question.PostedDate).format('LL')} |&nbsp;
         <i onClick={() => this.toggleReportForm(this.state.reportState)}
         onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
         onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>

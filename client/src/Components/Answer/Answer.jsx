@@ -87,7 +87,7 @@ class Answer extends Component {
       <div className={styles.reviewedStyle}>
         <div onMouseEnter={this.toggleShowUserStats}
         onMouseLeave={this.toggleShowUserStats}>
-          <div>Response from {user.Username} |</div>
+          <div className="title">Response from {user.Username} |</div>
           <div className={styles.UserStatsContainer}>
             {this.state.showUserStats
               ? <UserStats user={user} toggleShowUserStats={this.toggleShowUserStats}
@@ -137,7 +137,7 @@ class Answer extends Component {
           <div className={styles.btnContainer}
           onMouseEnter={() => this.toggleVoteToolTip(true, isTheSameUser)}
           onMouseLeave={() => this.toggleVoteToolTip(true, isTheSameUser)}>
-            <button className={arrowBtnStyles}
+            <button className={`${arrowBtnStyles} arrow-up`}
             onClick={() => this.props.voteAnswer(answer.UserID,
               answer.QuestionID,
               answer.id,
@@ -156,7 +156,7 @@ class Answer extends Component {
           <div className={styles.btnContainer}
           onMouseEnter={() => this.toggleVoteToolTip(false, isTheSameUser)}
           onMouseLeave={() => this.toggleVoteToolTip(false, isTheSameUser)}>
-            <button className={arrowBtnStyles}
+            <button className={`${arrowBtnStyles} arrow-down`}
             onClick={() => this.props.voteAnswer(answer.UserID,
               answer.QuestionID,
               answer.id,

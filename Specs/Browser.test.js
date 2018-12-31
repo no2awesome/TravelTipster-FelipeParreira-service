@@ -29,7 +29,7 @@ describe('Up/Down-voting an answer', async () => {
   });
 
   test('can upvote an answer', async () => {
-    const btn = 'button.arrow';
+    const btn = 'button.arrow-up';
     let previousVotes = await page.$eval('span', e => e.textContent);
     [previousVotes] = previousVotes.split('Votes');
     previousVotes = Number(previousVotes);
@@ -41,7 +41,7 @@ describe('Up/Down-voting an answer', async () => {
   });
 
   test('can downvote an answer', async () => {
-    const btn = 'button.arrow:nth-of-type(2)';
+    const btn = 'button.arrow-down';
     let previousVotes = await page.$eval('span', e => e.textContent);
     [previousVotes] = previousVotes.split('Votes');
     previousVotes = Number(previousVotes);
@@ -53,7 +53,7 @@ describe('Up/Down-voting an answer', async () => {
   });
 
   test('cannot upvote an answer twice (without page refresh)', async () => {
-    const btn = 'button.arrow';
+    const btn = 'button.arrow-up';
     let previousVotes = await page.$eval('span', e => e.textContent);
     [previousVotes] = previousVotes.split('Votes');
     previousVotes = Number(previousVotes);
@@ -66,7 +66,7 @@ describe('Up/Down-voting an answer', async () => {
   });
 
   test('cannot downvote an answer twice (without page refresh)', async () => {
-    const btn = 'button.arrow:nth-of-type(2)';
+    const btn = 'button.arrow-down';
     let previousVotes = await page.$eval('span', e => e.textContent);
     [previousVotes] = previousVotes.split('Votes');
     previousVotes = Number(previousVotes);

@@ -1,14 +1,14 @@
 /* eslint no-undef: 0 */ // --> OFF
 import { shallow, mount } from 'enzyme';
 import React from 'react'; // eslint-disable-line no-unused-vars
-import App from '../../client/src/Components/App.jsx'; // eslint-disable-line no-unused-vars
-import Header from '../../client/src/Components/Header.jsx'; // eslint-disable-line no-unused-vars
-import Question from '../../client/src/Components/Question.jsx'; // eslint-disable-line no-unused-vars
-import QuestionList from '../../client/src/Components/QuestionList.jsx'; // eslint-disable-line no-unused-vars
-import QuestionForm from '../../client/src/Components/QuestionForm.jsx'; // eslint-disable-line no-unused-vars
-import AnswerForm from '../../client/src/Components/AnswerForm.jsx'; // eslint-disable-line no-unused-vars
-import Answer from '../../client/src/Components/Answer.jsx'; // eslint-disable-line no-unused-vars
-import AnswerList from '../../client/src/Components/AnswerList.jsx'; // eslint-disable-line no-unused-vars
+import App from '../../client/src/Components/App/App.jsx'; // eslint-disable-line no-unused-vars
+import Header from '../../client/src/Components/Header/Header.jsx'; // eslint-disable-line no-unused-vars
+import Question from '../../client/src/Components/Question/Question.jsx'; // eslint-disable-line no-unused-vars
+import QuestionList from '../../client/src/Components/QuestionList/QuestionList.jsx'; // eslint-disable-line no-unused-vars
+import QuestionForm from '../../client/src/Components/QuestionForm/QuestionForm.jsx'; // eslint-disable-line no-unused-vars
+import AnswerForm from '../../client/src/Components/AnswerForm/AnswerForm.jsx'; // eslint-disable-line no-unused-vars
+import Answer from '../../client/src/Components/Answer/Answer.jsx'; // eslint-disable-line no-unused-vars
+import AnswerList from '../../client/src/Components/AnswerList/AnswerList.jsx'; // eslint-disable-line no-unused-vars
 
 const { toBeType } = require('jest-tobetype'); // eslint-disable-line no-unused-vars
 
@@ -100,7 +100,7 @@ describe('Header Component', () => {
 });
 
 describe('QuestionList Component', () => {
-  const wrapper = shallow(<QuestionList questions={questionData} />);
+  const wrapper = shallow(<QuestionList questions={questionData} currentPage={0} />);
   const list = wrapper.find('ul');
 
   it('should contain an unordered list', () => {
@@ -157,9 +157,9 @@ describe('Question Component', () => {
 
   it('should contain the question content and date', () => {
     const content = wrapper.find('p').get(1);
-    const date = wrapper.find('p').get(2);
+    const date = wrapper.find('.date');
     expect(content.props.children).toBe('Animi nemo rerum. Quia maiores ea saepe. Temporibus dicta dolor ipsa omnis.?');
-    expect(date.props.children[0]).toBe('July 1, 2018');
+    expect(date.props().children[0]).toBe('July 1, 2018');
   });
 
   it('should contain an answer list', () => {
@@ -248,18 +248,18 @@ describe('Answer Component', () => {
   const wrapper = shallow(<Answer answer={answer} user={user} currentUser={currentUser} />);
 
   it('should have a title', () => {
-    const title = wrapper.find('p').get(0);
+    const title = wrapper.find('.title').get(0);
     const titleContent = title.props.children.slice(0, 3).join('');
-    expect(titleContent).toBe('Response from Ruby.Buckridge | Reviewed this property | ');
+    expect(titleContent).toBe('Response from Ruby.Buckridge |');
   });
 
   it('should have buttons to up/down-vote an answer', () => {
     const upVoteButton = wrapper.find('button').get(0);
     const downVoteButton = wrapper.find('button').get(1);
-    expect(upVoteButton.props.className).toBe('arrow');
-    expect(downVoteButton.props.className).toBe('arrow');
-    expect(upVoteButton.props.children.props.className).toBe('fa fa-chevron-up');
-    expect(downVoteButton.props.children.props.className).toBe('fa fa-chevron-down');
+    expect(upVoteButton.props.className.split(' ').slice(-1)[0]).toBe('arrow-up');
+    expect(downVoteButton.props.className.split(' ').slice(-1)[0]).toBe('arrow-down');
+    expect(upVoteButton.props.children.props.className.split(' ').slice(-2).join(' ')).toBe('fa fa-chevron-up');
+    expect(downVoteButton.props.children.props.className.split(' ').slice(-2).join(' ')).toBe('fa fa-chevron-down');
   });
 
   it('should display the number of votes', () => {
