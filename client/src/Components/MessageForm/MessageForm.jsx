@@ -31,18 +31,18 @@ class MessageForm extends Component {
 
     return (
     <div>
-      <div onClick={() => this.props.closeForm(this.state)} className={styles.backGround}>
+      <div onClick={() => this.props.closeForm(this.state)} className={`background ${styles.backGround}`}>
       </div>
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.titleDiv}>Send message to {user.Username}</div>
-          <div onClick={() => this.props.closeForm(this.state)} className={styles.wdwIconDiv}><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
+          <div onClick={() => this.props.closeForm(this.state)} className={styles.wdwIconDiv}><i className={`fa fa-times ${styles.wdwIconStyle}`}></i></div>
         </div>
         <div className={styles.body}>
           <div>
             <div className={styles.fromTitleContainer}>From</div>
             <div className={styles.fromContainer}>
-              <div className={styles.miniProfileContainer}>
+              <div className={`mini-profile ${styles.miniProfileContainer}`}>
                 <img className={styles.image} src={this.props.currentUser.ThumbnailURL} />
                 <div className={styles.username}>{this.props.currentUser.Username}</div>
               </div>
@@ -61,7 +61,7 @@ class MessageForm extends Component {
         </div>
         <div className={styles.footer}>
           <button onClick={() => this.props.closeForm(this.state, true, userID)}
-          className={btnStyles}>Send Message</button>
+          className={`send-message ${btnStyles}`}>Send Message</button>
         </div>
       </div>
     </div>
