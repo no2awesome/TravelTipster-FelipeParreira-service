@@ -40,7 +40,8 @@ class UserStats extends Component {
     return (
     <div className={`${styles.containerStyle} ${this.props.styles}`}>
       {this.state.showMessageForm
-        ? <MessageForm closeForm={this.toggleMessageForm} />
+        ? <MessageForm currentUser={this.props.currentUser}
+        user={user} closeForm={this.toggleMessageForm} />
         : null
       }
       <div className={styles.dummy}></div>

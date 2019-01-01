@@ -102,7 +102,8 @@ class Question extends Component {
         src={question.User ? question.User.ThumbnailURL : null} />
         <p className={styles.usernameStyle}>{question.User ? question.User.Username : null}</p>
         {this.state.showUserStats
-          ? <UserStats toggleShowUserStats={this.toggleShowUserStats} user={question.User}
+          ? <UserStats currentUser={this.props.currentUser}
+          toggleShowUserStats={this.toggleShowUserStats} user={question.User}
           styles={styles.userStatsStyle} />
           : null
         }

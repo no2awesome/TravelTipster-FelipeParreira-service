@@ -90,7 +90,8 @@ class Answer extends Component {
           <div className="title">Response from {user.Username} |</div>
           <div className={styles.UserStatsContainer}>
             {this.state.showUserStats
-              ? <UserStats user={user} toggleShowUserStats={this.toggleShowUserStats}
+              ? <UserStats currentUser={this.props.currentUser}
+              user={user} toggleShowUserStats={this.toggleShowUserStats}
               styles={styles.userStatsStyle}/>
               : null
             }
