@@ -1,35 +1,56 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import MessageForm from '../MessageForm/MessageForm.jsx'; // eslint-disable-line no-unused-vars
 import styles from './UserStats.css';
 import genStyles from '../App/App.css';
 
-const UserStats = (props) => {
-  const { user } = props;
+class UserStats extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMessageForm: false,
+    };
 
-  const excellent = user['ReviewDistribution.Excellent'];
-  const veryGood = user['ReviewDistribution.VeryGood'];
-  const average = user['ReviewDistribution.Average'];
-  const poor = user['ReviewDistribution.Poor'];
-  const terrible = user['ReviewDistribution.Terrible'];
+    this.toggleMessageForm = this.toggleMessageForm.bind(this);
+  }
 
-  const total = excellent + veryGood + average + poor + terrible;
+  toggleMessageForm() {
+    this.setState({
+      showMessageForm: !this.state.showMessageForm,
+    });
+  }
 
-  // those are the equivalent values in terms of 50 units (eq. 100%)
-  const excel = Math.round(50 * excellent / total);
-  const vg = Math.round(50 * veryGood / total);
-  const avg = Math.round(50 * average / total);
-  const pr = Math.round(50 * poor / total);
-  const tb = Math.round(50 * terrible / total);
+  render() {
+    const { user } = this.props;
 
-  return (
-    <div className={`${styles.containerStyle} ${props.styles}`}>
+    const excellent = user['ReviewDistribution.Excellent'];
+    const veryGood = user['ReviewDistribution.VeryGood'];
+    const average = user['ReviewDistribution.Average'];
+    const poor = user['ReviewDistribution.Poor'];
+    const terrible = user['ReviewDistribution.Terrible'];
+
+    const total = excellent + veryGood + average + poor + terrible;
+
+    // those are the equivalent values in terms of 50 units (eq. 100%)
+    const excel = Math.round(50 * excellent / total);
+    const vg = Math.round(50 * veryGood / total);
+    const avg = Math.round(50 * average / total);
+    const pr = Math.round(50 * poor / total);
+    const tb = Math.round(50 * terrible / total);
+
+    return (
+    <div className={`${styles.containerStyle} ${this.props.styles}`}>
+      {this.state.showMessageForm
+        ? <MessageForm closeForm={this.toggleMessageForm} />
+        : null
+      }
       <div className={styles.dummy}></div>
       <div className={styles['arrow-left']}></div>
       <a className={styles.userName}>{user.Username}</a>
-      <i onClick={props.toggleShowUserStats} className={`${styles.wdwIconStyle} fa fa-times`}></i>
+      <i onClick={this.props.toggleShowUserStats} className={`${styles.wdwIconStyle} fa fa-times`}></i>
       <div className={styles.heading}>
         <p className={styles.userRankStyle}>Level <span
         className={styles.level}>{user.Ranking}</span> Contributor</p>
-        <button className={styles.msgBtn}><i className={`${styles.msgIconStyle} far fa-envelope`}></i> Send Message</button>
+        <button onClick={this.toggleMessageForm} className={styles.msgBtn}><i className={`${styles.msgIconStyle} far fa-envelope`}></i> Send Message</button>
       </div>
       <p className={`${styles.userHist} userHist`}>Trip Advisor member since {user.SignUpDate.split('-')[0]}</p>
       <p>From {user.HomeCity}</p>
@@ -54,7 +75,8 @@ const UserStats = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+    );
+  }
+}
 
 export default UserStats;
