@@ -2,7 +2,7 @@
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 12px rgba(0,0,0,0.35);
   width: 650px;
-  max-height: 500px;
+  max-height: 480px;
   position: fixed;
   top: 10vh;
   left: 30vw;
@@ -15,17 +15,18 @@
   text-align: left;
   font-size: 16px;
   line-height: 18px;
+  height: 600px;
 }
 
 .header {
   background: #fff;
   border-bottom: 1px solid #e5e5e5;
-  padding: 16px;
+  padding: 15px;
   color: #4a4a4a;
   text-align: center;
   display: flex;
-  height: 20%;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .wdwIconStyle, .arrowIconStyle {
@@ -43,6 +44,18 @@
 
 .wdwIconStyle:hover {
   color: #00c094;
+}
+
+.fromTitleContainer {
+  margin-bottom: -40px;
+}
+
+.wdwIconDiv {
+  margin-right: 30px;
+}
+
+.titleDiv {
+  margin-right: -30px;
 }
 
 .image {
@@ -72,6 +85,7 @@
   border: 1px solid;
   border-color: #e6e6e6 #ccc #ccc #e6e6e6;
   border-radius: 3px;
+  margin-top: -10px;
 }
 
 .fromContainer:hover {
@@ -128,5 +142,6 @@ button.large {
 }
 
 .footer {
-  margin-top: 22%;
+  margin-top: 20px;
+  margin-bottom: -80px;
 }

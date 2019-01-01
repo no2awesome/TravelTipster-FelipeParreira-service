@@ -8,12 +8,12 @@ const MessageForm = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div>Send message to [USER]</div>
-        <div><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
+        <div className={styles.titleDiv}>Send message to [USER]</div>
+        <div className={styles.wdwIconDiv}><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
       </div>
       <div className={styles.body}>
         <div>
-          <div>From</div>
+          <div className={styles.fromTitleContainer}>From</div>
           <div className={styles.fromContainer}>
             <div className={styles.miniProfileContainer}>
               <div className={styles.image}></div>

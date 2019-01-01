@@ -196,11 +196,11 @@ class App extends Component {
     });
   }
 
-  // <MessageForm />
 
   render() {
     return (
       <div className={styles.containerStyle}>
+        <MessageForm />
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
         <QuestionList postReport={this.postReport}
