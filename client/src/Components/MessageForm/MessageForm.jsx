@@ -6,7 +6,6 @@ class MessageForm extends Component {
   constructor(props) {
     super(props);
     this.state = props.initialState;
-    console.log('message form state', props.initialState);
 
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.handleSubjectChange = this.handleSubjectChange.bind(this);
@@ -28,7 +27,7 @@ class MessageForm extends Component {
   render() {
     const btnStyles = `${genStyles['btn-primary']} ${genStyles.big} ${styles.submit} ${styles.large}`;
     const { user } = this.props;
-    console.log('state', this.state);
+    const userID = user.ProfileURL.split('/')[4];
 
     return (
     <div>
@@ -61,7 +60,8 @@ class MessageForm extends Component {
           </div>
         </div>
         <div className={styles.footer}>
-          <button onClick={this.props.closeForm} className={btnStyles}>Send Message</button>
+          <button onClick={() => this.props.closeForm(this.state, true, userID)}
+          className={btnStyles}>Send Message</button>
         </div>
       </div>
     </div>

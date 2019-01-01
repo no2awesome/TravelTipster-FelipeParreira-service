@@ -4,7 +4,6 @@ import QuestionList from '../QuestionList/QuestionList.jsx'; // eslint-disable-l
 import Header from '../Header/Header.jsx'; // eslint-disable-line no-unused-vars
 import styles from './App.css';
 import NavBar from '../NavBar/NavBar.jsx'; // eslint-disable-line no-unused-vars
-import MessageForm from '../MessageForm/MessageForm.jsx'; // eslint-disable-line no-unused-vars
 
 class App extends Component {
   constructor(props) {
@@ -196,14 +195,23 @@ class App extends Component {
     });
   }
 
-  // <MessageForm />
-
   render() {
+    const sendMessage = (userId) => {
+      const url = `http://localhost:3000/users/${userId}/messages`;
+      $.ajax({
+        type: 'POST',
+        url,
+        success: () => window.alert('Your message was sent!'),
+        error: err => console.log('Error', err),
+      });
+    };
+
     return (
       <div className={styles.containerStyle}>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
-        <QuestionList postReport={this.postReport}
+        <QuestionList sendMessage={sendMessage}
+        postReport={this.postReport}
         currentPage={this.state.currentPage}
         questions={this.state.questions} submitAnswer={this.submitAnswer}
         voteAnswer={this.voteAnswer} currentUser={this.props.currentUser}

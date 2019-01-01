@@ -102,7 +102,7 @@ class Question extends Component {
         src={question.User ? question.User.ThumbnailURL : null} />
         <p className={styles.usernameStyle}>{question.User ? question.User.Username : null}</p>
         {this.state.showUserStats
-          ? <UserStats currentUser={this.props.currentUser}
+          ? <UserStats sendMessage={this.props.sendMessage} currentUser={this.props.currentUser}
           toggleShowUserStats={this.toggleShowUserStats} user={question.User}
           styles={styles.userStatsStyle} />
           : null
@@ -118,7 +118,8 @@ class Question extends Component {
           ? <button className={`${styles.deleteButton} ${genStyles['btn-primary']} ${genStyles.small} delete-question`} onClick={this.props.deleteQuestion}>Delete</button>
           : null
         }
-        <AnswerList postReport={this.props.postReport}
+        <AnswerList sendMessage={this.props.sendMessage}
+        postReport={this.props.postReport}
         answers={this.props.question.Answers} users={this.props.question.AnswersUsers}
         submitAnswer={this.props.submitAnswer} questionID={question.QuestionID}
         voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser}

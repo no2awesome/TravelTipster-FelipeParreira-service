@@ -17,23 +17,17 @@ class UserStats extends Component {
     this.toggleMessageForm = this.toggleMessageForm.bind(this);
   }
 
-  toggleMessageForm(messageState, isSubmission) {
-    // if (isSubmission) {
-    //   // this.sendMessage(messageState);
-    //   this.setState({
-    //     showMessageForm: !this.state.showMessageForm,
-    //     messageState: {
-    //       messageContent: '',
-    //       subjectContent: '',
-    //     },
-    //   });
-    // } else {
-    //   this.setState({
-    //     showMessageForm: !this.state.showMessageForm,
-    //     messageState,
-    //   });
-    // }
-    if (messageState) {
+  toggleMessageForm(messageState, isSubmission, userID) {
+    if (isSubmission) {
+      this.props.sendMessage(userID);
+      this.setState({
+        showMessageForm: !this.state.showMessageForm,
+        messageState: {
+          messageContent: '',
+          subjectContent: '',
+        },
+      });
+    } else if (messageState) {
       this.setState({
         showMessageForm: !this.state.showMessageForm,
         messageState,
@@ -65,7 +59,6 @@ class UserStats extends Component {
 
     const { messageState } = this.state;
 
-    console.log('message state', this.state.messageState);
     return (
     <div className={`${styles.containerStyle} ${this.props.styles}`}>
       {this.state.showMessageForm
