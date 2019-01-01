@@ -1,46 +1,72 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import styles from './MessageForm.css';
 import genStyles from '../App/App.css';
 
-const MessageForm = (props) => {
-  const btnStyles = `${genStyles['btn-primary']} ${genStyles.big} ${styles.submit} ${styles.large}`;
-  const { user } = props;
+class MessageForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = props.initialState;
+    console.log('message form state', props.initialState);
 
-  return (
+    this.handleMessageChange = this.handleMessageChange.bind(this);
+    this.handleSubjectChange = this.handleSubjectChange.bind(this);
+  }
+
+  handleMessageChange(e) {
+    this.setState({
+      messageContent: e.target.value,
+    });
+  }
+
+  handleSubjectChange(e) {
+    this.setState({
+      subjectContent: e.target.value,
+    });
+  }
+
+
+  render() {
+    const btnStyles = `${genStyles['btn-primary']} ${genStyles.big} ${styles.submit} ${styles.large}`;
+    const { user } = this.props;
+    console.log('state', this.state);
+
+    return (
     <div>
-      <div onClick={props.closeForm} className={styles.backGround}>
+      <div onClick={() => this.props.closeForm(this.state)} className={styles.backGround}>
       </div>
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.titleDiv}>Send message to {user.Username}</div>
-          <div onClick={props.closeForm} className={styles.wdwIconDiv}><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
+          <div onClick={() => this.props.closeForm(this.state)} className={styles.wdwIconDiv}><i className={`${styles.wdwIconStyle} fa fa-times`}></i></div>
         </div>
         <div className={styles.body}>
           <div>
             <div className={styles.fromTitleContainer}>From</div>
             <div className={styles.fromContainer}>
               <div className={styles.miniProfileContainer}>
-                <img className={styles.image} src={props.currentUser.ThumbnailURL} />
-                <div className={styles.username}>{props.currentUser.Username}</div>
+                <img className={styles.image} src={this.props.currentUser.ThumbnailURL} />
+                <div className={styles.username}>{this.props.currentUser.Username}</div>
               </div>
               <div><i className={`${styles.arrowIconStyle} fa fa-angle-down`}></i></div>
             </div>
           </div>
           <div>
             <h4>Subject</h4>
-            <textarea className={styles.subjectInput} placeholder="Enter Subject"></textarea>
+            <textarea value={this.state.subjectContent}
+            onChange={this.handleSubjectChange} className={styles.subjectInput} placeholder="Enter Subject"></textarea>
           </div>
           <div>
             <h4>Message</h4>
-            <textarea className={styles.messageInput} placeholder="Enter Message"></textarea>
+            <textarea value={this.state.messageContent} onChange={this.handleMessageChange} className={styles.messageInput} placeholder="Enter Message"></textarea>
           </div>
         </div>
         <div className={styles.footer}>
-          <button onClick={props.closeForm} className={btnStyles}>Send Message</button>
+          <button onClick={this.props.closeForm} className={btnStyles}>Send Message</button>
         </div>
       </div>
     </div>
-  );
-};
+    );
+  }
+}
 
 export default MessageForm;

@@ -8,15 +8,41 @@ class UserStats extends Component {
     super(props);
     this.state = {
       showMessageForm: false,
+      messageState: {
+        messageContent: '',
+        subjectContent: '',
+      },
     };
 
     this.toggleMessageForm = this.toggleMessageForm.bind(this);
   }
 
-  toggleMessageForm() {
-    this.setState({
-      showMessageForm: !this.state.showMessageForm,
-    });
+  toggleMessageForm(messageState, isSubmission) {
+    // if (isSubmission) {
+    //   // this.sendMessage(messageState);
+    //   this.setState({
+    //     showMessageForm: !this.state.showMessageForm,
+    //     messageState: {
+    //       messageContent: '',
+    //       subjectContent: '',
+    //     },
+    //   });
+    // } else {
+    //   this.setState({
+    //     showMessageForm: !this.state.showMessageForm,
+    //     messageState,
+    //   });
+    // }
+    if (messageState) {
+      this.setState({
+        showMessageForm: !this.state.showMessageForm,
+        messageState,
+      });
+    } else {
+      this.setState({
+        showMessageForm: !this.state.showMessageForm,
+      });
+    }
   }
 
   render() {
@@ -37,10 +63,13 @@ class UserStats extends Component {
     const pr = Math.round(50 * poor / total);
     const tb = Math.round(50 * terrible / total);
 
+    const { messageState } = this.state;
+
+    console.log('message state', this.state.messageState);
     return (
     <div className={`${styles.containerStyle} ${this.props.styles}`}>
       {this.state.showMessageForm
-        ? <MessageForm currentUser={this.props.currentUser}
+        ? <MessageForm initialState={messageState} currentUser={this.props.currentUser}
         user={user} closeForm={this.toggleMessageForm} />
         : null
       }
@@ -51,7 +80,7 @@ class UserStats extends Component {
       <div className={styles.heading}>
         <p className={styles.userRankStyle}>Level <span
         className={styles.level}>{user.Ranking}</span> Contributor</p>
-        <button onClick={this.toggleMessageForm} className={styles.msgBtn}><i className={`${styles.msgIconStyle} far fa-envelope`}></i> Send Message</button>
+        <button onClick={() => this.toggleMessageForm()} className={styles.msgBtn}><i className={`${styles.msgIconStyle} far fa-envelope`}></i> Send Message</button>
       </div>
       <p className={`${styles.userHist} userHist`}>Trip Advisor member since {user.SignUpDate.split('-')[0]}</p>
       <p>From {user.HomeCity}</p>
