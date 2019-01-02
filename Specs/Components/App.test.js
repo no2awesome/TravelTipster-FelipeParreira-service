@@ -477,10 +477,10 @@ describe('Message Form Component', () => {
     expect(icon.length).toBe(1);
   });
 
-  it('should contain a button to send messages', () => {
-    const sendBtn = wrapper.find('.send-message');
-    expect(sendBtn).toBeDefined();
-    expect(sendBtn.length).toBe(1);
+  it('should contain a button to submit messages', () => {
+    const submitBtn = wrapper.find('.submit-message');
+    expect(submitBtn).toBeDefined();
+    expect(submitBtn.length).toBe(1);
   });
 
   it('should contain two textareas (one for the subject and one for the message itself)', () => {

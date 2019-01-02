@@ -16,6 +16,10 @@ beforeAll(async () => {
     args: [`--window-size=${width},${height}`],
   });
   page = await browser.newPage();
+  page.on('dialog', async (dialog) => {
+    await dialog.dismiss();
+    await browser.close();
+  });
   await page.setViewport({ width, height });
 });
 
@@ -23,86 +27,86 @@ afterAll(() => {
   browser.close();
 });
 
-describe('Up/Down-voting an answer', async () => {
-  beforeEach(async () => {
-    await page.goto(pageURL, { waitUntil: 'networkidle2' });
-  });
+// describe('Up/Down-voting an answer', async () => {
+//   beforeEach(async () => {
+//     await page.goto(pageURL, { waitUntil: 'networkidle2' });
+//   });
 
-  test('can upvote an answer', async () => {
-    const btn = 'button.arrow-up';
-    let previousVotes = await page.$eval('span', e => e.textContent);
-    [previousVotes] = previousVotes.split('Votes');
-    previousVotes = Number(previousVotes);
-    await page.click(btn);
-    let currentVotes = await page.$eval('span', e => e.textContent);
-    [currentVotes] = currentVotes.split('Votes');
-    currentVotes = Number(currentVotes);
-    expect(currentVotes).toBe(previousVotes + 1);
-  });
+//   test('can upvote an answer', async () => {
+//     const btn = 'button.arrow-up';
+//     let previousVotes = await page.$eval('span', e => e.textContent);
+//     [previousVotes] = previousVotes.split('Votes');
+//     previousVotes = Number(previousVotes);
+//     await page.click(btn);
+//     let currentVotes = await page.$eval('span', e => e.textContent);
+//     [currentVotes] = currentVotes.split('Votes');
+//     currentVotes = Number(currentVotes);
+//     expect(currentVotes).toBe(previousVotes + 1);
+//   });
 
-  test('can downvote an answer', async () => {
-    const btn = 'button.arrow-down';
-    let previousVotes = await page.$eval('span', e => e.textContent);
-    [previousVotes] = previousVotes.split('Votes');
-    previousVotes = Number(previousVotes);
-    await page.click(btn);
-    let currentVotes = await page.$eval('span', e => e.textContent);
-    [currentVotes] = currentVotes.split('Votes');
-    currentVotes = Number(currentVotes);
-    expect(currentVotes).toBe(previousVotes - 1);
-  });
+//   test('can downvote an answer', async () => {
+//     const btn = 'button.arrow-down';
+//     let previousVotes = await page.$eval('span', e => e.textContent);
+//     [previousVotes] = previousVotes.split('Votes');
+//     previousVotes = Number(previousVotes);
+//     await page.click(btn);
+//     let currentVotes = await page.$eval('span', e => e.textContent);
+//     [currentVotes] = currentVotes.split('Votes');
+//     currentVotes = Number(currentVotes);
+//     expect(currentVotes).toBe(previousVotes - 1);
+//   });
 
-  test('cannot upvote an answer twice (without page refresh)', async () => {
-    const btn = 'button.arrow-up';
-    let previousVotes = await page.$eval('span', e => e.textContent);
-    [previousVotes] = previousVotes.split('Votes');
-    previousVotes = Number(previousVotes);
-    await page.click(btn);
-    await page.click(btn);
-    let currentVotes = await page.$eval('span', e => e.textContent);
-    [currentVotes] = currentVotes.split('Votes');
-    currentVotes = Number(currentVotes);
-    expect(currentVotes).toBe(previousVotes + 1);
-  });
+//   test('cannot upvote an answer twice (without page refresh)', async () => {
+//     const btn = 'button.arrow-up';
+//     let previousVotes = await page.$eval('span', e => e.textContent);
+//     [previousVotes] = previousVotes.split('Votes');
+//     previousVotes = Number(previousVotes);
+//     await page.click(btn);
+//     await page.click(btn);
+//     let currentVotes = await page.$eval('span', e => e.textContent);
+//     [currentVotes] = currentVotes.split('Votes');
+//     currentVotes = Number(currentVotes);
+//     expect(currentVotes).toBe(previousVotes + 1);
+//   });
 
-  test('cannot downvote an answer twice (without page refresh)', async () => {
-    const btn = 'button.arrow-down';
-    let previousVotes = await page.$eval('span', e => e.textContent);
-    [previousVotes] = previousVotes.split('Votes');
-    previousVotes = Number(previousVotes);
-    await page.click(btn);
-    await page.click(btn);
-    let currentVotes = await page.$eval('span', e => e.textContent);
-    [currentVotes] = currentVotes.split('Votes');
-    currentVotes = Number(currentVotes);
-    expect(currentVotes).toBe(previousVotes - 1);
-  });
-});
+//   test('cannot downvote an answer twice (without page refresh)', async () => {
+//     const btn = 'button.arrow-down';
+//     let previousVotes = await page.$eval('span', e => e.textContent);
+//     [previousVotes] = previousVotes.split('Votes');
+//     previousVotes = Number(previousVotes);
+//     await page.click(btn);
+//     await page.click(btn);
+//     let currentVotes = await page.$eval('span', e => e.textContent);
+//     [currentVotes] = currentVotes.split('Votes');
+//     currentVotes = Number(currentVotes);
+//     expect(currentVotes).toBe(previousVotes - 1);
+//   });
+// });
 
-describe('Asking and deleting a question', async () => {
-  jest.setTimeout(30000);
-  beforeEach(async () => {
-    await page.goto(pageURL, { waitUntil: 'networkidle2' });
-  });
+// describe('Asking and deleting a question', async () => {
+//   jest.setTimeout(30000);
+//   beforeEach(async () => {
+//     await page.goto(pageURL, { waitUntil: 'networkidle2' });
+//   });
 
-  test('can ask a question', async () => {
-    const askBtn = '.ask';
-    await page.click(askBtn);
-    const textarea = '.ask-input';
-    const submitBtn = '.submit-question';
-    await page.type(textarea, 'Is this a test question?');
-    await page.click(submitBtn);
-    const questionContent = await page.$eval('.question-content', e => e.textContent);
-    expect(questionContent).toBe('Is this a test question?');
-  });
+//   test('can ask a question', async () => {
+//     const askBtn = '.ask';
+//     await page.click(askBtn);
+//     const textarea = '.ask-input';
+//     const submitBtn = '.submit-question';
+//     await page.type(textarea, 'Is this a test question?');
+//     await page.click(submitBtn);
+//     const questionContent = await page.$eval('.question-content', e => e.textContent);
+//     expect(questionContent).toBe('Is this a test question?');
+//   });
 
-  test('can delete a question', async () => {
-    const deleteBtn = '.delete-question';
-    await page.click(deleteBtn);
-    const questionContent = await page.$eval('.question-content', e => e.textContent);
-    expect(questionContent).not.toBe('Is this a test question?');
-  });
-});
+//   test('can delete a question', async () => {
+//     const deleteBtn = '.delete-question';
+//     await page.click(deleteBtn);
+//     const questionContent = await page.$eval('.question-content', e => e.textContent);
+//     expect(questionContent).not.toBe('Is this a test question?');
+//   });
+// });
 
 describe('Writing and deleting an answer', async () => {
   jest.setTimeout(30000);
@@ -150,7 +154,7 @@ describe('Sending reports to answers', async () => {
     const reportInput = '.report-input';
     const submitBtn = '.submit-report';
     await page.click(flagIcon);
-    await page.type(reportInput, 'This is a test report This is a test report This is a test report');
+    await page.type(reportInput, 'This is a report test This is a report test This is a report test');
     await page.click(submitBtn);
     const reportResponse = await page.$eval('.report-response:last-of-type', e => e.textContent);
     expect(reportResponse).toBe('Thank you. We appreciate your input.');
@@ -196,5 +200,25 @@ describe('Using the nav bar to move to other pages', async () => {
     await page.click(page5Btn);
     const questionContent = await page.$eval('.question-content', e => e.textContent);
     expect(questionContent).toBe(thirdQuestion);
+  });
+});
+
+describe('Sending a message to another user', () => {
+  jest.setTimeout(30000);
+
+  it('can hover over the user picture and see the stats', async () => {
+    const userProfilePic = '.userMiniProfile';
+    await page.click(userProfilePic);
+    const sendMessageBtn = '.send-message';
+    await page.click(sendMessageBtn);
+  });
+
+  it('can type a message and subject and send them', async () => {
+    const messageInput = '.message-input';
+    const subjectInput = '.subject-input';
+    const submitBtn = '.submit-message';
+    await page.type(subjectInput, 'This is a subject test');
+    await page.type(messageInput, 'This is a message test');
+    await page.click(submitBtn);
   });
 });

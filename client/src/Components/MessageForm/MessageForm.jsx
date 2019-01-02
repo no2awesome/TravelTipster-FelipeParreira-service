@@ -52,16 +52,16 @@ class MessageForm extends Component {
           <div>
             <h4>Subject</h4>
             <textarea value={this.state.subjectContent}
-            onChange={this.handleSubjectChange} className={styles.subjectInput} placeholder="Enter Subject"></textarea>
+            onChange={this.handleSubjectChange} className={`subject-input ${styles.subjectInput}`} placeholder="Enter Subject"></textarea>
           </div>
           <div>
             <h4>Message</h4>
-            <textarea value={this.state.messageContent} onChange={this.handleMessageChange} className={styles.messageInput} placeholder="Enter Message"></textarea>
+            <textarea value={this.state.messageContent} onChange={this.handleMessageChange} className={`message-input ${styles.messageInput}`} placeholder="Enter Message"></textarea>
           </div>
         </div>
         <div className={styles.footer}>
           <button onClick={() => this.props.closeForm(this.state, true, userID)}
-          className={`send-message ${btnStyles}`}>Send Message</button>
+          className={`submit-message ${btnStyles}`}>Send Message</button>
         </div>
       </div>
     </div>

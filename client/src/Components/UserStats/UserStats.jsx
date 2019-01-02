@@ -73,7 +73,7 @@ class UserStats extends Component {
       <div className={styles.heading}>
         <p className={styles.userRankStyle}>Level <span
         className={styles.level}>{user.Ranking}</span> Contributor</p>
-        <button onClick={() => this.toggleMessageForm()} className={styles.msgBtn}><i className={`${styles.msgIconStyle} far fa-envelope`}></i> Send Message</button>
+        <button onClick={() => this.toggleMessageForm()} className={`send-message ${styles.msgBtn}`}><i className={`${styles.msgIconStyle} far fa-envelope`}></i> Send Message</button>
       </div>
       <p className={`${styles.userHist} userHist`}>Trip Advisor member since {user.SignUpDate.split('-')[0]}</p>
       <p>From {user.HomeCity}</p>

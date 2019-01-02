@@ -97,7 +97,7 @@ class Question extends Component {
         }
       </div>
       <div onMouseEnter={this.toggleShowUserStats} onMouseLeave={this.toggleShowUserStats}
-      className={styles.userMiniProfile}>
+      className={`userMiniProfile ${styles.userMiniProfile}`}>
         <img className={styles.userPicStyle}
         src={question.User ? question.User.ThumbnailURL : null} />
         <p className={styles.usernameStyle}>{question.User ? question.User.Username : null}</p>
