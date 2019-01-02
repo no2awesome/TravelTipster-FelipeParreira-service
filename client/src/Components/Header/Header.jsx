@@ -32,7 +32,7 @@ class Header extends Component {
       <div className={styles.blockStyle}>
         <div className={styles.containerStyle}>
           <div className={styles.titleStyle}>Questions & Answers</div>
-          <button className={`${genStyles['btn-primary']} ${genStyles.big}`} onClick={this.showQuestionForm}>Ask a question</button>
+          <button className={`${genStyles['btn-primary']} ${genStyles.big} ask`} onClick={this.showQuestionForm}>Ask a question</button>
         </div>
         <a href="#">See all {this.props.questions.length} questions</a>
         {this.state.showQuestionForm

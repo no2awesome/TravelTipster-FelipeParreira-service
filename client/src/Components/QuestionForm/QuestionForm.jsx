@@ -36,10 +36,10 @@ class QuestionForm extends Component {
         <p className={styles.warningStyle}>
         Note: your question will be posted publicly on the Questions & Answers page.
         </p>
-        <textarea placeholder={`Hi, ${this.props.currentUser.Username}. What would you like to know about this accomodation?`} value={this.state.questionContent} onChange={this.handleTextAreaChange} className={styles.formTextInput}>
+        <textarea placeholder={`Hi, ${this.props.currentUser.Username}. What would you like to know about this accomodation?`} value={this.state.questionContent} onChange={this.handleTextAreaChange} className={`${styles.formTextInput} ask-input`}>
         </textarea>
         <div className={styles.buttonContainer}>
-          <button className={`${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.handleSubmitClick}>Submit</button>
+          <button className={`${genStyles['btn-primary']} ${genStyles.small} submit-question`} onClick={this.handleSubmitClick}>Submit</button>
           <button className={`${genStyles['btn-secondary']} ${genStyles.small}`}
           onClick={this.props.hideQuestionForm}>Cancel</button>
         </div>

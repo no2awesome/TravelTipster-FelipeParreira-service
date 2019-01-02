@@ -12,7 +12,8 @@ const QuestionList = (props) => {
       {questions.map((question) => {
         const key = question.QuestionID || question.Content.substring(1, 4);
         return (
-          <Question postReport={props.postReport}
+          <Question sendMessage={props.sendMessage}
+          postReport={props.postReport}
           key={key} question={question}
           submitAnswer={props.submitAnswer} voteAnswer={props.voteAnswer}
           currentUser={props.currentUser}

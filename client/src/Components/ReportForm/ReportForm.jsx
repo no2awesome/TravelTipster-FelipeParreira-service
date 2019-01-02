@@ -53,13 +53,13 @@ class ReportForm extends Component {
               <span className={styles.italic}>(optional)</span></h4>
             </div>
             <textarea value={this.state.reportContent}
-            onChange={this.handleTextAreaChange} className={textareaStyles}></textarea>
+            onChange={this.handleTextAreaChange} className={`report-input ${textareaStyles}`}></textarea>
             <div className={footNoteStyles}>50 characters minimum, 500 maximum</div>
           </div>
           <div className={styles.footer}>
             <button
             onClick={() => closeForm({ reportContent: '', isInvalidInput: false }, true)}
-            className={btnStyles}>Submit</button>
+            className={`submit-report ${btnStyles}`}>Submit</button>
           </div>
         </div>
       </div>

@@ -47,8 +47,8 @@ class AnswerList extends Component {
     return (
       <div className={styles.answerListContainer}>
         <div className={styles.buttonContainer}>
-          <button className={`${styles.answerButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.showAnswerForm}>Answer</button>
-          <button className={`${genStyles['btn-secondary']} ${genStyles.small}`} onClick={this.toggleShowAllAnswers}>
+          <button className={`answer-btn ${styles.answerButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.showAnswerForm}>Answer</button>
+          <button className={`showMoreAnswersBtn ${genStyles['btn-secondary']} ${genStyles.small}`} onClick={this.toggleShowAllAnswers}>
             {!this.state.showAllAnswers
               ? `Show all ${length} answers`
               : 'Hide all answers'
@@ -64,7 +64,8 @@ class AnswerList extends Component {
         <ul className={styles.listStyle}>
           {answers.map((answer, index) => {
             const key = answer.id || answer.Content.substring(1, 4);
-            return (<Answer postReport={this.props.postReport}
+            return (<Answer sendMessage={this.props.sendMessage}
+              postReport={this.props.postReport}
               key={key} answer={answer} user={users[index]}
               voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser}
               deleteAnswer={() => this.props.deleteAnswer(this.props.questionID, answer.id)} />

@@ -225,7 +225,7 @@ describe('UPDATE number of votes for an answer', () => {
   });
 
   test('it should upvote an answer', async () => {
-    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/154/votes' }).form({ vote: '1' })
+    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/155/votes' }).form({ vote: '1' })
       .then(async () => {
         const response = await fetch('http://localhost:3000/hotels/4/questions');
         questions = await response.json();
@@ -236,7 +236,7 @@ describe('UPDATE number of votes for an answer', () => {
   });
 
   test('it should downvote an answer', async () => {
-    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/154/votes' }).form({ vote: '-1' })
+    await request.patch({ url: 'http://localhost:3000/hotels/4/questions/31/answers/155/votes' }).form({ vote: '-1' })
       .then(async () => {
         const response = await fetch('http://localhost:3000/hotels/4/questions');
         questions = await response.json();

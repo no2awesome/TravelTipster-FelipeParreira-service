@@ -195,13 +195,23 @@ class App extends Component {
     });
   }
 
-
   render() {
+    const sendMessage = (userId) => {
+      const url = `http://localhost:3000/users/${userId}/messages`;
+      $.ajax({
+        type: 'POST',
+        url,
+        success: () => window.alert('Your message was sent!'),
+        error: err => console.log('Error', err),
+      });
+    };
+
     return (
       <div className={styles.containerStyle}>
         <Header questions={this.state.questions} submitQuestion={this.submitQuestion}
         currentUser={this.props.currentUser} />
-        <QuestionList postReport={this.postReport}
+        <QuestionList sendMessage={sendMessage}
+        postReport={this.postReport}
         currentPage={this.state.currentPage}
         questions={this.state.questions} submitAnswer={this.submitAnswer}
         voteAnswer={this.voteAnswer} currentUser={this.props.currentUser}

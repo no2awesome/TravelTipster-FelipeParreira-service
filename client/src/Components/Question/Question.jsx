@@ -56,7 +56,7 @@ class Question extends Component {
   render() {
     const { question } = this.props;
     const isTheSameUser = question.UserID === this.props.currentUser.UserID;
-    let reportIconStyle = `${styles.flagStyle} fa fa-flag`;
+    let reportIconStyle = `fa fa-flag ${styles.flagStyle}`;
     if (isTheSameUser) {
       reportIconStyle += ` ${genStyles.disabled}`;
     }
@@ -68,7 +68,7 @@ class Question extends Component {
 
     const { reportState } = this.state;
     let subHeaderContent = (
-      <div className={styles.dateStyle}>{moment(question.PostedDate).format('LL')} |&nbsp;
+      <div className={`${styles.dateStyle} date`}>{moment(question.PostedDate).format('LL')} |&nbsp;
         <i onClick={() => this.toggleReportForm(this.state.reportState)}
         onMouseEnter={() => this.toggleShowToolTip(isTheSameUser)}
         onMouseLeave={() => this.toggleShowToolTip(isTheSameUser)} className={reportIconStyle}>
@@ -82,7 +82,7 @@ class Question extends Component {
 
     if (this.state.reportWasSubmitted) {
       subHeaderContent = (
-        <div className={styles.dateStyle}>
+        <div className={`report-response ${styles.dateStyle}`}>
           Thank you. We appreciate your input.
         </div>
       );
@@ -97,27 +97,29 @@ class Question extends Component {
         }
       </div>
       <div onMouseEnter={this.toggleShowUserStats} onMouseLeave={this.toggleShowUserStats}
-      className={styles.userMiniProfile}>
+      className={`userMiniProfile ${styles.userMiniProfile}`}>
         <img className={styles.userPicStyle}
         src={question.User ? question.User.ThumbnailURL : null} />
         <p className={styles.usernameStyle}>{question.User ? question.User.Username : null}</p>
         {this.state.showUserStats
-          ? <UserStats toggleShowUserStats={this.toggleShowUserStats} user={question.User}
+          ? <UserStats sendMessage={this.props.sendMessage} currentUser={this.props.currentUser}
+          toggleShowUserStats={this.toggleShowUserStats} user={question.User}
           styles={styles.userStatsStyle} />
           : null
         }
       </div>
       <div>
         <div className={styles.headerContainer}>
-          <p className={styles.questionStyle}>{question.Content}</p>
+          <p className={`${styles.questionStyle} question-content`}>{question.Content}</p>
           {subHeaderContent}
         </div>
         <br />
         {question.UserID === this.props.currentUser.UserID
-          ? <button className={`${styles.deleteButton} ${genStyles['btn-primary']} ${genStyles.small}`} onClick={this.props.deleteQuestion}>Delete</button>
+          ? <button className={`${styles.deleteButton} ${genStyles['btn-primary']} ${genStyles.small} delete-question`} onClick={this.props.deleteQuestion}>Delete</button>
           : null
         }
-        <AnswerList postReport={this.props.postReport}
+        <AnswerList sendMessage={this.props.sendMessage}
+        postReport={this.props.postReport}
         answers={this.props.question.Answers} users={this.props.question.AnswersUsers}
         submitAnswer={this.props.submitAnswer} questionID={question.QuestionID}
         voteAnswer={this.props.voteAnswer} currentUser={this.props.currentUser}
